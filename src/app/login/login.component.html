@@ -1,0 +1,62 @@
+<div class="bg-login">
+  <div class="text-center text-white pt-5">
+    <div class="kc-logo-text"></div>
+    <h1 class="mt-3 diagonal-gradient">HỆ THỐNG QUẢN LÝ THỰC TẬP THỰC TẾ</h1>
+    <!-- <h4 class="h4">{{ 'title' | translate }}</h4> -->
+  </div>
+  <!-- <mat-menu #language="matMenu">
+    <button mat-menu-item (click)="changeLanguage('vn')">
+      <img src="../../assets/logo/vn.png" alt="" width="30px" /> Tiếng việt
+    </button>
+    <button mat-menu-item (click)="changeLanguage('en')">
+      <img src="../../assets/logo/en.png" alt="" width="30px" /> English
+    </button>
+  </mat-menu> -->
+  <div class="login-container mt-4">
+    <h2 style="color: #176ff3">ĐĂNG NHẬP</h2>
+    <p class="erro" *ngIf="showError">Sai tài khoản hoặc mật khẩu</p>
+    <form>
+      <label for="username">Tài khoản</label>
+      <mat-form-field class="w-100">
+        <mat-icon matPrefix>account_circle</mat-icon>
+        <input
+          type="text"
+          id="username"
+          [(ngModel)]="username"
+          name="username"
+          matInput
+        />
+      </mat-form-field>
+      <label for="password">Mật khẩu</label>
+      <mat-form-field class="w-100">
+        <mat-icon matPrefix>key</mat-icon>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          matInput
+          [type]="hide ? 'password' : 'text'"
+           #input
+          maxlength="10"
+        />
+         <mat-hint align="end">Số ký tự {{ input.value.length }}/10</mat-hint>
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <div style="text-align: right">
+        <button mat-button (click)="openForgotPasswordDialog()">
+          Quên mật khẩu ?
+        </button>
+      </div>
+      <button type="submit" (click)="login()">ĐĂNG NHẬP</button>
+    </form>
+  </div>
+</div>

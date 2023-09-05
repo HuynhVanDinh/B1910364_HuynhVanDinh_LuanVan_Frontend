@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Tên</th>
+      <th>Email</th>
+      <!-- Thêm các cột khác tùy theo dữ liệu bạn muốn hiển thị -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sinhVien of sinhVienList">
+      <td>{{ sinhVien.id }}</td>
+      <td>{{ sinhVien.ten }}</td>
+      <td>{{ sinhVien.email }}</td>
+      <!-- Thêm các cột khác tùy theo dữ liệu bạn muốn hiển thị -->
+    </tr>
+  </tbody>
+</table>
