@@ -1,0 +1,79 @@
+<mat-drawer-container class="h-100">
+  <mat-drawer
+    class="draw"
+    mode="side"
+    [opened]="isDrawerOpen"
+    (closed)="(isDrawerOpen)"
+  >
+    <div class="container">
+      <div class="bg-white diamond"></div>
+      <h6 class="text-center text-white">
+        {{ "brand" | translate }}
+      </h6>
+      <hr class="bg-white w-50">
+    </div>
+    <div class="tab-bar text-white pl-4 p-2" [routerLink]="['/']">
+      <mat-icon class="mr-1">home</mat-icon>  {{ "home" | translate }}
+    </div>
+    <mat-accordion>
+      <mat-expansion-panel
+        class="tab-bar"
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title class="text-white">
+            <mat-icon>receipt long</mat-icon>{{ "category" | translate }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p class="pl-5 text-white child-bar" [routerLink]="['/admin/sinhvien']">
+          <mat-icon>pets</mat-icon>{{ "Base type" | translate }}
+        </p>
+        <p class="pl-5 text-white child-bar" [routerLink]="['/admin/lop']">
+          <mat-icon>maps</mat-icon>Quản lý lớp
+        </p>
+        <p class="pl-5 text-white child-bar" [routerLink]="['/admin/khoa']">
+          <mat-icon>maps</mat-icon>Quản lý khoa
+        </p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar class="bg-white">
+      <button
+        (click)="closeDrawer()"
+        mat-icon-button
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="text-primary">{{ "title" | translate }}</span>
+      <span class="example-spacer"></span>
+      <button
+        [routerLink]="['/admin']"
+        mat-icon-button
+        class="example-icon home-icon"
+        aria-label="Example icon-button with heart icon"
+      >
+        <mat-icon>home</mat-icon>
+      </button>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>{{ loggedInUser?.name }}
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Thông tin cá nhân</button>
+        <button mat-menu-item (click)="logout()" routerLinkActive="router-link-active" >Đăng xuất</button>
+      </mat-menu>
+      <button class="mr-2" mat-button [matMenuTriggerFor]="language">
+        <img [src]="currentLanguageImage" alt="" width="30px" />
+      </button>
+      <mat-menu #language="matMenu">
+        <button mat-menu-item (click)="changeLanguage('vn')"><img src="../../assets/logo/vn.gif" alt="" width="30px" /> Tiếng việt</button>
+        <button mat-menu-item (click)="changeLanguage('en')"><img src="../../assets/logo/en.png" alt="" width="30px" /> English</button>
+      </mat-menu>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+  <app-checktoken></app-checktoken>
+</mat-drawer-container>

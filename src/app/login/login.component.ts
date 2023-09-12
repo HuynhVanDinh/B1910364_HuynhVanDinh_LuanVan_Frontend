@@ -43,12 +43,14 @@ export class LoginComponent {
         console.log('Login successful:', data);
         // Lưu trữ mã thông báo vào localStorage
         this.authService.setAuthToken(data.accessToken);
+        this.authService.setRefreshToken(data.refreshToken);
 
         // Lưu trữ thông tin vai trò
         // this.authService.setRoles(data.roles);
          this.authService.saveRolesToLocalStorage(data.roles);
 
         console.log('token nè', this.authService.getAuthToken());
+        console.log('refreshtoken nè', this.authService.getRefreshToken());
         switch (true) {
           case this.authService.hasRole('ROLE_ADMIN'):
             this.router.navigate(['/admin']); // Chuyển hướng đến trang admin

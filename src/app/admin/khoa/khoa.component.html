@@ -1,8 +1,10 @@
 <div class="shadow p-2 mx-2 my-2 rounded">
   <div class="row">
     <div class="col-md-10">
-      <h2 class="text-success m-0">{{ "Mgtype" | translate }}</h2>
-      <p>{{ "path" | translate }}</p>
+      <h2 class="text-success m-0"> Quản trị thông tin khoa</h2>
+      <!-- <h2 class="text-success m-0">{{ "Mgtype" | translate }}</h2> -->
+      <p>Danh mục > Khoa</p>
+      <!-- <p>{{ "path" | translate }}</p> -->
     </div>
     <div class="col-md-2 mt-3">
       <button
@@ -43,9 +45,9 @@
           <button class="btn btn-success mr-2" (click)="searchSinhVien()">
             <mat-icon class="pt-1">search</mat-icon>{{ "search" | translate }}
           </button>
-          <button class="btn btn-info" (click)="exportData()">
+          <!-- <button class="btn btn-info" (click)="exportData()">
             <mat-icon class="pt-1">arrow_downward</mat-icon> Export
-          </button>
+          </button> -->
         </div>
       </div>
     </mat-expansion-panel>
@@ -54,7 +56,8 @@
     <div class="line m-1 float-left"></div>
     <div>
       <h1>
-        <b>{{ "Base type" | translate }}</b>
+        <b>Danh sách khoa</b>
+        <!-- <b>{{ "Base type" | translate }}</b> -->
       </h1>
     </div>
     <table class="rounded border p-3" mat-table [dataSource]="dataSource">
@@ -76,97 +79,37 @@
           mat-header-cell
           *matHeaderCellDef
         >
-          {{ "Base code" | translate }}
+          Mã khoa
+          <!-- {{ "Base code" | translate }} -->
         </th>
         <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.maSV }}
+          {{ item.khoaId }}
         </td>
       </ng-container>
-      <!-- Cột "Tên loại cơ sở" -->
-      <ng-container matColumnDef="name">
+      <ng-container matColumnDef="tenkhoa">
         <th
           class="bg-success text-white text-center"
           mat-header-cell
           *matHeaderCellDef
         >
-          {{ "Base name" | translate }}
-        </th>
-        <td class="text-center" mat-cell *matCellDef="let item">{{ item.tenSV }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="quy_mo">
-        <th
-          class="bg-success text-white text-center"
-          mat-header-cell
-          *matHeaderCellDef
-        >
-          {{ "Scale" | translate }}
-        </th>
-        <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.gioiTinh }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="loai_hinh">
-        <th
-          class="bg-success text-white text-center"
-          mat-header-cell
-          *matHeaderCellDef
-        >
-          {{ "type" | translate }}
-        </th>
-        <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.ngaySinh }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="lop">
-        <th
-          class="bg-success text-white text-center"
-          mat-header-cell
-          *matHeaderCellDef
-        >
-          Lớp
+          Tên khoa
           <!-- {{ "type" | translate }} -->
         </th>
         <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.lop.tenLop }}
+          {{ item.khoaName }}
         </td>
       </ng-container>
-      <ng-container matColumnDef="khoa">
+      <ng-container matColumnDef="sdt">
         <th
           class="bg-success text-white text-center"
           mat-header-cell
           *matHeaderCellDef
         >
-          Khoa
+          SĐT
           <!-- {{ "type" | translate }} -->
         </th>
         <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.lop.khoa.khoaName }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="hinh_anh">
-        <th
-          class="bg-success text-white text-center"
-          mat-header-cell
-          *matHeaderCellDef
-        >
-          {{ "image" | translate }}
-        </th>
-        <td class="test" mat-cell *matCellDef="let item">
-          <img
-            class="img_download"
-            [src]="
-              item.image
-                ? 'http://localhost:8080/file/' + item.image
-                : 'http://localhost:8080/file/co-viet-nam-2.jpg'
-            "
-            alt="File Image"
-          />
-          <button class="download" (click)="downloadFile(item.image)">
-            <mat-icon>download</mat-icon>
-          </button>
+          {{ item.khoaSdt }}
         </td>
       </ng-container>
       <ng-container matColumnDef="delete">
@@ -200,12 +143,8 @@
         *matHeaderRowDef="[
           'position',
           'code',
-          'hinh_anh',
-          'name',
-          'quy_mo',
-          'loai_hinh',
-          'lop',
-          'khoa',
+          'tenkhoa',
+          'sdt',
           'delete'
         ]"
       ></tr>
@@ -216,12 +155,8 @@
           columns: [
             'position',
             'code',
-            'hinh_anh',
-            'name',
-            'quy_mo',
-            'loai_hinh',
-            'lop',
-            'khoa',
+            'tenkhoa',
+            'sdt',
             'delete'
           ]
         "

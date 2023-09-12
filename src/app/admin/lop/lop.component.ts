@@ -1,35 +1,31 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SinhvienService } from '../../sinhvien.service';
-import { SinhVien } from '../../model/sinhvien.model';
-import { TranslateService } from '@ngx-translate/core';
-import { FileUploadService } from 'src/app/file-upload.service';
-import { ExcelService } from 'src/app/excel.service';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-// import { map } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material/table';
+import { TranslateService } from '@ngx-translate/core';
+import { LopService } from 'src/app/lop.service';
+import { Lop } from 'src/app/model/lop.model';
 import { OpenwarningComponent } from 'src/app/openwarning/openwarning.component';
-import { DialogSinhvienComponent } from '../dialog/dialog-sinhvien/dialog-sinhvien.component';
+import { DialogLopComponent } from '../dialog/dialog-lop/dialog-lop.component';
 
 @Component({
-  selector: 'app-sinhvien',
-  templateUrl: './sinhvien.component.html',
-  styleUrls: ['./sinhvien.component.css'],
+  selector: 'app-lop',
+  templateUrl: './lop.component.html',
+  styleUrls: ['./lop.component.css'],
 })
-export class SinhvienComponent implements OnInit {
-  // currentLanguageImage: string = '../../assets/logo/vn.png';
+export class LopComponent implements OnInit {
   isDrawerOpen: boolean = true;
   panelOpenState = false;
-  datas: SinhVien[] = [];
+  datas: Lop[] = [];
   pageSize = 5; // Số mục trên mỗi trang
   pageSizeOptions: number[] = [5, 10, 25, 50]; // Các tùy chọn số mục trên trang
   pageIndex = 0;
 
   constructor(
-    private fileUploadService: FileUploadService,
-    private excelService: ExcelService,
+    // private fileUploadService: FileUploadService,
+    // private excelService: ExcelService,
     private translate: TranslateService,
-    private sinhvienService: SinhvienService,
+    private lopService: LopService,
     private dialog: MatDialog
   ) {
     translate.setDefaultLang('vn');
@@ -44,8 +40,8 @@ export class SinhvienComponent implements OnInit {
   }
 
   getAll() {
-    this.sinhvienService
-      .getAllSinhVien()
+    this.lopService
+      .getAllLop()
       // .pipe(
       //   map((res: SinhVien[]) => {
       //     // Chuyển đổi dữ liệu từ res sang một dạng khác
@@ -84,7 +80,7 @@ export class SinhvienComponent implements OnInit {
     });
   }
   openDialogthem(): void {
-    this.dialog.open(DialogSinhvienComponent, {
+    this.dialog.open(DialogLopComponent, {
       width: '700px',
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '300ms',
@@ -111,20 +107,20 @@ export class SinhvienComponent implements OnInit {
   searchSinhVien() {
     const authToken = localStorage.getItem('authToken');
     if (!authToken) {
-      // console.log(authToken);
+      console.log(authToken);
       console.error('Access token not found. User is not authenticated.');
       return;
     }
-    this.sinhvienService.searchSinhVien(this.searchName, authToken).subscribe(
-      (data: any) => {
-        // console.log(authToken);
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.paginator = this.paginator;
-      },
-      (error) => {
-        console.error('Error searching for sinh vien:', error);
-      }
-    );
+    // this.sinhvienService.searchSinhVien(this.searchName, authToken).subscribe(
+    //   (data: any) => {
+    //     // console.log(authToken);
+    //     this.dataSource = new MatTableDataSource(data);
+    //     this.dataSource.paginator = this.paginator;
+    //   },
+    //   (error) => {
+    //     console.error('Error searching for sinh vien:', error);
+    //   }
+    // );
   }
   search() {
     // this.sinhvienService.searchByName(this.searchName).subscribe((res: any) => {
@@ -143,43 +139,24 @@ export class SinhvienComponent implements OnInit {
   }
 
   exportData(): void {
-    const data = this.sinhvienService.getAllSinhVien().subscribe((data) => {
-      this.excelService.exportToExcel(data, 'LoaiCoSo');
-    });
+    // const data = this.sinhvienService.getAllSinhVien().subscribe((data) => {
+    //   this.excelService.exportToExcel(data, 'LoaiCoSo');
+    // });
   }
   downloadFile(filename: string) {
-    this.fileUploadService.getFileOneData(filename).subscribe(
-      (data: Blob) => {
-        // Xử lý dữ liệu trả về, ví dụ như tạo URL tải xuống
-        const downloadUrl = URL.createObjectURL(data);
-        const link = document.createElement('a');
-        link.href = downloadUrl;
-        link.download = filename;
-        link.click();
-      },
-      (error) => {
-        // Xử lý lỗi
-        console.log('Lỗi !!!:', error);
-      }
-    );
+    // this.fileUploadService.getFileOneData(filename).subscribe(
+    //   (data: Blob) => {
+    //     // Xử lý dữ liệu trả về, ví dụ như tạo URL tải xuống
+    //     const downloadUrl = URL.createObjectURL(data);
+    //     const link = document.createElement('a');
+    //     link.href = downloadUrl;
+    //     link.download = filename;
+    //     link.click();
+    //   },
+    //   (error) => {
+    //     // Xử lý lỗi
+    //     console.log('Lỗi !!!:', error);
+    //   }
+    // );
   }
-  // sinhVienList: any[] = [];
-
-  // constructor(private sinhVienService: SinhvienService) {}
-
-  // ngOnInit(): void {
-  //   this.getSinhVienList();
-  // }
-
-  // getSinhVienList(): void {
-  //   this.sinhVienService.getAllSinhVien().subscribe(
-  //     (data) => {
-  //       this.sinhVienList = data;
-  //       console.log(data);
-  //     },
-  //     (error) => {
-  //       console.error('Lỗi khi lấy danh sách sinh viên:', error);
-  //     }
-  //   );
-  // }
 }
