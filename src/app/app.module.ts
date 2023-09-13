@@ -29,7 +29,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { ChecktokenComponent } from './checktoken/checktoken.component';
@@ -38,7 +38,12 @@ import { DialogLopComponent } from './admin/dialog/dialog-lop/dialog-lop.compone
 import { DialogSinhvienComponent } from './admin/dialog/dialog-sinhvien/dialog-sinhvien.component';
 import { KhoaComponent } from './admin/khoa/khoa.component';
 import { DialogKhoaComponent } from './admin/dialog/dialog-khoa/dialog-khoa.component';
-
+import { ChartModule } from 'primeng/chart';
+import { ChartComponent } from './admin/chart/chart.component';
+import { DockModule } from 'primeng/dock';
+import { TestComponent } from './test/test.component';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { CustomPaginatorIntl } from './custom-paginator-intl';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +62,8 @@ import { DialogKhoaComponent } from './admin/dialog/dialog-khoa/dialog-khoa.comp
     DialogSinhvienComponent,
     KhoaComponent,
     DialogKhoaComponent,
+    ChartComponent,
+    TestComponent,
   ],
   imports: [
     TranslateModule.forRoot({
@@ -85,13 +92,21 @@ import { DialogKhoaComponent } from './admin/dialog/dialog-khoa/dialog-khoa.comp
     MatTableModule,
     MatPaginatorModule,
     ReactiveFormsModule,
+    ChartModule,
+    DockModule,
+    RadioButtonModule,
     ToastrModule.forRoot({
       timeOut: 1500, // Thiết lập thời gian tồn tại là 1,5 giây
       progressBar: true, // Hiển thị thanh tiến trình
       progressAnimation: 'increasing',
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MatPaginatorIntl,
+      useClass: CustomPaginatorIntl, // Sử dụng custom PaginatorIntl
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

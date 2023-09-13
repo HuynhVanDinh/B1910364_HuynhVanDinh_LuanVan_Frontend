@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,5 +12,19 @@ export class KhoaService {
   getAllKhoa(): Observable<any> {
     return this.http.get(this.baseUrl);
   }
+  themkhoa(name: string, code: string, authToken: string): Observable<any> {
+    const url = `${this.baseUrl}`;
+    if (!name || !code) {
+      return throwError('Vui lòng nhập đầy đủ thông tin.');
+    }
 
+    const body = {
+      khoaName: name,
+      khoaSdt: code,
+    };
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
+    return this.http.post(url, body, { headers });
+  }
 }

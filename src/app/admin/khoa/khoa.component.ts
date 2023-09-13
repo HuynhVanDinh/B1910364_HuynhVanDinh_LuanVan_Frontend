@@ -85,7 +85,7 @@ export class KhoaComponent {
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '300ms',
       data: {
-        SinhvienComponent: this,
+        KhoaComponent: this,
       },
       disableClose: true,
     });

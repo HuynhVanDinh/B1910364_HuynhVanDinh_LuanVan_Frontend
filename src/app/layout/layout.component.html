@@ -1,3 +1,4 @@
+<!-- <app-progress-spinner-overlay *ngIf="isLoading"></app-progress-spinner-overlay> -->
 <mat-drawer-container class="h-100">
   <mat-drawer
     class="draw"
@@ -12,7 +13,7 @@
       </h6>
       <hr class="bg-white w-50">
     </div>
-    <div class="tab-bar text-white pl-4 p-2" [routerLink]="['/']">
+    <div class="tab-bar text-white pl-4 p-2" [routerLink]="['/admin/']">
       <mat-icon class="mr-1">home</mat-icon>  {{ "home" | translate }}
     </div>
     <mat-accordion>
@@ -34,6 +35,9 @@
         </p>
         <p class="pl-5 text-white child-bar" [routerLink]="['/admin/khoa']">
           <mat-icon>maps</mat-icon>Quản lý khoa
+        </p>
+         <p class="pl-5 text-white child-bar" [routerLink]="['/admin/test']">
+          <mat-icon>maps</mat-icon>thử nghiệm
         </p>
       </mat-expansion-panel>
     </mat-accordion>

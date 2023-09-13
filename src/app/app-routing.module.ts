@@ -10,6 +10,8 @@ import { SinhvienComponent } from './admin/sinhvien/sinhvien.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LopComponent } from './admin/lop/lop.component';
 import { KhoaComponent } from './admin/khoa/khoa.component';
+import { ChartComponent } from './admin/chart/chart.component';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,10 +28,36 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['admin'] },
     children: [
-      { path: '', component: SinhvienComponent },
-      { path: 'sinhvien', component: SinhvienComponent },
-      { path: 'lop', component: LopComponent },
-      { path: 'khoa', component: KhoaComponent}
+      {
+        path: '',
+        component: ChartComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
+      {
+        path: 'sinhvien',
+        component: SinhvienComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
+      {
+        path: 'lop',
+        component: LopComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
+      {
+        path: 'khoa',
+        component: KhoaComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
+      {
+        path: 'test',
+        component: TestComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
     ],
   },
   {
@@ -39,7 +67,7 @@ const routes: Routes = [
     data: { roles: ['student'] },
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'login' },
+  { path: '**', redirectTo: '/error' },
 ];
 
 @NgModule({

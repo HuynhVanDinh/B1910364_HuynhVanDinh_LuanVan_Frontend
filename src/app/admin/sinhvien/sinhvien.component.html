@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-md-10">
       <h2 class="text-success m-0">{{ "Mgtype" | translate }}</h2>
-      <p>{{ "path" | translate }}</p>
+      <p>Danh mục > Sinh viên</p>
+      <!-- <p>{{ "path" | translate }}</p> -->
     </div>
     <div class="col-md-2 mt-3">
       <button
@@ -91,7 +92,9 @@
         >
           {{ "Base name" | translate }}
         </th>
-        <td class="text-center" mat-cell *matCellDef="let item">{{ item.tenSV }}</td>
+        <td class="text-center" mat-cell *matCellDef="let item">
+          {{ item.tenSV }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="quy_mo">
