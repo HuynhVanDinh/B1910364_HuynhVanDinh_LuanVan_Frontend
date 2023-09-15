@@ -15,6 +15,7 @@ import { Khoa } from 'src/app/model/khoa.model';
   styleUrls: ['./dialog-khoa.component.css'],
 })
 export class DialogKhoaComponent implements OnInit {
+  isLoading: boolean = false;
   myForm!: FormGroup;
   datas: Khoa[] = [];
   name!: string;
@@ -85,21 +86,24 @@ export class DialogKhoaComponent implements OnInit {
     //   this.fileUploadService.uploadFile(this.selectedFile).subscribe(
     //     (data) => {
     //       image = data.filename;
-     const authToken = localStorage.getItem('authToken');
-     if (!authToken) {
-       // console.log(authToken);
-       console.error('Access token not found. User is not authenticated.');
-       return;
-     }
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+      // console.log(authToken);
+      console.error('Access token not found. User is not authenticated.');
+      return;
+    }
+    this.isLoading = true;
     this.khoaService.themkhoa(name, code, authToken).subscribe(
       () => {
         this.dialog.closeAll();
+        this.isLoading = false;
         this.toastr.success('Thêm thành công');
         console.log('Thêm khoa thành công');
         this.KhoaComponent.getAll();
       },
       (error: any) => {
         this.dialogRef.close('Closed using function');
+        this.isLoading = false;
         this.toastr.error('Lỗi thêm khoa');
         console.error('Lỗi thêm khoa:', error);
       }
@@ -114,6 +118,6 @@ export class DialogKhoaComponent implements OnInit {
   }
   closedialog() {
     this.dialogRef.close('Closed using function');
-    this.toastr.success('Thêm thành công');
+    // this.toastr.success('Thêm thành công');
   }
 }

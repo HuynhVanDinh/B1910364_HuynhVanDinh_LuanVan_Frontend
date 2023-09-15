@@ -12,6 +12,7 @@ import { LopComponent } from './admin/lop/lop.component';
 import { KhoaComponent } from './admin/khoa/khoa.component';
 import { ChartComponent } from './admin/chart/chart.component';
 import { TestComponent } from './test/test.component';
+import { PdfViewerComponent } from './admin/pdf-viewer/pdf-viewer.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -54,7 +55,7 @@ const routes: Routes = [
       },
       {
         path: 'test',
-        component: TestComponent,
+        component: PdfViewerComponent,
         canActivate: [AuthGuard],
         data: { roles: ['admin'] },
       },

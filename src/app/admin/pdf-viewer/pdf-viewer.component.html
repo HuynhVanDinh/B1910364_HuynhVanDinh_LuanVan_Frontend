@@ -1,0 +1,18 @@
+<h1 class="text-center mt-2">Trình xem PDF</h1>
+<div class="col">
+  <div class="mat-from-field-container mb-3">
+    <h3>Choose Document: </h3>
+    <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+    <input hidden (change)="onFileSelected($event)" #fileInput type="file">
+    <span class="file-name ml-3">{{selectedFile?.name}}</span>
+  </div>
+  <div class="file-preview-container">
+    <img *ngIf="isFileImage" [src]="selectedFilePath" height="200">
+    <ngx-extended-pdf-viewer [base64Src]="selectedFileB64" backgroundColor="#ffffff" [height]="'90vh'"
+    [useBrowserLocale]="true" [handTool]="false" [showHandToolButton]="true" *ngIf="isFileDocument">
+    </ngx-extended-pdf-viewer>
+  </div>
+</div>
+    <ngx-extended-pdf-viewer  [src]="'assets/demo.pdf'" backgroundColor="#ffffff" [height]="'90vh'"
+    [useBrowserLocale]="true" [handTool]="false" [showHandToolButton]="true">
+    </ngx-extended-pdf-viewer>

@@ -36,13 +36,14 @@ export class ForgotPasswordDialogComponent implements OnInit {
       (response) => {
         this.message = response.message;
         this.isError = false;
-         this.isLoading = false;
+        this.isLoading = false;
         setTimeout(() => {
           this.dialogRef.close();
         }, 4000);
       },
       (error) => {
         this.message = error.error.message;
+        this.isLoading = false;
         this.isError = true;
       }
     );

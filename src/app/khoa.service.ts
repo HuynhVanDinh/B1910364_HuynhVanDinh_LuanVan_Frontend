@@ -27,4 +27,16 @@ export class KhoaService {
     });
     return this.http.post(url, body, { headers });
   }
+  searchKhoa(tenKhoa: string, authToken: string) {
+    // Tạo URL với tham số tenSV
+    const url = `${this.baseUrl}/search?khoaName=${tenKhoa}`;
+
+    // Tạo tiêu đề (header) chứa token xác thực
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
+
+    // Gửi yêu cầu GET đến máy chủ với tiêu đề chứa token
+    return this.http.get(url, { headers });
+  }
 }

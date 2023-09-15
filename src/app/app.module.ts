@@ -44,6 +44,10 @@ import { DockModule } from 'primeng/dock';
 import { TestComponent } from './test/test.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CustomPaginatorIntl } from './custom-paginator-intl';
+import { MatSortModule } from '@angular/material/sort';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { PdfViewerComponent } from './admin/pdf-viewer/pdf-viewer.component';
+import { PdfDialogComponent } from './admin/dialog/pdf-dialog/pdf-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +68,8 @@ import { CustomPaginatorIntl } from './custom-paginator-intl';
     DialogKhoaComponent,
     ChartComponent,
     TestComponent,
+    PdfViewerComponent,
+    PdfDialogComponent,
   ],
   imports: [
     TranslateModule.forRoot({
@@ -95,6 +101,8 @@ import { CustomPaginatorIntl } from './custom-paginator-intl';
     ChartModule,
     DockModule,
     RadioButtonModule,
+    MatSortModule,
+    NgxExtendedPdfViewerModule,
     ToastrModule.forRoot({
       timeOut: 1500, // Thiết lập thời gian tồn tại là 1,5 giây
       progressBar: true, // Hiển thị thanh tiến trình
