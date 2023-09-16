@@ -2,7 +2,7 @@
 <div class="h-25 bg-success text-white head-from">
   <div class="row">
     <div class="col-11 mt-2">
-      <h1 class="pl-4">Thêm khoa</h1>
+   <h1 class="pl-4">{{ isEdit ? ("suakhoa" | translate) : ("themkhoa" | translate) }}</h1>
       <!-- <h1 class="p-2">{{ "addbasetype" | translate }}</h1> -->
     </div>
     <div class="col-1 mt-2">
@@ -17,13 +17,13 @@
         <mat-label>Tên khoa</mat-label>
         <input
           matInput
-          formControlName="name"
+          formControlName="khoaName"
           placeholder="Vd: Khoa CNTT"
-          [(ngModel)]="name"
+          [(ngModel)]="khoaName"
           required
         />
         <mat-error
-          *ngIf="myForm.get('name')!.invalid && myForm.get('name')!.touched"
+          *ngIf="myForm.get('khoaName')!.invalid && myForm.get('khoaName')!.touched"
           >Vui lòng nhập tên khoa !!</mat-error
         >
       </mat-form-field>
@@ -34,8 +34,8 @@
         <mat-label>Số điện thoại</mat-label>
         <!-- <span matPrefix>+1 &nbsp;</span> -->
         <input type="text"  matInput
-          formControlName="code"
-          [(ngModel)]="code"
+          formControlName="khoaSdt"
+          [(ngModel)]="khoaSdt"
           placeholder="Vd: 0342303842"
           required
           maxlength="10"
@@ -45,7 +45,7 @@
           <mat-hint align="end">Số tối đa {{ input.value.length }}/10</mat-hint>
         <!-- <mat-icon matSuffix>mode_edit</mat-icon> -->
          <mat-error
-          *ngIf="myForm.get('code')!.invalid && myForm.get('code')!.touched"
+          *ngIf="myForm.get('khoaSdt')!.invalid && myForm.get('khoaSdt')!.touched"
           >Vui lòng nhập số điện thoại !!</mat-error
         >
       </mat-form-field>
@@ -68,18 +68,13 @@
 </form>
 <div class="row m-3">
   <div class="col-md-12 mt-2 mb-2">
-    <button
+   <button class="btn btn-success float-right ml-2" *ngIf="!isEditMode" (click)="themKhoa(khoaName, khoaSdt)">
+  {{ "add" | translate }}
+</button>
 
-      class="btn btn-success float-right ml-2"
-      (click)="
-        themKhoa(
-          name,
-          code
-        )
-      "
-    >
-      {{ "add" | translate }}
-    </button>
+<button class="btn btn-success float-right ml-2" *ngIf="isEditMode" (click)="suaKhoa(id, khoaName, khoaSdt)" >
+  {{ "edit" | translate }}
+</button>
     <button class="btn btn-primary float-right" (click)="refreshForm()">
       {{ "refresh" | translate }}
     </button>

@@ -25,5 +25,8 @@
   "yes": "Yes",
   "no": "No",
   "home": "Home",
-  "image": "Image"
+  "image": "Image",
+
+  "suakhoa": "Edit department",
+  "themkhoa": "Add department"
 }

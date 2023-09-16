@@ -16,10 +16,13 @@ import { Khoa } from 'src/app/model/khoa.model';
 })
 export class DialogKhoaComponent implements OnInit {
   isLoading: boolean = false;
+  id!: number;
   myForm!: FormGroup;
   datas: Khoa[] = [];
-  name!: string;
-  code!: string;
+  khoaName!: string;
+  khoaSdt!: string;
+  isEdit!: boolean;
+  isEditMode!: boolean;
   // quy_mo!: string;
   // loai_hinh!: string;
   // latitude!: number;
@@ -30,16 +33,23 @@ export class DialogKhoaComponent implements OnInit {
   // files!: any[];
   // selectedFile: File | undefined;
   ngOnInit(): void {
-    this.myForm = new FormGroup({
-      // latitude: new FormControl(),
-      // longitude: new FormControl(),
-      // quy_mo: new FormControl(),
-      code: new FormControl(),
-      name: new FormControl(),
-      // address: new FormControl(),
-      // loai_hinh: new FormControl(),
-      // file: new FormControl(),
-    });
+    if (this.data.isEdit) {
+      this.isEditMode = true;
+      // console.log(this.data);
+      this.id = this.data.khoa.khoaId;
+      this.khoaName = this.data.khoa.khoaName;
+      this.khoaSdt = this.data.khoa.khoaSdt;
+      this.myForm = new FormGroup({
+        khoaName: new FormControl(),
+        khoaSdt: new FormControl(),
+      });
+    } else {
+      this.isEditMode = false;
+      this.myForm = new FormGroup({
+        khoaName: new FormControl(),
+        khoaSdt: new FormControl(),
+      });
+    }
   }
   constructor(
     private toastr: ToastrService,
@@ -47,7 +57,9 @@ export class DialogKhoaComponent implements OnInit {
     private dialog: MatDialog,
     public dialogRef: MatDialogRef<DialogKhoaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) {
+    this.isEdit = data.isEdit;
+  }
   onPhoneNumberInput(event: any) {
     // Lọc và chỉ cho phép các ký tự số
     const inputValue = event.target.value;
@@ -55,24 +67,27 @@ export class DialogKhoaComponent implements OnInit {
 
     // Giới hạn độ dài chuỗi số điện thoại tối đa
     if (numericValue.length > 10) {
-      this.code = numericValue.slice(0, 10);
+      this.khoaSdt = numericValue.slice(0, 10);
     } else {
-      this.code = numericValue;
+      this.khoaSdt = numericValue;
     }
 
     // Cập nhật giá trị vào formControl
-    this.myForm.get('code')!.setValue(this.code);
+    this.myForm.get('khoaSdt')!.setValue(this.khoaSdt);
   }
   // onFileSelected(event: any) {
   //   this.selectedFile = event.target.files[0];
   // }
   refreshForm() {
-    this.myForm.reset();
-    this.myForm.markAsUntouched();
-    this.myForm.markAsPristine();
-    // if (this.currentMarker) {
-    //   this.map.removeLayer(this.currentMarker);
-    // }
+    if (this.data.isEdit) {
+      this.id = this.data.khoa.khoaId;
+      this.khoaName = this.data.khoa.khoaName;
+      this.khoaSdt = this.data.khoa.khoaSdt;
+    } else {
+      this.myForm.reset();
+      this.myForm.markAsUntouched();
+      this.myForm.markAsPristine();
+    }
   }
   KhoaComponent = this.data.KhoaComponent;
   themKhoa(name: string, code: string): void {
@@ -106,6 +121,47 @@ export class DialogKhoaComponent implements OnInit {
         this.isLoading = false;
         this.toastr.error('Lỗi thêm khoa');
         console.error('Lỗi thêm khoa:', error);
+      }
+    );
+    //       this.selectedFile = undefined;
+    //     }
+    //     // (error) => {
+    //     //   console.log('Error:', error);
+    //     // }
+    //   );
+    // }
+  }
+  suaKhoa(id: number, name: string, code: string): void {
+    if (this.myForm.invalid) {
+      this.myForm.markAllAsTouched();
+      return;
+    }
+    this.dialogRef.close('Closed using function');
+
+    // if (this.selectedFile) {
+    //   this.fileUploadService.uploadFile(this.selectedFile).subscribe(
+    //     (data) => {
+    //       image = data.filename;
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+      // console.log(authToken);
+      console.error('Access token not found. User is not authenticated.');
+      return;
+    }
+    this.isLoading = true;
+    this.khoaService.suakhoa(id, name, code, authToken).subscribe(
+      () => {
+        this.dialog.closeAll();
+        this.isLoading = false;
+        this.toastr.success('Sửa thành công');
+        console.log('Sửa khoa thành công');
+        this.KhoaComponent.getAll();
+      },
+      (error: any) => {
+        this.dialogRef.close('Closed using function');
+        this.isLoading = false;
+        this.toastr.error('Lỗi sửa khoa');
+        console.error('Lỗi sửa khoa:', error);
       }
     );
     //       this.selectedFile = undefined;

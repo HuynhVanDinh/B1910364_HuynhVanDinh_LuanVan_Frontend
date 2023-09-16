@@ -17,6 +17,7 @@ import { PdfDialogComponent } from '../dialog/pdf-dialog/pdf-dialog.component';
   styleUrls: ['./khoa.component.css'],
 })
 export class KhoaComponent {
+  isEdit: boolean = false;
   isDrawerOpen: boolean = true;
   panelOpenState = false;
   datas: Khoa[] = [];
@@ -30,7 +31,7 @@ export class KhoaComponent {
     // private excelService: ExcelService,
     private translate: TranslateService,
     private khoaService: KhoaService,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {
     translate.setDefaultLang('vn');
   }
@@ -92,27 +93,32 @@ export class KhoaComponent {
     });
   }
   openDialogthem(): void {
+    this.isEdit = false;
     this.dialog.open(DialogKhoaComponent, {
       width: '700px',
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '300ms',
       data: {
+        isEdit: this.isEdit,
         KhoaComponent: this,
       },
       disableClose: true,
     });
   }
   openEditDialog(data: any): void {
-    // this.dialog.open(OpeneditComponent, {
-    //   width: '700px',
-    //   enterAnimationDuration: '300ms',
-    //   exitAnimationDuration: '300ms',
-    //   data: {
-    //     loaicoso: data,
-    //     LoaicosoComponent: this,
-    //   },
-    //   disableClose: true,
-    // });
+    console.log(data);
+    this.isEdit = true;
+    this.dialog.open(DialogKhoaComponent, {
+      width: '700px',
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+      data: {
+        isEdit: this.isEdit,
+        khoa: data,
+        KhoaComponent: this,
+      },
+      disableClose: true,
+    });
   }
 
   searchName: string = '';

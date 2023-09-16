@@ -27,6 +27,22 @@ export class KhoaService {
     });
     return this.http.post(url, body, { headers });
   }
+  suakhoa(id: number, name: string, code: string, authToken: string): Observable<any> {
+    const url = `${this.baseUrl}/`+ id;
+    if (!name || !code) {
+      return throwError('Vui lòng nhập đầy đủ thông tin.');
+    }
+
+    const body = {
+      khoaName: name,
+      khoaSdt: code,
+    };
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
+    return this.http.put(url, body, { headers });
+  }
+
   searchKhoa(tenKhoa: string, authToken: string) {
     // Tạo URL với tham số tenSV
     const url = `${this.baseUrl}/search?khoaName=${tenKhoa}`;
