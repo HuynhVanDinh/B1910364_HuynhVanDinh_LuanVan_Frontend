@@ -1,6 +1,6 @@
 export class Khoa {
-  khoa_id!: number;
-  khoa_name!: string;
+  khoaId!: number;
+  khoaName!: string;
   khoa_sdt!: string;
   khoa_status!: number;
 }

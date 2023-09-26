@@ -1,8 +1,9 @@
 <div class="shadow p-2 mx-2 my-2 rounded">
   <div class="row">
     <div class="col-md-10">
-      <h2 class="text-success m-0">{{ "Mgtype" | translate }}</h2>
-      <p>Danh mục > Sinh viên</p>
+      <h2 class="text-success m-0">Quản trị thông tin đơn vị thực tập</h2>
+      <!-- <h2 class="text-success m-0">{{ "Mgtype" | translate }}</h2> -->
+      <p>Danh mục > Đơn vị</p>
       <!-- <p>{{ "path" | translate }}</p> -->
     </div>
     <div class="col-md-2 mt-3">
@@ -34,29 +35,60 @@
             class="form-control"
             [(ngModel)]="searchName"
             [placeholder]="'keysearch' | translate"
-            (keyup.enter)="searchSinhVien()"
+            (keyup.enter)="searchDonVi()"
           />
         </div>
         <div class="col-md-6 align-center">
-          <button class="btn btn-primary mr-2" (click)="refreshSearch()">
+          <button
+            class="mr-2"
+            mat-raised-button
+            color="primary"
+            (click)="refreshSearch()"
+          >
+            <mat-icon>refresh</mat-icon>{{ "refresh" | translate }}
+          </button>
+          <button class="mr-2 t-search" mat-raised-button (click)="searchDonVi()">
+            <mat-icon>search</mat-icon>{{ "search" | translate }}
+          </button>
+          <button class="mr-2" mat-raised-button (click)="exportToPdf()">
+            <mat-icon> picture_as_pdf </mat-icon>Xuất PDF
+          </button>
+          <!-- <button class="btn btn-primary mr-2" (click)="refreshSearch()">
             <mat-icon class="pt-1">refresh</mat-icon>{{ "refresh" | translate }}
           </button>
-          <button class="btn btn-success mr-2" (click)="searchSinhVien()">
+          <button class="btn btn-success mr-2" (click)="searchLop()">
             <mat-icon class="pt-1">search</mat-icon>{{ "search" | translate }}
-          </button>
-          <button class="btn btn-info" (click)="exportData()">
+          </button> -->
+          <!-- <button class="btn btn-info" (click)="exportData()">
             <mat-icon class="pt-1">arrow_downward</mat-icon> Export
-          </button>
+          </button> -->
         </div>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
   <div class="mat-elevation-z8 p-2 mt-2">
     <div class="line m-1 float-left"></div>
-    <div>
-      <h1>
-        <b>{{ "Base type" | translate }}</b>
-      </h1>
+    <div class="row">
+      <div class="col-8">
+        <div>
+          <h1>
+            <b>Danh sách đơn vị thực tập</b>
+            <!-- <b>{{ "Base type" | translate }}</b> -->
+          </h1>
+        </div>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="float-right w-50">
+          <mat-label>Bộ lọc</mat-label>
+          <input
+            matInput
+            (keyup)="applyFilter($event)"
+            placeholder="Vd: Mia"
+            #input
+          />
+          <mat-icon matSuffix>filter_alt</mat-icon>
+        </mat-form-field>
+      </div>
     </div>
     <table class="rounded border p-3" mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="position">
@@ -71,122 +103,61 @@
           {{ i + 1 }}
         </td>
       </ng-container>
-      <ng-container matColumnDef="code">
+      <ng-container matColumnDef="maDv">
         <th
           class="bg-success text-white text-center"
           mat-header-cell
           *matHeaderCellDef
         >
-          {{ "Base code" | translate }}
+          Mã đơn vị
+          <!-- {{ "Base code" | translate }} -->
         </th>
         <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.maSV }}
+          {{ item.maDvtt }}
         </td>
       </ng-container>
-      <!-- Cột "Tên loại cơ sở" -->
-      <ng-container matColumnDef="name">
+      <ng-container matColumnDef="tenDv">
         <th
           class="bg-success text-white text-center"
           mat-header-cell
           *matHeaderCellDef
         >
-          {{ "Base name" | translate }}
-        </th>
-        <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.tenSV }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="quequan">
-        <th
-          class="bg-success text-white text-center"
-          mat-header-cell
-          *matHeaderCellDef
-        >
-        Quê quán
-          <!-- {{ "Base name" | translate }} -->
-        </th>
-        <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.queQuan }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="quy_mo">
-        <th
-          class="bg-success text-white text-center"
-          mat-header-cell
-          *matHeaderCellDef
-        >
-          {{ "Scale" | translate }}
-        </th>
-        <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.gioiTinh }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="loai_hinh">
-        <th
-          class="bg-success text-white text-center"
-          mat-header-cell
-          *matHeaderCellDef
-        >
-          {{ "type" | translate }}
-        </th>
-        <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.ngaySinh }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="lop">
-        <th
-          class="bg-success text-white text-center"
-          mat-header-cell
-          *matHeaderCellDef
-        >
-          Lớp
+          Tên đơn vị
           <!-- {{ "type" | translate }} -->
         </th>
         <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.lop.tenLop }}
+          {{ item.tenDvtt }}
         </td>
       </ng-container>
-      <ng-container matColumnDef="khoa">
+      <ng-container matColumnDef="diachi">
         <th
           class="bg-success text-white text-center"
           mat-header-cell
           *matHeaderCellDef
         >
-          Khoa
+          Địa chỉ
           <!-- {{ "type" | translate }} -->
         </th>
         <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.lop.khoa.khoaName }}
+          {{ item.diaChi }}
         </td>
       </ng-container>
-
-      <ng-container matColumnDef="hinh_anh">
+      <ng-container matColumnDef="sdt">
         <th
           class="bg-success text-white text-center"
           mat-header-cell
           *matHeaderCellDef
         >
-          {{ "image" | translate }}
+          Số điện thoại
+          <!-- {{ "type" | translate }} -->
         </th>
-        <td class="test" mat-cell *matCellDef="let item">
-          <img
-            class="img_download"
-            [src]="
-              item.image
-                ? 'http://localhost:8080/file/' + item.image
-                : 'http://localhost:8080/file/20230918201356_user.png'
-            "
-            alt="File Image"
-          />
-          <button class="download" (click)="downloadFile(item.image)">
-            <mat-icon>download</mat-icon>
-          </button>
+        <td class="text-center" mat-cell *matCellDef="let item">
+          {{ item.soDt }}
         </td>
       </ng-container>
       <ng-container matColumnDef="delete">
         <th
-          class="bg-success text-white text-center w-25"
+          class="bg-success text-white text-center"
           mat-header-cell
           *matHeaderCellDef
         >
@@ -214,14 +185,10 @@
         mat-header-row
         *matHeaderRowDef="[
           'position',
-          'code',
-          'hinh_anh',
-          'name',
-          'quequan',
-          'quy_mo',
-          'loai_hinh',
-          'lop',
-          'khoa',
+          'maDv',
+          'tenDv',
+          'diachi',
+          'sdt',
           'delete'
         ]"
       ></tr>
@@ -229,18 +196,7 @@
         mat-row
         *matRowDef="
           let row;
-          columns: [
-            'position',
-            'code',
-            'hinh_anh',
-            'name',
-            'quequan',
-            'quy_mo',
-            'loai_hinh',
-            'lop',
-            'khoa',
-            'delete'
-          ]
+          columns: ['position', 'maDv', 'tenDv', 'diachi', 'sdt', 'delete']
         "
       ></tr>
     </table>

@@ -13,6 +13,9 @@ import { KhoaComponent } from './admin/khoa/khoa.component';
 import { ChartComponent } from './admin/chart/chart.component';
 import { TestComponent } from './test/test.component';
 import { PdfViewerComponent } from './admin/pdf-viewer/pdf-viewer.component';
+import { ProvinceListComponent } from './admin/province-list/province-list.component';
+import { FileUploadComponent } from './admin/file-upload/file-upload.component';
+import { DonviComponent } from './admin/donvi/donvi.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -42,6 +45,12 @@ const routes: Routes = [
         data: { roles: ['admin'] },
       },
       {
+        path: 'donvi',
+        component: DonviComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
+      {
         path: 'lop',
         component: LopComponent,
         canActivate: [AuthGuard],
@@ -56,6 +65,18 @@ const routes: Routes = [
       {
         path: 'test',
         component: PdfViewerComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
+      {
+        path: 'province',
+        component: ProvinceListComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
+      {
+        path: 'file',
+        component: FileUploadComponent,
         canActivate: [AuthGuard],
         data: { roles: ['admin'] },
       },

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatTreeModule } from '@angular/material/tree';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
@@ -48,6 +48,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PdfViewerComponent } from './admin/pdf-viewer/pdf-viewer.component';
 import { PdfDialogComponent } from './admin/dialog/pdf-dialog/pdf-dialog.component';
+import { ProvinceListComponent } from './admin/province-list/province-list.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { FileUploadComponent } from './admin/file-upload/file-upload.component';
+import { CalendarModule } from 'primeng/calendar';
+import { DelUploadComponent } from './admin/dialog/del-upload/del-upload.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import { DonviComponent } from './admin/donvi/donvi.component';
+import { DialogDonviComponent } from './admin/dialog/dialog-donvi/dialog-donvi.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +79,11 @@ import { PdfDialogComponent } from './admin/dialog/pdf-dialog/pdf-dialog.compone
     TestComponent,
     PdfViewerComponent,
     PdfDialogComponent,
+    ProvinceListComponent,
+    FileUploadComponent,
+    DelUploadComponent,
+    DonviComponent,
+    DialogDonviComponent,
   ],
   imports: [
     TranslateModule.forRoot({
@@ -79,6 +93,8 @@ import { PdfDialogComponent } from './admin/dialog/pdf-dialog/pdf-dialog.compone
         deps: [HttpClient],
       },
     }),
+    CalendarModule,
+    MatGridListModule,
     MatProgressSpinnerModule,
     MatDialogModule,
     MatMenuModule,
@@ -103,6 +119,9 @@ import { PdfDialogComponent } from './admin/dialog/pdf-dialog/pdf-dialog.compone
     RadioButtonModule,
     MatSortModule,
     NgxExtendedPdfViewerModule,
+    MatTreeModule,
+    MatRadioModule,
+    MatCardModule,
     ToastrModule.forRoot({
       timeOut: 1500, // Thiết lập thời gian tồn tại là 1,5 giây
       progressBar: true, // Hiển thị thanh tiến trình

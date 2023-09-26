@@ -18,8 +18,8 @@
   "edit": "Edit",
   "delete": "Delete",
   "close": "Close",
-  "editbasetype": "Edit base",
-  "addbasetype": "Add base",
+  "themsv": "Add student",
+  "suasv": "Edit student",
   "warning": "Warning",
   "notification": "Are you sure you want to delete?",
   "yes": "Yes",
@@ -28,5 +28,9 @@
   "image": "Image",
 
   "suakhoa": "Edit department",
-  "themkhoa": "Add department"
+  "themkhoa": "Add department",
+  "sualop": "Edit class",
+  "themlop": "Add class",
+  "suadonvi": "Edit unit",
+  "themdonvi": "Add unit"
 }

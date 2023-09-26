@@ -18,6 +18,7 @@ import { DialogSinhvienComponent } from '../dialog/dialog-sinhvien/dialog-sinhvi
 })
 export class SinhvienComponent implements OnInit {
   // currentLanguageImage: string = '../../assets/logo/vn.png';
+  isEdit: boolean = false;
   isDrawerOpen: boolean = true;
   panelOpenState = false;
   datas: SinhVien[] = [];
@@ -84,27 +85,33 @@ export class SinhvienComponent implements OnInit {
     });
   }
   openDialogthem(): void {
+    this.isEdit = false;
     this.dialog.open(DialogSinhvienComponent, {
       width: '700px',
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '300ms',
       data: {
+        isEdit: this.isEdit,
         SinhvienComponent: this,
       },
       disableClose: true,
     });
   }
   openEditDialog(data: any): void {
-    // this.dialog.open(OpeneditComponent, {
-    //   width: '700px',
-    //   enterAnimationDuration: '300ms',
-    //   exitAnimationDuration: '300ms',
-    //   data: {
-    //     loaicoso: data,
-    //     LoaicosoComponent: this,
-    //   },
-    //   disableClose: true,
-    // });
+    this.isEdit = true;
+    this.dialog.open(DialogSinhvienComponent, {
+      width: '700px',
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+      data: {
+        isEdit: this.isEdit,
+        sinhvien: data,
+        SinhvienComponent: this,
+      },
+
+      disableClose: true,
+    });
+    // console.log(data);
   }
 
   searchName: string = '';

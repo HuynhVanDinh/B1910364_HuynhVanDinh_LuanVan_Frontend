@@ -26,4 +26,56 @@ export class SinhvienService {
     // Gửi yêu cầu GET đến máy chủ với tiêu đề chứa token
     return this.http.get(url, { headers });
   }
+  createSinhVien(
+    tensv: string,
+    ngaysinh: Date,
+    gioitinh: string,
+    quequan: string,
+    lopId: number | null,
+    email: string,
+    authToken: string
+  ): Observable<any> {
+    const url = `${this.baseUrl}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Bearer ${authToken}`,
+    });
+    const body = {
+      tenSV: tensv,
+      ngaySinh: ngaysinh,
+      gioiTinh: gioitinh,
+      queQuan: quequan,
+    };
+    return this.http.post<any>(url, body, {
+      params: { lopId: lopId!.toString(), email: email },
+      headers: headers,
+    });
+  }
+  updateSinhVien(
+    masv: number,
+    tensv: string,
+    ngaysinh: Date,
+    gioitinh: string,
+    quequan: string,
+    lopId: number | null,
+    email: string,
+    authToken: string
+  ): Observable<any> {
+     const url = `${this.baseUrl}/` + masv;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Bearer ${authToken}`,
+    });
+    const body = {
+      tenSV: tensv,
+      ngaySinh: ngaysinh,
+      gioiTinh: gioitinh,
+      queQuan: quequan,
+    };
+    // console.log(body);
+    return this.http.put<any>(url, body, {
+      params: { lopId: lopId!.toString(), email: email },
+      headers: headers,
+    });
+  }
 }

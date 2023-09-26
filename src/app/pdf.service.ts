@@ -10,6 +10,15 @@ export class PdfService {
   private baseUrl = 'http://localhost:9004/api/pdf';
   exportKhoaToPdf(): Observable<Blob> {
     // Gửi yêu cầu GET đến API để tạo tệp PDF
-    return this.http.get(this.baseUrl+'/khoa', { responseType: 'blob' });
+    return this.http.get(this.baseUrl + '/khoa', { responseType: 'blob' });
+  }
+  exportLopToPdf(): Observable<Blob> {
+    // Gửi yêu cầu GET đến API để tạo tệp PDF
+    return this.http.get(this.baseUrl + '/lop', { responseType: 'blob' });
+  }
+
+  exportDonViToPdf(): Observable<Blob> {
+    // Gửi yêu cầu GET đến API để tạo tệp PDF
+    return this.http.get(this.baseUrl + '/donvi', { responseType: 'blob' });
   }
 }

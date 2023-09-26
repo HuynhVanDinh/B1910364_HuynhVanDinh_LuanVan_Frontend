@@ -1,259 +1,182 @@
+<app-progress-spinner-overlay *ngIf="isLoading"></app-progress-spinner-overlay>
 <div class="h-25 bg-success text-white head-from">
   <div class="row">
     <div class="col-11 mt-2">
-      <h1 class="p-2">{{ "addbasetype" | translate }}</h1>
+      <h1 class="pl-4">
+        {{ isEdit ? ("suasv" | translate) : ("themsv" | translate) }}
+      </h1>
+      <!-- <h1 class="p-2">{{ "addbasetype" | translate }}</h1> -->
     </div>
     <div class="col-1 mt-2">
       <b class="text-white h2" (click)="closedialog()">X</b>
     </div>
   </div>
-  <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
 </div>
 <form [formGroup]="myForm">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="avt ml-4 mt-2 border rounded">
-        <div class="border rounded" id="map"></div>
-      </div>
-      <input
-        class="my-3 ml-4"
-        (change)="onFileSelected($event)"
-        type="file"
-        id="images"
-        accept="image/*"
-        required
-      />
-    </div>
-    <div class="col-md-6">
-      <div class="mr-4 mt-2">
-        <!-- <input
-          type="number"
-          class="form-control mb-2"
-          [(ngModel)]="latitude"
-          placeholder="Vĩ độ"
-        /> -->
-        <mat-form-field class="w-100">
-          <input
-            matInput
-            type="number"
-            formControlName="latitude"
-            [(ngModel)]="latitude"
-            placeholder="Vĩ độ"
-            required
-          />
-          <mat-error
-            *ngIf="
-              myForm.get('latitude')!.invalid && myForm.get('latitude')!.touched
-            "
-            >Vui lòng nhập vĩ độ !!</mat-error
-          >
-        </mat-form-field>
-        <!-- <input
-        type="number"
-        class="form-control mb-2"
-        [(ngModel)]="longitude"
-        placeholder="Kinh độ"
-      /> -->
-        <mat-form-field class="w-100">
-          <input
-            matInput
-            type="number"
-            formControlName="longitude"
-            [(ngModel)]="longitude"
-            placeholder="Kinh độ"
-            required
-          />
-          <mat-error
-            *ngIf="
-              myForm.get('longitude')!.invalid &&
-              myForm.get('longitude')!.touched
-            "
-            >Vui lòng nhập kinh độ !!</mat-error
-          >
-        </mat-form-field>
-        <!-- <textarea
-        class="form-control"
-        [(ngModel)]="address"
-        cols="25"
-        rows="5"
-        placeholder="Tên địa chỉ"
-      ></textarea> -->
-        <mat-form-field class="w-100">
-          <mat-label>Địa chỉ: </mat-label>
-          <textarea
-            matInput
-            [(ngModel)]="address"
-            formControlName="address"
-            required
-          ></textarea>
-          <mat-error
-            *ngIf="
-              myForm.get('address')!.invalid && myForm.get('address')!.touched
-            "
-            >Vui lòng nhập địa chỉ !!</mat-error
-          >
-        </mat-form-field>
-      </div>
-    </div>
-  </div>
-
   <div class="row my-3 m-2">
     <div class="col-md-6 mb-2">
       <mat-form-field class="w-100">
+        <mat-label>Tên sinh viên</mat-label>
         <input
           matInput
-          formControlName="name"
-          placeholder="Tên cơ sở"
-          [(ngModel)]="name"
+          formControlName="tenSV"
+          placeholder="Vd: DI19V7A4"
+          [(ngModel)]="tenSV"
           required
         />
         <mat-error
-          *ngIf="myForm.get('name')!.invalid && myForm.get('name')!.touched"
-          >Vui lòng nhập tên cơ sở !!</mat-error
+          *ngIf="myForm.get('tenSV')!.invalid && myForm.get('tenSV')!.touched"
+          >Vui lòng nhập tên sinh viên !!</mat-error
         >
       </mat-form-field>
-      <!-- <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="name"
-        placeholder="Tên cơ sở"
-        required
-        #nameInput="ngModel"
-      />
-      <div
-        *ngIf="nameInput.invalid && (nameInput.errors?.['required'] || nameInput.value === '') && nameInput.dirty"
-        class="text-danger"
-      >
-        Vui lòng nhập tên cơ sở.
-      </div> -->
     </div>
-
     <div class="col-md-6">
       <mat-form-field class="w-100">
+        <mat-label>Ngày sinh</mat-label>
+        <!-- <p-calendar [(ngModel)]="date" matInput
+          formControlName="ngaysinh"
+          placeholder="Vd: 16/06/2001"></p-calendar> -->
         <input
+          type="date"
           matInput
-          formControlName="code"
-          [(ngModel)]="code"
-          placeholder="Mã cơ sở"
+          formControlName="ngaysinh"
+          placeholder="Vd: 16/06/2001"
+          [(ngModel)]="ngaysinh"
           required
         />
-        <mat-error
-          *ngIf="myForm.get('code')!.invalid && myForm.get('code')!.touched"
-          >Vui lòng nhập mã cơ sở !!</mat-error
-        >
-      </mat-form-field>
-      <!-- <input
-      type="text"
-      class="form-control"
-      [(ngModel)]="code"
-      placeholder="Mã cơ sở"
-      required
-      #codeInput="ngModel"
-    />
-    <div
-      *ngIf="codeInput.invalid && (codeInput.errors?.['required'] || codeInput.value === '') && codeInput.dirty"
-      class="text-danger"
-    >
-      Vui lòng nhập mã cơ sở.
-    </div> -->
-    </div>
-
-    <div class="col-md-6">
-      <!-- <input
-      type="text"
-      class="form-control"
-      [(ngModel)]="quy_mo"
-      placeholder="Quy mô"
-      required
-      #quyMoInput="ngModel"
-    />
-    <div
-      *ngIf="quyMoInput.invalid && (quyMoInput.errors?.['required'] || quyMoInput.value === '') && quyMoInput.dirty"
-      class="text-danger"
-    >
-      Vui lòng nhập quy mô.
-    </div> -->
-      <mat-form-field class="w-100">
-        <mat-label>Quy mô </mat-label>
-        <mat-select formControlName="quy_mo" [(ngModel)]="quy_mo" required>
-          <mat-option value="Nhỏ">Nhỏ</mat-option>
-          <mat-option value="Vừa">Vừa</mat-option>
-          <mat-option value="Lớn">Lớn</mat-option>
-        </mat-select>
-        <mat-error
-          *ngIf="myForm.get('quy_mo')!.invalid && myForm.get('quy_mo')!.touched"
-          >Vui lòng chọn quy mô !!</mat-error
-        >
-      </mat-form-field>
-    </div>
-
-    <div class="col-md-6">
-      <mat-form-field class="w-100">
-        <mat-label>Loại hình </mat-label>
-        <mat-select
-          formControlName="loai_hinh"
-          [(ngModel)]="loai_hinh"
-          required
-        >
-          <mat-option value="Tư nhân">Tư nhân</mat-option>
-          <mat-option value="Nhà nước">Nhà nước</mat-option>
-          <mat-option value="Hộ gia đình">Hộ gia đình</mat-option>
-        </mat-select>
         <mat-error
           *ngIf="
-            myForm.get('loai_hinh')!.invalid && myForm.get('loai_hinh')!.touched
+            myForm.get('ngaysinh')!.invalid && myForm.get('ngaysinh')!.touched
           "
-          >Vui lòng chọn loại hình chăn nuôi !!</mat-error
+          >Vui lòng nhập ngày sinh !!</mat-error
         >
       </mat-form-field>
-      <!-- <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="loai_hinh"
-        placeholder="Loại hình"
-        required
-        #loaiHinhInput="ngModel"
-      />
-      <div
-        *ngIf="loaiHinhInput.invalid && (loaiHinhInput.errors?.['required'] || loaiHinhInput.value === '') && loaiHinhInput.dirty"
-        class="text-danger"
-      >
-        Vui lòng nhập loại hình.
-      </div> -->
     </div>
-    <!-- <button mat-raised-button (click)="showSelectedValue()">
-      Hiển thị giá trị đã chọn
-    </button> -->
+    <div class="col-md-6 mb-2">
+      <mat-form-field class="w-100">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          formControlName="email"
+          placeholder="Vd: dinhb1910364@student.ctu.vn"
+          [(ngModel)]="email"
+          required
+        />
+        <mat-error
+          *ngIf="myForm.get('email')!.invalid && myForm.get('email')!.touched"
+          >Vui lòng nhập email !!</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 mb-2">
+      <mat-form-field class="w-100">
+        <mat-label>Quê quán</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="quequan"
+          placeholder="Vd: long hậu, lai vung, đồng tháp"
+          [(ngModel)]="quequan"
+          required
+        />
+        <mat-error
+          *ngIf="
+            myForm.get('quequan')!.invalid && myForm.get('quequan')!.touched
+          "
+          >Vui lòng nhập quê quán !!</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <!-- <div class="col-md-6">
+      <mat-form-field class="w-100">
+        <mat-label>Tên khoa</mat-label>
+        <mat-select formControlName="khoaNameControl" required>
+          <mat-option
+            *ngFor="let khoa of danhSachTenKhoa"
+            [value]="khoa.khoaId"
+          >
+            {{ khoa.khoaName }}
+          </mat-option>
+        </mat-select>
 
-    <!-- <button
-    class="btn btn-primary w-100"
-    (click)="uploadFile()"
-    [disabled]="!selectedFile"
-  >
-    Upload
-  </button> -->
+        <mat-error *ngIf="khoaNameControl.hasError('required')">
+          Vui lòng nhập tên khoa !!
+        </mat-error>
+      </mat-form-field>
+    </div> -->
+
+    <div class="col-md-6">
+      <mat-form-field class="w-100">
+        <mat-label>Tên lớp</mat-label>
+        <mat-select formControlName="lopNameControl" required>
+          <mat-option *ngFor="let lop of danhSachTenLop" [value]="lop.lopId">
+            {{ lop.tenLop }}
+          </mat-option>
+        </mat-select>
+
+        <mat-error *ngIf="lopNameControl.hasError('required')">
+          Vui lòng nhập tên lớp !!
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-card class="w-100">
+        <mat-card-header>
+          <mat-card-title>Giới tính</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-radio-group
+            [(ngModel)]="gender"
+            (change)="onGenderChange($event)"
+          >
+            <mat-radio-button [value]="'Nam'" [checked]="gender === 'Nam'"
+              >Nam</mat-radio-button
+            >
+            <mat-radio-button [value]="'Nữ'" [checked]="gender === 'Nữ'"
+              >Nữ</mat-radio-button
+            >
+          </mat-radio-group>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </form>
 <div class="row m-3">
   <div class="col-md-12 mt-2 mb-2">
     <button
-      [disabled]="!selectedFile"
       class="btn btn-success float-right ml-2"
+      *ngIf="!isEditMode"
       (click)="
-        themLoaiCoSo(
-          name,
-          code,
-          quy_mo,
-          loai_hinh,
-          latitude,
-          longitude,
-          geojson,
-          address,
-          image
+        themSinhVien(
+          tenSV,
+          gender,
+          ngaysinh,
+          quequan,
+          email,
+          myForm.get('lopNameControl')?.value
         )
       "
     >
       {{ "add" | translate }}
+    </button>
+
+    <button
+      class="btn btn-success float-right ml-2"
+      *ngIf="isEditMode"
+      (click)="
+        suaSinhVien(
+          maSV,
+          tenSV,
+          gender,
+          ngaysinh,
+          quequan,
+          email,
+          myForm.get('lopNameControl')?.value
+        )
+      "
+    >
+      {{ "edit" | translate }}
     </button>
     <button class="btn btn-primary float-right" (click)="refreshForm()">
       {{ "refresh" | translate }}

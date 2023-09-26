@@ -6,12 +6,12 @@
   padding: 0;
   margin: 0;
   font-size: 24px;
-  color: rgb(255, 255, 255); /* Màu của nút đóng */
-  transition: color 0.3s ease; /* Hiệu ứng màu khi hover */
+  color: rgb(255, 255, 255);
+  transition: color 0.3s ease;
 }
 
 .close-button:hover {
-  color: #ff0000; /* Màu khi hover */
+  color: #ff0000; 
 }
 .btn-header{
   background-color: rgb(3, 146, 3);

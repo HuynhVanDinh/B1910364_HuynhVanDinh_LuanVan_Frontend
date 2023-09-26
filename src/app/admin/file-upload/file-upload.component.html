@@ -1,0 +1,85 @@
+<!-- <input type="file" (change)="onFileSelected($event)" /> -->
+<div class="row">
+  <div class="col-4"></div>
+  <div class="col-4">
+    <label for="images" class="drop-container">
+      <span class="drop-title">Drop files here</span>
+      or
+      <input
+        (change)="onFileSelected($event)"
+        type="file"
+        id="images"
+        accept="image/*"
+        required
+      />
+      <button
+        class="btn btn-primary w-100"
+        (click)="uploadFile()"
+        [disabled]="!selectedFile"
+      >
+        Upload
+      </button>
+    </label>
+  </div>
+</div>
+
+<mat-grid-list class="m-2" cols="4" rowHeight="1:1">
+  <mat-grid-tile *ngFor="let file of files">
+    <div class="test">
+      <!-- <a href="#image-1">
+        <div class="main-image" (click)="changeImage('main-img1', file.url)">
+          <img
+           style="height: 200px; width: 300px"
+            [src]="file.url"
+            [alt]="file.filename"
+            id="main-img"
+          />
+        </div>
+      </a>
+      <div class="lb-overlay" id="image-1">
+        <a href="#page" class="lb-close">X</a>
+        <img
+          [src]="file.url"
+          [alt]="file.filename"
+          id="main-img1"
+        />
+      </div> -->
+      <img
+        style="height: 200px; width: 300px"
+        [src]="file.url"
+        [alt]="file.filename"
+        class="p-2 img_download"
+      />
+      <div class="p-2">
+        <span>{{ file.filename }}</span> <br />
+        <!-- <input
+        v
+        type="file"
+        (change)="onUpdateFileSelected($event, file.filename)"
+        [(ngModel)]="selectedFile"
+      /> -->
+        <button class="download" (click)="downloadFile(file.filename)">Download File</button>
+        <button
+          class="btn btn-info w-50"
+          (click)="updateFile(file.filename)"
+          [disabled]="!selectedFile"
+        >
+          Update
+        </button>
+        <!-- <button class="btn btn-danger w-50" (click)="deleteFile(file.filename)">Delete</button> -->
+        <button class="btn btn-danger w-50" (click)="openDialog(file.filename)">
+          Delete
+        </button>
+      </div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+<!-- <div class="test container">
+  <button class="download" (click)="downloadFile()">Download File</button>
+  <img
+    class="img_download"
+    *ngIf="imageSrc"
+    [src]="imageSrc"
+    alt="File Image"
+  />
+</div> -->

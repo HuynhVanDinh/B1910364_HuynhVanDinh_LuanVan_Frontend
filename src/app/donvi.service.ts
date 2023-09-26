@@ -5,31 +5,41 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class LopService {
-  private baseUrl = 'http://localhost:9004/api/lop';
+export class DonviService {
+  private baseUrl = 'http://localhost:9004/api/donvithuctap';
 
   constructor(private http: HttpClient) {}
-  getAllLop(): Observable<any> {
+  getAllDonVi(): Observable<any> {
     return this.http.get(this.baseUrl);
   }
-  createLop(lop: string, khoaId: number, authToken: string): Observable<any> {
+  createDonvi(
+    tenDv: string,
+    diaChi: string,
+    soDt: string,
+    email: string,
+    authToken: string
+  ): Observable<any> {
     const url = `${this.baseUrl}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${authToken}`,
     });
     const body = {
-      tenLop: lop,
+      tenDvtt: tenDv,
+      diaChi: diaChi,
+      soDt: soDt,
     };
     return this.http.post<any>(url, body, {
-      params: { khoaId: khoaId.toString() },
+      params: { email: email },
       headers: headers,
     });
   }
-  editLop(
+  editDonvi(
     id: number,
-    lop: string,
-    khoaId: number,
+    tenDv: string,
+    diaChi: string,
+    soDt: string,
+    email: string,
     authToken: string
   ): Observable<any> {
     const url = `${this.baseUrl}/` + id;
@@ -38,16 +48,18 @@ export class LopService {
       Authorization: `Bearer ${authToken}`,
     });
     const body = {
-      tenLop: lop,
+      tenDvtt: tenDv,
+      diaChi: diaChi,
+      soDt: soDt,
     };
     return this.http.put<any>(url, body, {
-      params: { khoaId: khoaId.toString() },
+      params: { email: email },
       headers: headers,
     });
   }
-  searchLop(tenLop: string, authToken: string) {
+  searchDonVi(tenDvtt: string, authToken: string) {
     // Tạo URL với tham số tenSV
-    const url = `${this.baseUrl}/search?tenLop=${tenLop}`;
+    const url = `${this.baseUrl}/search?tenDvtt=${tenDvtt}`;
 
     // Tạo tiêu đề (header) chứa token xác thực
     const headers = new HttpHeaders({

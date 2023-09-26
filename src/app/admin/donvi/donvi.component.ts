@@ -4,23 +4,26 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
+import { DonviService } from 'src/app/donvi.service';
 import { LopService } from 'src/app/lop.service';
+import { DonVi } from 'src/app/model/donvi.model';
 import { Lop } from 'src/app/model/lop.model';
 import { OpenwarningComponent } from 'src/app/openwarning/openwarning.component';
 import { PdfService } from 'src/app/pdf.service';
+import { DialogDonviComponent } from '../dialog/dialog-donvi/dialog-donvi.component';
 import { DialogLopComponent } from '../dialog/dialog-lop/dialog-lop.component';
 import { PdfDialogComponent } from '../dialog/pdf-dialog/pdf-dialog.component';
 
 @Component({
-  selector: 'app-lop',
-  templateUrl: './lop.component.html',
-  styleUrls: ['./lop.component.css'],
+  selector: 'app-donvi',
+  templateUrl: './donvi.component.html',
+  styleUrls: ['./donvi.component.css'],
 })
-export class LopComponent implements OnInit {
+export class DonviComponent implements OnInit {
   isEdit: boolean = false;
   isDrawerOpen: boolean = true;
   panelOpenState = false;
-  datas: Lop[] = [];
+  datas: DonVi[] = [];
   pageSize = 5; // Số mục trên mỗi trang
   pageSizeOptions: number[] = [5, 10, 25, 50]; // Các tùy chọn số mục trên trang
   pageIndex = 0;
@@ -30,6 +33,7 @@ export class LopComponent implements OnInit {
     // private fileUploadService: FileUploadService,
     // private excelService: ExcelService,
     private translate: TranslateService,
+    private donviService: DonviService,
     private lopService: LopService,
     private dialog: MatDialog
   ) {
@@ -45,22 +49,8 @@ export class LopComponent implements OnInit {
   }
 
   getAll() {
-    this.lopService
-      .getAllLop()
-      // .pipe(
-      //   map((res: SinhVien[]) => {
-      //     // Chuyển đổi dữ liệu từ res sang một dạng khác
-      //     return res.map((item) => {
-      //       return {
-      //         maSV: item.maSV,
-      //         tenSV: item.tenSV,
-      //         gioiTinh: item.gioiTinh,
-      //         ngaySinh: item.ngaySinh,
-      //         queQuan: item.queQuan,
-      //       };
-      //     });
-      //   })
-      // )
+    this.donviService
+      .getAllDonVi()
       .subscribe({
         next: (res) => {
           console.log(res);
@@ -95,27 +85,27 @@ export class LopComponent implements OnInit {
   }
   openDialogthem(): void {
     this.isEdit = false;
-    this.dialog.open(DialogLopComponent, {
+    this.dialog.open(DialogDonviComponent, {
       width: '700px',
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '300ms',
       data: {
         isEdit: this.isEdit,
-        LopComponent: this,
+        DonViComponent: this,
       },
       disableClose: true,
     });
   }
   openEditDialog(data: any): void {
     this.isEdit = true;
-    this.dialog.open(DialogLopComponent, {
+    this.dialog.open(DialogDonviComponent, {
       width: '700px',
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '300ms',
       data: {
         isEdit: this.isEdit,
-        lop: data,
-        LopComponent: this,
+        donvi: data,
+        DonViComponent: this,
       },
       disableClose: true,
     });
@@ -123,14 +113,14 @@ export class LopComponent implements OnInit {
 
   searchName: string = '';
 
-  searchLop() {
+  searchDonVi() {
     const authToken = localStorage.getItem('authToken');
     if (!authToken) {
       // console.log(authToken);
       console.error('Access token not found. User is not authenticated.');
       return;
     }
-    this.lopService.searchLop(this.searchName, authToken).subscribe(
+    this.donviService.searchDonVi(this.searchName, authToken).subscribe(
       (data: any) => {
         // console.log(authToken);
         this.dataSource = new MatTableDataSource(data);
@@ -154,7 +144,7 @@ export class LopComponent implements OnInit {
   }
   refreshSearch() {
     this.searchName = '';
-    this.searchLop();
+    this.searchDonVi();
   }
 
   exportData(): void {
@@ -179,7 +169,7 @@ export class LopComponent implements OnInit {
     // );
   }
   exportToPdf() {
-    this.pdfService.exportLopToPdf().subscribe((response) => {
+    this.pdfService.exportDonViToPdf().subscribe((response) => {
       const blob = new Blob([response], { type: 'application/pdf' });
       const url = window.URL.createObjectURL(blob);
       // window.open(url); // Mở tệp PDF trong cửa sổ mới hoặc tab.

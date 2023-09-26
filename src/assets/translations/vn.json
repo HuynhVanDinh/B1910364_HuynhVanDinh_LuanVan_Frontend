@@ -18,8 +18,8 @@
   "edit": "Sửa",
   "delete": "Xoá",
   "close": "Đóng",
-  "addbasetype": "Thêm sinh viên",
-  "editbasetype": "Sửa sinh viên",
+  "themsv": "Thêm sinh viên",
+  "suasv": "Sửa sinh viên",
   "warning": "Cảnh báo",
   "notification": "Bạn có chắn chắn muốn xoá?",
   "yes": "Có",
@@ -28,5 +28,9 @@
   "image": "Hình ảnh",
 
   "suakhoa": "Sửa khoa",
-  "themkhoa": "Thêm khoa"
+  "themkhoa": "Thêm khoa",
+  "sualop": "Sửa lớp",
+  "themlop": "Thêm lớp",
+  "suadonvi": "Sửa đơn vị",
+  "themdonvi": "Thêm đơn vị"
 }
