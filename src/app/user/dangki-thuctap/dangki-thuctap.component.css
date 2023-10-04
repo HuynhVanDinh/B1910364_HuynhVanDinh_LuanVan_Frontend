@@ -1,0 +1,8 @@
+.list-dk {
+  margin-top: 4px;
+  background-color: white;
+  padding: 5px;
+  border: solid rgb(180, 180, 180) 1px;
+  border-radius: 5px;
+  height: 500px;
+}

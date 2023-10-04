@@ -14,6 +14,12 @@ export class SinhvienService {
     return this.http.get(this.baseUrl);
   }
 
+  getSinhVien(accountid: string | null): Observable<any> {
+    const url = `${this.baseUrl}/account/${accountid}`;
+    console.log(url);
+    return this.http.get(url);
+  }
+
   searchSinhVien(tenSV: string, authToken: string) {
     // Tạo URL với tham số tenSV
     const url = `${this.baseUrl}/search?tenSV=${tenSV}`;
@@ -61,7 +67,7 @@ export class SinhvienService {
     email: string,
     authToken: string
   ): Observable<any> {
-     const url = `${this.baseUrl}/` + masv;
+    const url = `${this.baseUrl}/` + masv;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${authToken}`,

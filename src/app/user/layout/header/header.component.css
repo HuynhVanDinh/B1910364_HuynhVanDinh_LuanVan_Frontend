@@ -1,0 +1,71 @@
+.spacer {
+  flex: 1;
+}
+#headerbar {
+  position: relative;
+  background-color: white;
+  padding: 5px 5px 10px;
+  border: solid rgb(180, 180, 180) 1px;
+  border-radius: 5px;
+}
+.body-main {
+  /* background-color: #ececec; */
+  height: auto;
+}
+#header {
+  /* background-color: white; */
+  padding-top: 5px;
+}
+.logout {
+  position: absolute;
+  top: 20px; /* Điều chỉnh top theo yêu cầu của bạn */
+  right: 20px; /* Điều chỉnh right theo yêu cầu của bạn */
+  background-color: transparent;
+  color: white;
+  width: 130px;
+  /* Điều chỉnh các thuộc tính khác của nút (button) */
+}
+#menublock {
+  margin-top: 3px;
+  background-color: white;
+  padding: 5px 5px 10px;
+  border: solid rgb(180, 180, 180) 1px;
+  border-radius: 5px;
+}
+.seclected {
+  height: auto;
+}
+.dock-hidden {
+  display: none;
+}
+
+.dock-window {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height: 300px;
+  z-index: 999;
+}
+
+.btn-top {
+  position: fixed; /* Đặt vị trí cố định */
+  bottom: 20px; /* Khoảng cách từ đáy trang */
+  right: 268px; /* Khoảng cách từ cạnh phải */
+  z-index: 9999; /* Đảm bảo nút nằm trên cùng của các phần tử khác */
+  background-color: #0056b3; /* Màu nền của nút */
+  color: #fff; /* Màu chữ trắng */
+  border: none; /* Loại bỏ đường viền */
+  border-radius: 50%; /* Đường viền tròn để tạo hình dạng hình tròn */
+  cursor: pointer; /* Con trỏ khi di chuột qua nút */
+  padding: 10px 20px; /* Kích thước của nút */
+  transition: background-color 0.3s, transform 0.3s; /* Hiệu ứng chuyển đổi màu nền và scale */
+}
+
+/* Hiệu ứng khi di chuột qua nút */
+.btn-top:hover {
+  background-color: #0056b3; /* Màu nền thay đổi khi di chuột qua */
+  transform: scale(1.1); /* Phóng to nút khi di chuột qua */
+}
+

@@ -41,7 +41,7 @@ import { DialogKhoaComponent } from './admin/dialog/dialog-khoa/dialog-khoa.comp
 import { ChartModule } from 'primeng/chart';
 import { ChartComponent } from './admin/chart/chart.component';
 import { DockModule } from 'primeng/dock';
-import { TestComponent } from './test/test.component';
+import { TestComponent } from './user/test/test.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CustomPaginatorIntl } from './custom-paginator-intl';
 import { MatSortModule } from '@angular/material/sort';
@@ -57,6 +57,15 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { DonviComponent } from './admin/donvi/donvi.component';
 import { DialogDonviComponent } from './admin/dialog/dialog-donvi/dialog-donvi.component';
+import { HeaderComponent } from './user/layout/header/header.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { DangkiThuctapComponent } from './user/dangki-thuctap/dangki-thuctap.component';
+import { DangkiCoquanComponent } from './user/dangki-coquan/dangki-coquan.component';
+import { FooterComponent } from './user/footer/footer.component';
+import { ThongtinSinhvienComponent } from './user/thongtin-sinhvien/thongtin-sinhvien.component';
+import { DialogPdfComponent } from './user/dialog/dialog-pdf/pdf-dialog.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,11 +88,17 @@ import { DialogDonviComponent } from './admin/dialog/dialog-donvi/dialog-donvi.c
     TestComponent,
     PdfViewerComponent,
     PdfDialogComponent,
+    DialogPdfComponent,
     ProvinceListComponent,
     FileUploadComponent,
     DelUploadComponent,
     DonviComponent,
     DialogDonviComponent,
+    HeaderComponent,
+    DangkiThuctapComponent,
+    DangkiCoquanComponent,
+    FooterComponent,
+    ThongtinSinhvienComponent,
   ],
   imports: [
     TranslateModule.forRoot({
@@ -122,6 +137,7 @@ import { DialogDonviComponent } from './admin/dialog/dialog-donvi/dialog-donvi.c
     MatTreeModule,
     MatRadioModule,
     MatCardModule,
+    SidebarModule,
     ToastrModule.forRoot({
       timeOut: 1500, // Thiết lập thời gian tồn tại là 1,5 giây
       progressBar: true, // Hiển thị thanh tiến trình

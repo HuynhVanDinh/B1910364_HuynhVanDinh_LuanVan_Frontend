@@ -1,0 +1,118 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="list-student">
+      <div class="canhan">
+        <div class="text">
+          <h6>THÔNG TIN SINH VIÊN</h6>
+        </div>
+        <table class="table">
+          <tbody *ngIf="datas">
+            <tr>
+              <th>Mã SV</th>
+              <td scope="row">{{datas.maSV}}</td>
+            </tr>
+            <tr>
+              <th>Họ tên</th>
+              <td scope="row">{{datas.tenSV}}</td>
+            </tr>
+            <tr>
+              <th>Ngày sinh</th>
+              <td scope="row">{{datas.ngaySinh}}</td>
+            </tr>
+            <tr>
+              <th>Quê quán</th>
+              <td scope="row">{{datas.queQuan}}</td>
+            </tr>
+            <tr>
+              <th>Giới tính</th>
+              <td scope="row">{{datas.gioiTinh}}</td>
+            </tr>
+            <tr>
+              <th>Lớp</th>
+              <td scope="row">{{datas.lop.tenLop}}</td>
+            </tr>
+            <tr>
+              <th>Khoa</th>
+              <td scope="row">{{datas.lop.khoa.khoaName}}</td>
+            </tr>
+            <tr>
+              <td colspan="2" class="text-center pt-5">
+                <a class="text-success"
+                  >Cập nhật thông tin</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="list-news">
+      <ul class="thongbao">
+        <li>
+          <a
+            class="btn"
+            (click)="exportToPdf('/assets/pdf/Đề cương TTTT ngành CNTT.pdf')"
+            >Đề cương TTTT ngành CNTT</a
+          >
+        </li>
+        <li>
+          <a
+            class="btn"
+            (click)="exportToPdf('/assets/pdf/Đề cương TTTT ngành CNTT.pdf')"
+            >Đề cương TTTT ngành HTTT</a
+          >
+        </li>
+        <li>
+          <a
+            class="btn"
+            (click)="exportToPdf('/assets/pdf/ĐÈ cương TTTT ngành KHMT.pdf')"
+            >Đề cương TTTT ngành KHMT</a
+          >
+        </li>
+        <li>
+          <a
+            class="btn"
+            (click)="exportToPdf('/assets/pdf/Đề cương TTTT ngành KTPM.pdf')"
+            >Đề cương TTTT ngành KTPM</a
+          >
+        </li>
+        <li>
+          <a
+            class="btn"
+            (click)="
+              exportToPdf('/assets/pdf/Đề cương TTTT ngành MMT và TTDL.pdf')
+            "
+            >Đề cương TTTT ngành MMT và TTDL</a
+          >
+        </li>
+        <li>
+          <a
+            class="btn"
+            (click)="exportToPdf('/assets/pdf/Đề cương TTTT ngành THUD.pdf')"
+            >Đề cương TTTT ngành THUD</a
+          >
+        </li>
+        <li>
+          <a
+            class="btn"
+            (click)="
+              exportToPdf('/assets/pdf/02-THONG BAO LIEN HE DIA DIEM TTTT.pdf')
+            "
+            >Thông báo liên hệ địa điểm TTTT</a
+          >
+        </li>
+        <li>
+          <a
+            class="btn"
+            (click)="
+              exportToPdf('/assets/pdf/08-kế hoạch - TTTT HKHE 2023_2023.pdf')
+            "
+            >Kế hoạch TTTT năm 2023</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

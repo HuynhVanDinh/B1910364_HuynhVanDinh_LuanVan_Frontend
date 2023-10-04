@@ -1,0 +1,19 @@
+<div class="list-cq">
+  <div class="title">
+    <h5>TIN THỰC TẬP</h5>
+    <hr />
+  </div>
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <!-- Hiển thị dữ liệu tương ứng với trang hiện tại -->
+    <mat-grid-tile *ngFor="let item of displayedItems">
+      {{ item }}
+    </mat-grid-tile>
+  </mat-grid-list>
+  <!-- Hiển thị phân trang -->
+  <mat-paginator
+    [pageSize]="pageSize"
+    [pageIndex]="currentPageIndex"
+    [length]="totalItems"
+    (page)="pageChanged($event)"
+  ></mat-paginator>
+</div>

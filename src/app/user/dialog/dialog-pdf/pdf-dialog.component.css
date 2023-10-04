@@ -1,0 +1,17 @@
+.close-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  font-size: 24px;
+  color: rgb(255, 255, 255);
+  transition: color 0.3s ease;
+}
+
+.close-button:hover {
+  color: #ff0000;
+}
+.btn-header {
+  background-color: #317ac4;
+}

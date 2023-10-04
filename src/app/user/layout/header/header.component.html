@@ -1,0 +1,113 @@
+<div class="body-main" [style.background-color]="componentBackgroundColor">
+  <div class="container-sm ">
+    <div class="mx-5">
+      <div class="mx-5">
+        <header id="header">
+          <div id="headerbar" class="grid-block">
+            <button *ngIf="!isMenuOpen" class="logout" mat-flat-button>
+              <mat-icon>logout</mat-icon>
+              Đăng xuất
+            </button>
+            <a id="logo" href="#">
+              <img src="/../assets/imgs/banner_cict _header.jpg" width="100%" />
+            </a>
+          </div>
+          <section id="menublock" class="grid-block">
+            <div id="menubar" class="grid-block">
+              <mat-toolbar color="primary">
+                <!-- <button mat-icon-button *ngIf="isMenuOpen" (click)="toggleMenu()">
+                <mat-icon>menu</mat-icon>
+              </button> -->
+                <ng-container *ngIf="isMenuOpen; else desktopMenu">
+                  <!-- <button mat-button >
+                  <mat-icon>menu</mat-icon> Menu
+                </button> -->
+                  <mat-menu #mobileMenu="matMenu">
+                    <button
+                      mat-menu-item
+                      *ngFor="let menuItem of menuItems"
+                      (click)="navigateTo(menuItem.route)"
+                    >
+                      {{ menuItem.label }}
+                    </button>
+                  </mat-menu>
+                  <button mat-icon-button [matMenuTriggerFor]="mobileMenu">
+                    <mat-icon>menu</mat-icon>
+                  </button>
+                </ng-container>
+                <ng-template #desktopMenu>
+                  <span [routerLink]="['/student/']">Trang chủ</span>
+                  <div class="spacer"></div>
+                  <button
+                    mat-button
+                    (click)="navigateTo('dk-thuctap')"
+                    [routerLink]="['/student/dktt']"
+                  >
+                    Đăng kí thực tập
+                  </button>
+                  <button
+                    mat-button
+                    (click)="navigateTo('dk-coquan')"
+                    [routerLink]="['/student/dkcq']"
+                  >
+                    Đăng kí cơ quan
+                  </button>
+                  <button
+                    mat-button
+                    (click)="navigateTo('tienich')"
+                    [routerLink]="['/student/tienich']"
+                    routerLinkActive="router-link-active"
+                  >
+                    Kết quả
+                  </button>
+                  <button mat-button (click)="showSidebar()">Cài đặt</button>
+                </ng-template>
+              </mat-toolbar>
+            </div>
+          </section>
+          <p-sidebar [(visible)]="sidebarVisible" [position]="'right'">
+            <p-button
+              label="Đổi màu nền component"
+              (click)="changeComponentBackgroundColor()"
+            ></p-button>
+            <hr />
+            <p-button
+              class="dock-toggle-button"
+              (click)="toggleDockVisibility()"
+            >
+              <span *ngIf="dockVisible">Ẩn điều hướng</span>
+              <span *ngIf="!dockVisible">Mở điều hướng</span>
+            </p-button>
+            <!-- <div class="flex flex-wrap gap-3 mb-5" >
+              <p-radioButton
+                *ngFor="let option of positionOptions"
+                [name]="option.label"
+                [value]="option.value"
+                [label]="option.label"
+                [(ngModel)]="position"
+                [id]="option.value"
+              ></p-radioButton>
+            </div> -->
+            <!-- Nội dung của thanh bên -->
+
+            <!-- Đặt nội dung của thanh bên ở đây -->
+          </p-sidebar>
+        </header>
+        <div class="seclected">
+          <router-outlet></router-outlet>
+          <app-footer></app-footer>
+          <button class="btn-top"  *ngIf="showScrollButton !isMenuOpen" (click)="scrollToTop()">↑ Top</button>
+        </div>
+        <div class="dock-window" [ngClass]="{ 'dock-hidden': !dockVisible }">
+          <p-dock [model]="items" [position]="'bottom'">
+            <ng-template pTemplate="item" let-item>
+              <a [routerLink]="['/student', item.label]"  [title]="item.title">
+                <img [src]="item.icon" [alt]="item.label" width="100%" />
+              </a>
+            </ng-template>
+          </p-dock>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
