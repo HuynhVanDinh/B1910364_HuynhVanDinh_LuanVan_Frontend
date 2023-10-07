@@ -8,7 +8,7 @@
               <mat-icon>logout</mat-icon>
               Đăng xuất
             </button>
-            <a id="logo" href="#">
+            <a id="logo" [routerLink]="'/student'">
               <img src="/../assets/imgs/banner_cict _header.jpg" width="100%" />
             </a>
           </div>
@@ -54,8 +54,8 @@
                   </button>
                   <button
                     mat-button
-                    (click)="navigateTo('tienich')"
-                    [routerLink]="['/student/tienich']"
+                    (click)="navigateTo('ketqua')"
+                    [routerLink]="['/student/ketqua']"
                     routerLinkActive="router-link-active"
                   >
                     Kết quả

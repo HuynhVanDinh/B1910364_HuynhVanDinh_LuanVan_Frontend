@@ -1,0 +1,60 @@
+.main {
+  margin-top: 4px;
+  background-color: white;
+  padding: 5px;
+  border: solid rgb(180, 180, 180) 1px;
+  border-radius: 5px;
+  height: auto;
+}
+.title {
+  color: #317ac4;
+  padding: 5px;
+}
+.btn-submit {
+  text-align: right; /* Căn chỉnh nội dung nút về bên phải */
+  margin-top: 20px; /* Điều chỉnh khoảng cách giữa nút và các phần khác (tuỳ chọn) */
+}
+.from-submit {
+  background-color: white;
+  padding: 10px;
+  padding-top: 30px;
+  border: solid rgb(180, 180, 180) 1px;
+  border-radius: 5px;
+  height: 280px;
+}
+/* CSS cho label tùy chỉnh */
+.form-group label.custom-file-upload {
+  border: 2px solid #ccc;
+  display: inline-block;
+  padding: 8px 12px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+}
+
+/* CSS cho label tùy chỉnh khi hover */
+.form-group label.custom-file-upload:hover {
+  background-color: #e0e0e0;
+}
+
+/* CSS cho input file để ẩn đi */
+.form-group input[type="file"] {
+  display: none;
+}
+
+/* CSS cho hiển thị tên tệp */
+.form-group input[type="file"] + label span {
+  display: inline-block;
+  width: 150px; /* Điều chỉnh độ rộng tùy thích */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* CSS cho hiển thị biểu tượng chọn tệp (ít cần thiết) */
+.form-group input[type="file"] + label::before {
+  content: "\f07c"; /* Unicode của biểu tượng thư mục */
+  font-family: FontAwesome;
+  margin-right: 5px;
+}

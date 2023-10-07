@@ -64,6 +64,8 @@ import { DangkiCoquanComponent } from './user/dangki-coquan/dangki-coquan.compon
 import { FooterComponent } from './user/footer/footer.component';
 import { ThongtinSinhvienComponent } from './user/thongtin-sinhvien/thongtin-sinhvien.component';
 import { DialogPdfComponent } from './user/dialog/dialog-pdf/pdf-dialog.component';
+import { ThongtinDangkiComponent } from './user/thongtin-dangki/thongtin-dangki.component';
+import { KetquaThuctapComponent } from './user/ketqua-thuctap/ketqua-thuctap.component';
 
 
 @NgModule({
@@ -99,6 +101,8 @@ import { DialogPdfComponent } from './user/dialog/dialog-pdf/pdf-dialog.componen
     DangkiCoquanComponent,
     FooterComponent,
     ThongtinSinhvienComponent,
+    ThongtinDangkiComponent,
+    KetquaThuctapComponent,
   ],
   imports: [
     TranslateModule.forRoot({

@@ -4,16 +4,37 @@
     <hr />
   </div>
   <mat-grid-list cols="2" rowHeight="2:1">
-    <!-- Hiển thị dữ liệu tương ứng với trang hiện tại -->
-    <mat-grid-tile *ngFor="let item of displayedItems">
-      {{ item }}
+    <mat-grid-tile *ngFor="let baidang of dataSource.data">
+      <div>
+        <img src="../../../assets/imgs/CTU.jpg" alt="" />
+      </div>
+      <div class="noidung">
+        <h4>
+          <b class="text-danger">{{ baidang.donViThucTap.tenDvtt }}</b>
+        </h4>
+        <h6>Ngày đăng: {{ baidang.ngayDang }}</h6>
+        <div class="ndung" [innerHTML]="baidang.noiDung"></div>
+        <p>
+          Số lượng còn:
+          <b class="text-danger">{{ baidang.soLuong }} </b> <i>Sinh viên</i>
+        </p>
+        <p *ngIf="baidang.troCap !== 0">Trợ Cấp: {{ baidang.troCap }}</p>
+        <div class="float-right pr-3">
+          <a
+            [routerLink]="['/student/ghidanh']"
+            [queryParams]="{ baidangId: baidang.maBD }"
+            class="text-danger"
+            style="font-weight: 700"
+            >Ghi danh</a
+          >
+        </div>
+      </div>
     </mat-grid-tile>
   </mat-grid-list>
-  <!-- Hiển thị phân trang -->
   <mat-paginator
+    [length]="dataSource.data.length"
     [pageSize]="pageSize"
-    [pageIndex]="currentPageIndex"
-    [length]="totalItems"
-    (page)="pageChanged($event)"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onPageChange($event)"
   ></mat-paginator>
 </div>

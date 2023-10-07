@@ -3,6 +3,7 @@ mat-grid-tile {
   border: solid rgb(180, 180, 180) 1px;
   border-radius: 5px;
 }
+
 .list-cq {
   margin-top: 4px;
   background-color: white;
@@ -10,7 +11,51 @@ mat-grid-tile {
   border: solid rgb(180, 180, 180) 1px;
   border-radius: 5px;
 }
-.title{
-  color: #317AC4;
+.title {
+  color: #317ac4;
   padding: 5px;
+}
+.col-md-5 {
+  margin: 0;
+  padding: 0;
+}
+h3 {
+  font-size: 1.2rem; /* Kích thước tiêu đề */
+  margin: 5px 0; /* Khoảng cách trên và dưới tiêu đề */
+}
+
+p {
+  font-size: 1rem; /* Kích thước văn bản */
+  color: #333; /* Màu văn bản */
+  margin: 5px 0; /* Khoảng cách trên và dưới đoạn văn bản */
+}
+h6 {
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+  font-style: italic;
+}
+
+.mat-grid-tile div:first-child {
+  align-self: flex-start;
+  margin-right: 16px;
+}
+
+.mat-grid-tile div:first-child img {
+  padding: 10px;
+  padding-top: 20px;
+  width: 200px;
+  height: 230px;
+}
+
+.mat-grid-tile .noidung {
+  margin-top: -20px;
+}
+
+.mat-grid-tile div:last-child {
+  flex-grow: 1;
+}
+.ndung {
+  height: 80px;
+  overflow-y: scroll;
 }

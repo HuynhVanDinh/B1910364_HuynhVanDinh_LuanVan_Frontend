@@ -20,6 +20,8 @@ import { HeaderComponent } from './user/layout/header/header.component';
 import { DangkiCoquanComponent } from './user/dangki-coquan/dangki-coquan.component';
 import { DangkiThuctapComponent } from './user/dangki-thuctap/dangki-thuctap.component';
 import { ThongtinSinhvienComponent } from './user/thongtin-sinhvien/thongtin-sinhvien.component';
+import { ThongtinDangkiComponent } from './user/thongtin-dangki/thongtin-dangki.component';
+import { KetquaThuctapComponent } from './user/ketqua-thuctap/ketqua-thuctap.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -113,6 +115,18 @@ const routes: Routes = [
       {
         path: 'dktt',
         component: DangkiThuctapComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['student'] },
+      },
+      {
+        path: 'ghidanh',
+        component: ThongtinDangkiComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['student'] },
+      },
+      {
+        path: 'ketqua',
+        component: KetquaThuctapComponent,
         canActivate: [AuthGuard],
         data: { roles: ['student'] },
       },
