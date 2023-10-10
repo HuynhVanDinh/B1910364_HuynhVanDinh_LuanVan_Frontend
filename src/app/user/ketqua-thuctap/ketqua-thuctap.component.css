@@ -1,0 +1,23 @@
+.diemso{
+    margin-top: 4px;
+  background-color: white;
+  padding: 5px;
+  border: solid rgb(180, 180, 180) 1px;
+  border-radius: 5px;
+}
+.title {
+  color: #317ac4;
+  padding: 5px;
+}
+
+h1.text-center {
+  font-size: 36px;
+  color: #333;
+  margin-top: 20px;
+}
+
+h2.text-center {
+  font-size: 48px;
+  color: #ff6600; /* Màu cam đậm */
+  margin: 10px 0;
+}

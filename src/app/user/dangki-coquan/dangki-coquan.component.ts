@@ -1,7 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Pipe,
+  PipeTransform,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BaidangService } from 'src/app/baidang.service';
+import { DangkiService } from 'src/app/dangki.service';
+import { SinhvienService } from 'src/app/sinhvien.service';
 
 @Component({
   selector: 'app-dangki-coquan',
@@ -9,19 +18,38 @@ import { BaidangService } from 'src/app/baidang.service';
   styleUrls: ['./dangki-coquan.component.css'],
   // encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class DangkiCoquanComponent implements OnInit {
+export class DangkiCoquanComponent implements OnInit, PipeTransform {
+  isGhiDanh: boolean = false;
+  isGhiDanhMap: { [key: number]: boolean } = {};
   pageSize = 5; // Số mục trên mỗi trang
   pageSizeOptions: number[] = [5, 10, 25, 50]; // Các tùy chọn số mục trên trang
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   // @ViewChild(MatSort) sort!: MatSort;
-  constructor(private baidangService: BaidangService) {}
+  constructor(
+    private dangkiService: DangkiService,
+    private sinhvienService: SinhvienService,
+    private baidangService: BaidangService
+  ) {}
   ngOnInit() {
     this.getAll();
+    // this.isBaiDang();
+  }
+  transform(value: number): string {
+    // Sử dụng Intl.NumberFormat để định dạng số tiền và thêm đơn vị VNĐ
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(value);
   }
   getAll() {
     this.baidangService.getAllBaiDang().subscribe({
       next: (res) => {
+        const baiDangIds = res.map((baidang: any) => baidang.maBD);
+        const accountid = localStorage.getItem('accountid');
+        this.sinhvienService.getSinhVien(accountid).subscribe((data) => {
+          this.isBaiDangForStudent(data.maSV, baiDangIds);
+        });
         // console.log(res);
         // Khởi tạo MatTableDataSource và thiết lập paginator
         this.dataSource = new MatTableDataSource(res);
@@ -31,6 +59,40 @@ export class DangkiCoquanComponent implements OnInit {
       },
     });
   }
+  isBaiDangForStudent(sinhVienId: number, baiDangIds: number[]) {
+    // Kiểm tra từng bài đăng cho sinh viên
+    baiDangIds.forEach((baiDangId) => {
+      this.dangkiService.isBaiDang(sinhVienId, baiDangId).subscribe(
+        (result) => {
+          if (result.registered) {
+
+            console.log(
+              `Sinh viên ${sinhVienId} đã đăng ký bài đăng ${baiDangId}`
+            );
+             this.isGhiDanhMap[baiDangId] = true;
+
+            console.log(this.isGhiDanh);
+            // Xử lý tương ứng khi sinh viên đã đăng ký
+          } else {
+            console.log(
+              `Sinh viên ${sinhVienId} chưa đăng ký bài đăng ${baiDangId}`
+            );
+              this.isGhiDanhMap[baiDangId] = false;
+            console.log(this.isGhiDanh);
+            // Xử lý tương ứng khi sinh viên chưa đăng ký
+          }
+        },
+        (error) => {
+          console.error(
+            `Lỗi khi kiểm tra bài đăng cho sinh viên ${sinhVienId}:`,
+            error
+          );
+          // Xử lý lỗi khi gọi API kiểm tra
+        }
+      );
+    });
+  }
+
   onPageChange(event: any) {
     // Xử lý sự kiện khi người dùng thay đổi trang
     this.pageSize = event.pageSize;

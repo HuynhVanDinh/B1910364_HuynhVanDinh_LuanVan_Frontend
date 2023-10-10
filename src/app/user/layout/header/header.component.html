@@ -1,5 +1,6 @@
+<app-checktoken></app-checktoken>
 <div class="body-main" [style.background-color]="componentBackgroundColor">
-  <div class="container-sm ">
+  <div class="container-sm">
     <div class="mx-5">
       <div class="mx-5">
         <header id="header">
@@ -54,6 +55,13 @@
                   </button>
                   <button
                     mat-button
+                    (click)="navigateTo('dk-coquan')"
+                    [routerLink]="['/student/list-dangki']"
+                  >
+                    Đăng kí của tôi
+                  </button>
+                  <button
+                    mat-button
                     (click)="navigateTo('ketqua')"
                     [routerLink]="['/student/ketqua']"
                     routerLinkActive="router-link-active"
@@ -96,12 +104,18 @@
         <div class="seclected">
           <router-outlet></router-outlet>
           <app-footer></app-footer>
-          <button class="btn-top"  *ngIf="showScrollButton !isMenuOpen" (click)="scrollToTop()">↑ Top</button>
+          <button
+            class="btn-top"
+            *ngIf="showScrollButton!; isMenuOpen"
+            (click)="scrollToTop()"
+          >
+            ↑ Top
+          </button>
         </div>
         <div class="dock-window" [ngClass]="{ 'dock-hidden': !dockVisible }">
           <p-dock [model]="items" [position]="'bottom'">
             <ng-template pTemplate="item" let-item>
-              <a [routerLink]="['/student', item.label]"  [title]="item.title">
+              <a [routerLink]="['/student', item.label]" [title]="item.title">
                 <img [src]="item.icon" [alt]="item.label" width="100%" />
               </a>
             </ng-template>

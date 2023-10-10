@@ -66,6 +66,8 @@ import { ThongtinSinhvienComponent } from './user/thongtin-sinhvien/thongtin-sin
 import { DialogPdfComponent } from './user/dialog/dialog-pdf/pdf-dialog.component';
 import { ThongtinDangkiComponent } from './user/thongtin-dangki/thongtin-dangki.component';
 import { KetquaThuctapComponent } from './user/ketqua-thuctap/ketqua-thuctap.component';
+import { DangkiCuatoiComponent } from './user/dangki-cuatoi/dangki-cuatoi.component';
+import { TrangThaiPipeComponent } from './trang-thai.pipe/trang-thai.pipe.component';
 
 
 @NgModule({
@@ -103,6 +105,8 @@ import { KetquaThuctapComponent } from './user/ketqua-thuctap/ketqua-thuctap.com
     ThongtinSinhvienComponent,
     ThongtinDangkiComponent,
     KetquaThuctapComponent,
+    DangkiCuatoiComponent,
+    TrangThaiPipeComponent,
   ],
   imports: [
     TranslateModule.forRoot({

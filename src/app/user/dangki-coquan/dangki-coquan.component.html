@@ -18,8 +18,10 @@
           Số lượng còn:
           <b class="text-danger">{{ baidang.soLuong }} </b> <i>Sinh viên</i>
         </p>
-        <p *ngIf="baidang.troCap !== 0">Trợ Cấp: {{ baidang.troCap }}</p>
-        <div class="float-right pr-3">
+        <p *ngIf="baidang.troCap !== 0">
+          Trợ Cấp: {{ baidang.troCap | currency : "VND" : true }}
+        </p>
+        <div class="float-right pr-3" *ngIf="!isGhiDanhMap[baidang.maBD]">
           <a
             [routerLink]="['/student/ghidanh']"
             [queryParams]="{ baidangId: baidang.maBD }"
@@ -27,6 +29,10 @@
             style="font-weight: 700"
             >Ghi danh</a
           >
+        </div>
+        <div class="float-right pr-3" *ngIf="isGhiDanhMap[baidang.maBD]">
+          <b class="text-danger"
+            style="font-weight: 700"> Đã ghi danh </b>
         </div>
       </div>
     </mat-grid-tile>

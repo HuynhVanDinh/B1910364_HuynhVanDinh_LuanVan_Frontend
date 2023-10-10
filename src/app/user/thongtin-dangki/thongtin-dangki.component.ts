@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
+import { ToastrService } from 'ngx-toastr';
+import { DangkiService } from 'src/app/dangki.service';
+import { SinhvienService } from 'src/app/sinhvien.service';
 
 @Component({
   selector: 'app-thongtin-dangki',
@@ -13,7 +16,12 @@ export class ThongtinDangkiComponent implements OnInit {
   cvFile: File | undefined;
   selectedFileNameDiem = '';
   selectedFileNameCv = '';
+  isLoading: boolean = false;
+  sinhVienId!: number;
   constructor(
+    private toastr: ToastrService,
+    private sinhvienService: SinhvienService,
+    private dangkiService: DangkiService,
     private pdfService: NgxExtendedPdfViewerService,
     private route: ActivatedRoute
   ) {
@@ -24,13 +32,47 @@ export class ThongtinDangkiComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.diemFile) {
-      // Xử lý tệp bảng điểm ở đây
-      console.log(this.diemFile);
-    }
-    if (this.cvFile) {
-      // Xử lý tệp CV ở đây
-      console.log(this.cvFile);
+    if (this.diemFile && this.cvFile) {
+      this.isLoading = true;
+      const accountid = localStorage.getItem('accountid');
+      this.sinhvienService.getSinhVien(accountid).subscribe((data) => {
+        this.sinhVienId = data.maSV;
+        console.log(this.sinhVienId);
+        const authToken = localStorage.getItem('authToken');
+        if (!authToken) {
+          // console.log(authToken);
+          console.error('Access token not found. User is not authenticated.');
+          return;
+        }
+        console.log(
+          'hfhjfdghdgh',
+          this.cvFile!.name,
+          this.diemFile!.name,
+          this.baidangId,
+          this.sinhVienId,
+          authToken
+        );
+        this.dangkiService
+          .createDangky(
+            this.cvFile!.name,
+            this.diemFile!.name,
+            this.baidangId,
+            this.sinhVienId,
+            authToken
+          )
+          .subscribe(
+            (data) => {
+              console.log('data', data);
+              this.isLoading = false;
+              this.toastr.success(data.message);
+            },
+            (error) => {
+              console.log('Login error:', error);
+              this.isLoading = false;
+              this.toastr.error(error.error.message);
+            }
+          );
+      });
     }
   }
 
