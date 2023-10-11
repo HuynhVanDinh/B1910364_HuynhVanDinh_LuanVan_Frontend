@@ -68,6 +68,7 @@ import { ThongtinDangkiComponent } from './user/thongtin-dangki/thongtin-dangki.
 import { KetquaThuctapComponent } from './user/ketqua-thuctap/ketqua-thuctap.component';
 import { DangkiCuatoiComponent } from './user/dangki-cuatoi/dangki-cuatoi.component';
 import { TrangThaiPipeComponent } from './trang-thai.pipe/trang-thai.pipe.component';
+import { CapnhatThongtinComponent } from './user/capnhat-thongtin/capnhat-thongtin.component';
 
 
 @NgModule({
@@ -107,6 +108,7 @@ import { TrangThaiPipeComponent } from './trang-thai.pipe/trang-thai.pipe.compon
     KetquaThuctapComponent,
     DangkiCuatoiComponent,
     TrangThaiPipeComponent,
+    CapnhatThongtinComponent,
   ],
   imports: [
     TranslateModule.forRoot({

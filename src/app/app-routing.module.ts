@@ -23,6 +23,7 @@ import { ThongtinSinhvienComponent } from './user/thongtin-sinhvien/thongtin-sin
 import { ThongtinDangkiComponent } from './user/thongtin-dangki/thongtin-dangki.component';
 import { KetquaThuctapComponent } from './user/ketqua-thuctap/ketqua-thuctap.component';
 import { DangkiCuatoiComponent } from './user/dangki-cuatoi/dangki-cuatoi.component';
+import { CapnhatThongtinComponent } from './user/capnhat-thongtin/capnhat-thongtin.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -128,6 +129,12 @@ const routes: Routes = [
       {
         path: 'list-dangki',
         component: DangkiCuatoiComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['student'] },
+      },
+      {
+        path: 'sua-thongtin',
+        component: CapnhatThongtinComponent,
         canActivate: [AuthGuard],
         data: { roles: ['student'] },
       },

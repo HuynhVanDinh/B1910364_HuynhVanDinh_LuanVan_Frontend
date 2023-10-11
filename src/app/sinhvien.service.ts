@@ -19,7 +19,10 @@ export class SinhvienService {
     console.log(url);
     return this.http.get(url);
   }
-
+  getSinhVienById(id: string): Observable<any> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.get(url);
+  }
   searchSinhVien(tenSV: string, authToken: string) {
     // Tạo URL với tham số tenSV
     const url = `${this.baseUrl}/search?tenSV=${tenSV}`;
@@ -81,6 +84,22 @@ export class SinhvienService {
     // console.log(body);
     return this.http.put<any>(url, body, {
       params: { lopId: lopId!.toString(), email: email },
+      headers: headers,
+    });
+  }
+  updateAvt(
+    masv: string | null,
+    hinhAnh: string,
+    authToken: string
+  ): Observable<any> {
+    const url = `${this.baseUrl}/${masv}/capnhatanhdien`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Bearer ${authToken}`,
+    });
+
+    // Đưa tên tệp hình ảnh vào trực tiếp, không cần bọc trong một đối tượng
+    return this.http.put<any>(url, hinhAnh, {
       headers: headers,
     });
   }

@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DangkiService {
-  layDanhSachDangKySinhVien() {}
   private baseUrl = 'http://localhost:9004/api/dangky';
   constructor(private http: HttpClient) {}
   getAllDangky(): Observable<any> {

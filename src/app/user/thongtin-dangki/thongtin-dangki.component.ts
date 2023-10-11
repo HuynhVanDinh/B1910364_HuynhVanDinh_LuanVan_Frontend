@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { ToastrService } from 'ngx-toastr';
+import { forkJoin } from 'rxjs';
 import { DangkiService } from 'src/app/dangki.service';
+import { FileUploadService } from 'src/app/file-upload.service';
 import { SinhvienService } from 'src/app/sinhvien.service';
 
 @Component({
@@ -19,11 +21,13 @@ export class ThongtinDangkiComponent implements OnInit {
   isLoading: boolean = false;
   sinhVienId!: number;
   constructor(
+    private fileUploadService: FileUploadService,
     private toastr: ToastrService,
     private sinhvienService: SinhvienService,
     private dangkiService: DangkiService,
     private pdfService: NgxExtendedPdfViewerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.baidangId = this.route.snapshot.queryParamMap.get('baidangId');
   }
@@ -52,26 +56,36 @@ export class ThongtinDangkiComponent implements OnInit {
           this.sinhVienId,
           authToken
         );
-        this.dangkiService
-          .createDangky(
-            this.cvFile!.name,
-            this.diemFile!.name,
-            this.baidangId,
-            this.sinhVienId,
-            authToken
-          )
-          .subscribe(
-            (data) => {
-              console.log('data', data);
-              this.isLoading = false;
-              this.toastr.success(data.message);
-            },
-            (error) => {
-              console.log('Login error:', error);
-              this.isLoading = false;
-              this.toastr.error(error.error.message);
-            }
-          );
+        forkJoin([
+          this.fileUploadService.uploadFile(this.cvFile!),
+          this.fileUploadService.uploadFile(this.diemFile!),
+        ]).subscribe((results) => {
+          // Xử lý kết quả sau khi tất cả các yêu cầu upload hoàn thành.
+          const cvFileResult = results[0];
+          const diemFileResult = results[1];
+          this.dangkiService
+            .createDangky(
+              cvFileResult.filename,
+              diemFileResult.filename,
+              this.baidangId,
+              this.sinhVienId,
+              authToken
+            )
+            .subscribe(
+              (data) => {
+                console.log('data', data);
+                this.isLoading = false;
+                this.toastr.success(data.message);
+                this.router.navigate(['/student/list-dangki']);
+              },
+              (error) => {
+                console.log('Login error:', error);
+                this.isLoading = false;
+                this.toastr.error(error.error.message);
+              }
+            );
+        });
+
       });
     }
   }
