@@ -6,6 +6,8 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { FileUploadService } from 'src/app/file-upload.service';
+import { ImgClientService } from 'src/app/img-client.service';
 import { KhoaService } from 'src/app/khoa.service';
 import { LopService } from 'src/app/lop.service';
 import { Khoa } from 'src/app/model/khoa.model';
@@ -77,6 +79,8 @@ export class DialogSinhvienComponent implements OnInit {
   }
   constructor(
     // private khoaService: KhoaService,
+    private fileUploadService: FileUploadService,
+    private imgService: ImgClientService,
     private sinhVienService: SinhvienService,
     private lopService: LopService,
     private toastr: ToastrService,
@@ -111,7 +115,7 @@ export class DialogSinhvienComponent implements OnInit {
       return;
     }
     this.dialogRef.close('Closed using function');
-
+    this.isLoading = true;
     // const khoaNameValue = this.myForm.get('khoaNameControl')!.value;
     const lopNameValue = this.myForm.get('lopNameControl')!.value;
 
@@ -125,27 +129,48 @@ export class DialogSinhvienComponent implements OnInit {
       console.error('Access token not found. User is not authenticated.');
       return;
     }
-    this.isLoading = true;
-    this.sinhVienService
-      .createSinhVien(tensv, ngaysinh, gt, quequan, lop, email, authToken)
-      .subscribe(
-        () => {
-          this.dialog.closeAll();
-          this.isLoading = false;
-          this.toastr.success('Thêm thành công');
-          console.log('Thêm sinh viên thành công');
-          this.SinhVienComponent.getAll();
-        },
-        (error: any) => {
-          this.dialogRef.close('Closed using function');
-          this.isLoading = false;
-          this.toastr.error('Lỗi thêm sinh viên');
-          console.error('Lỗi thêm sinh viên:', error);
-        }
-      );
+    this.imgService
+      .getDefaultImageAsFile()
+      .subscribe((defaultImageFile: File) => {
+        this.fileUploadService.uploadFile(defaultImageFile).subscribe(
+          (data) => {
+            const hinhAnh = data.filename;
+            this.sinhVienService
+              .createSinhVien(
+                tensv,
+                ngaysinh,
+                gt,
+                quequan,
+                lop,
+                email,
+                hinhAnh,
+                authToken
+              )
+              .subscribe(
+                () => {
+                  this.dialog.closeAll();
+                  this.isLoading = false;
+                  this.toastr.success('Thêm thành công');
+                  console.log('Thêm sinh viên thành công');
+                  this.SinhVienComponent.getAll();
+                },
+                (error: any) => {
+                  this.dialogRef.close('Closed using function');
+                  this.isLoading = false;
+                  this.toastr.error('Lỗi thêm sinh viên');
+                  console.error('Lỗi thêm sinh viên:', error);
+                }
+              );
+          }
+          // (error) => {
+          //   console.log('Error:', error);
+          // }
+        );
+      });
   }
+
   suaSinhVien(
-    masv : number,
+    masv: number,
     tensv: string,
     gt: string,
     ngaysinh: Date,

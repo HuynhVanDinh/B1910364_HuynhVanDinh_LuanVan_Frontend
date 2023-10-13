@@ -2,40 +2,40 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import {
-  MatTreeFlatDataSource,
-  MatTreeFlattener,
-} from '@angular/material/tree';
-import { FlatTreeControl } from '@angular/cdk/tree';
-interface FoodNode {
-  name: string;
-  children?: FoodNode[];
-}
+// import {
+//   MatTreeFlatDataSource,
+//   MatTreeFlattener,
+// } from '@angular/material/tree';
+// import { FlatTreeControl } from '@angular/cdk/tree';
+// interface FoodNode {
+//   name: string;
+//   children?: FoodNode[];
+// }
 
-const TREE_DATA: FoodNode[] = [
-  {
-    name: 'Fruit',
-    children: [{ name: 'Apple' }, { name: 'Banana' }, { name: 'Fruit loops' }],
-  },
-  {
-    name: 'Vegetables',
-    children: [
-      {
-        name: 'Green',
-        children: [{ name: 'Broccoli' }, { name: 'Brussels sprouts' }],
-      },
-      {
-        name: 'Orange',
-        children: [{ name: 'Pumpkins' }, { name: 'Carrots' }],
-      },
-    ],
-  },
-];
-interface ExampleFlatNode {
-  expandable: boolean;
-  name: string;
-  level: number;
-}
+// const TREE_DATA: FoodNode[] = [
+//   {
+//     name: 'Fruit',
+//     children: [{ name: 'Apple' }, { name: 'Banana' }, { name: 'Fruit loops' }],
+//   },
+//   {
+//     name: 'Vegetables',
+//     children: [
+//       {
+//         name: 'Green',
+//         children: [{ name: 'Broccoli' }, { name: 'Brussels sprouts' }],
+//       },
+//       {
+//         name: 'Orange',
+//         children: [{ name: 'Pumpkins' }, { name: 'Carrots' }],
+//       },
+//     ],
+//   },
+// ];
+// interface ExampleFlatNode {
+//   expandable: boolean;
+//   name: string;
+//   level: number;
+// }
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -56,34 +56,34 @@ export class LayoutComponent implements OnInit {
     translate.setDefaultLang('vn');
   }
 
-  treeControl = new FlatTreeControl<ExampleFlatNode>(
-    (node) => node.level,
-    (node) => node.expandable
-  );
-  private _transformer = (node: FoodNode, level: number) => {
-    return {
-      expandable: !!node.children && node.children.length > 0,
-      name: node.name,
-      level: level,
-    };
-  };
-  treeFlattener = new MatTreeFlattener(
-    this._transformer,
-    (node) => node.level,
-    (node) => node.expandable,
-    (node) => node.children
-  );
+  // treeControl = new FlatTreeControl<ExampleFlatNode>(
+  //   (node) => node.level,
+  //   (node) => node.expandable
+  // );
+  // private _transformer = (node: FoodNode, level: number) => {
+  //   return {
+  //     expandable: !!node.children && node.children.length > 0,
+  //     name: node.name,
+  //     level: level,
+  //   };
+  // };
+  // treeFlattener = new MatTreeFlattener(
+  //   this._transformer,
+  //   (node) => node.level,
+  //   (node) => node.expandable,
+  //   (node) => node.children
+  // );
 
-  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+  // dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   ngOnInit(): void {
-    this.dataSource.data = TREE_DATA;
+    // this.dataSource.data = TREE_DATA;
     // Lấy thông tin tài khoản đã đăng nhập từ AuthService
     // this.loggedInUser = this.authService.getLoggedInUser();
     this.loggedInUser = { name: this.username };
     console.log(this.loggedInUser);
   }
-  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+  // hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
   logout() {
     this.authService.logout().subscribe(
       (data) => {

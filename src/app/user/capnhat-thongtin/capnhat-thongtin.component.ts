@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { FileUploadService } from 'src/app/file-upload.service';
 import { SinhvienService } from 'src/app/sinhvien.service';
 
@@ -13,7 +14,9 @@ export class CapnhatThongtinComponent implements OnInit {
   sinhVien: any;
   maSV: string | null;
   @ViewChild('fileInput') fileInput: any;
+  isLoading: boolean = false;
   constructor(
+    private toastr: ToastrService,
     private fileUploadService: FileUploadService,
     private route: ActivatedRoute,
     private sinhvienService: SinhvienService
@@ -72,6 +75,7 @@ export class CapnhatThongtinComponent implements OnInit {
       }
       const filename = this.sinhVien.hinhAnh;
       console.log(filename, file);
+      this.isLoading = true;
       this.fileUploadService
         .updateFile(filename, file)
         .subscribe((response) => {
@@ -79,9 +83,19 @@ export class CapnhatThongtinComponent implements OnInit {
           const hinhAnh = response.filename;
           this.sinhvienService
             .updateAvt(this.maSV, hinhAnh, authToken)
-            .subscribe((data) => {
-              console.log('File uploaded successfully:', data);
-            });
+            .subscribe(
+              (data) => {
+                this.isLoading = false;
+                this.toastr.success(data.message);
+                console.log('File uploaded successfully:', data);
+                this.getSinhVienDetails(this.maSV!);
+              },
+              (error: any) => {
+                this.isLoading = false;
+                this.toastr.error('Lỗi cập nhật ảnh diện');
+                console.error('Lỗi cập nhật ảnh diện', error);
+              }
+            );
         });
 
       // Here, you can make an HTTP POST request to upload the file to your server

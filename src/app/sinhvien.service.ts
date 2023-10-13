@@ -42,6 +42,7 @@ export class SinhvienService {
     quequan: string,
     lopId: number | null,
     email: string,
+    hinhAnh: string,
     authToken: string
   ): Observable<any> {
     const url = `${this.baseUrl}`;
@@ -54,6 +55,7 @@ export class SinhvienService {
       ngaySinh: ngaysinh,
       gioiTinh: gioitinh,
       queQuan: quequan,
+      hinhAnh: hinhAnh,
     };
     return this.http.post<any>(url, body, {
       params: { lopId: lopId!.toString(), email: email },

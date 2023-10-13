@@ -21,18 +21,24 @@
         <p *ngIf="baidang.troCap !== 0">
           Trợ Cấp: {{ baidang.troCap | currency : "VND" : true }}
         </p>
+
         <div class="float-right pr-3" *ngIf="!isGhiDanhMap[baidang.maBD]">
-          <a
+          <div *ngIf="baidang.soLuong !== 0">
+            <a
             [routerLink]="['/student/ghidanh']"
             [queryParams]="{ baidangId: baidang.maBD }"
             class="text-danger"
             style="font-weight: 700"
-            >Ghi danh</a
-          >
+            >Ghi danh</a>
+          </div>
+          <div *ngIf="baidang.soLuong == 0">
+             <b class="text-danger"
+            style="font-weight: 700"> Hết số lượng</b>
+          </div>
         </div>
         <div class="float-right pr-3" *ngIf="isGhiDanhMap[baidang.maBD]">
           <b class="text-danger"
-            style="font-weight: 700"> Đã ghi danh </b>
+            style="font-weight: 700"> Đã ghi danh</b>
         </div>
       </div>
     </mat-grid-tile>
