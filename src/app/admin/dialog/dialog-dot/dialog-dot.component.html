@@ -1,0 +1,97 @@
+<app-progress-spinner-overlay *ngIf="isLoading"></app-progress-spinner-overlay>
+<div class="h-25 bg-success text-white head-from">
+  <div class="row">
+    <div class="col-11 mt-2">
+      <h1 class="pl-4">
+        {{ isEdit ? ("suadonvi" | translate) : ("themdonvi" | translate) }}
+      </h1>
+      <!-- <h1 class="p-2">{{ "addbasetype" | translate }}</h1> -->
+    </div>
+    <div class="col-1 mt-2">
+      <b class="text-white h2" (click)="closedialog()">X</b>
+    </div>
+  </div>
+</div>
+<form [formGroup]="myForm">
+  <div class="m-2 my-2">
+    <mat-form-field class="w-100">
+      <mat-label>Tên đợt thực tập</mat-label>
+      <input
+        matInput
+        formControlName="tenDot"
+        placeholder="Vd: VNPT-IT"
+        [(ngModel)]="tenDot"
+        required
+      />
+      <mat-error
+        *ngIf="myForm.get('tenDot')!.invalid && myForm.get('tenDot')!.touched"
+        >Vui lòng nhập tên đơn vị !!</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="w-100">
+        <mat-label>Thời gian bắt đầu</mat-label>
+        <!-- <p-calendar [(ngModel)]="date" matInput
+          formControlName="ngaysinh"
+          placeholder="Vd: 16/06/2001"></p-calendar> -->
+        <input
+          type="date"
+          matInput
+          formControlName="thoiGianBatDau"
+          placeholder="Vd: 16/06/2001"
+          [(ngModel)]="thoiGianBatDau"
+          required
+        />
+        <mat-error
+          *ngIf="
+            myForm.get('thoiGianBatDau')!.invalid && myForm.get('thoiGianBatDau')!.touched
+          "
+          >Vui lòng nhập thời gian bắt đầu !!</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Thời gian kết thúc</mat-label>
+        <!-- <p-calendar [(ngModel)]="date" matInput
+          formControlName="ngaysinh"
+          placeholder="Vd: 16/06/2001"></p-calendar> -->
+        <input
+          type="date"
+          matInput
+          formControlName="thoiGianKetThuc"
+          placeholder="Vd: 16/06/2001"
+          [(ngModel)]="thoiGianKetThuc"
+          required
+        />
+        <mat-error
+          *ngIf="
+            myForm.get('thoiGianKetThuc')!.invalid && myForm.get('thoiGianKetThuc')!.touched
+          "
+          >Vui lòng nhập thời gian kết thúc !!</mat-error
+        >
+      </mat-form-field>
+  </div>
+</form>
+<div class="row m-3">
+  <div class="col-md-12 mt-2 mb-2">
+    <button
+      class="btn btn-success float-right ml-2"
+      *ngIf="!isEditMode"
+      (click)="themDot(tenDot, thoiGianBatDau, thoiGianKetThuc)"
+    >
+      {{ "add" | translate }}
+    </button>
+
+    <button
+      class="btn btn-success float-right ml-2"
+      *ngIf="isEditMode"
+      (click)="suaDot(id, tenDot, thoiGianBatDau, thoiGianKetThuc)"
+    >
+      {{ "edit" | translate }}
+    </button>
+    <button class="btn btn-primary float-right" (click)="refreshForm()">
+      {{ "refresh" | translate }}
+    </button>
+    <button class="btn btn-danger mr-2 float-right" (click)="closedialog()">
+      {{ "close" | translate }}
+    </button>
+  </div>
+</div>

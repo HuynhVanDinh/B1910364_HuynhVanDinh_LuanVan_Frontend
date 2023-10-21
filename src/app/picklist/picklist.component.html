@@ -1,0 +1,33 @@
+
+<p-pickList
+  [dragdrop]="true"
+  [source]="sourceList"
+  [target]="targetList"
+  [responsive]="true"
+  [targetStyle]="{ height: '20rem' }"
+  filterBy="name"
+  [sourceStyle]="{ height: '20rem' }"
+  sourceHeader="Danh sách nguồn"
+  targetHeader="Danh sách đích"
+  sourceFilterPlaceholder="Search by name"
+  targetFilterPlaceholder="Search by name"
+  breakpoint="1400px"
+>
+  <ng-template let-product pTemplate="item">
+    <div class="flex flex-wrap p-2 align-items-center gap-3">
+      <img
+        class="w-4rem shadow-2 flex-shrink-0 border-round"
+        src="../../assets/imgs/student.png"
+        alt="{item.name}"
+      />
+      <div class="flex-1 flex flex-column gap-2">
+        <span class="font-bold">Huỳnh Văn Định</span>
+      </div>
+      <span class="font-bold text-900">
+        Gt: Nam
+        <!-- {{ "$" + product.price }} -->
+      </span>
+    </div>
+  </ng-template>
+</p-pickList>
+<button class="btn btn-primary" (click)="onSubmit()">Gửi</button>

@@ -15,10 +15,10 @@ export class ChartComponent implements OnInit{
     const textColor = documentStyle.getPropertyValue('--text-color');
 
     this.data = {
-      labels: ['A', 'B', 'C'],
+      labels: ['A', 'B', 'C', 'D', 'E'],
       datasets: [
         {
-          data: [540, 325, 702],
+          data: [540, 325, 702, 604, 900],
           backgroundColor: [
             documentStyle.getPropertyValue('--blue-500'),
             documentStyle.getPropertyValue('--yellow-500'),

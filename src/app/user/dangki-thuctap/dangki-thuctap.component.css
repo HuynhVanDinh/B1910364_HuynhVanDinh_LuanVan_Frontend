@@ -6,3 +6,41 @@
   border-radius: 5px;
   height: 500px;
 }
+.title {
+  color: #317ac4;
+  padding: 5px;
+}
+.vertical-table {
+  display: flex;
+  flex-direction: column;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+td.header {
+  width: 30%;
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+.text-head-table{
+  color: #317ac4;
+}
+.btn-icon {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px; /* Điều chỉnh kích thước biểu tượng theo ý muốn */
+  color: #007bff; /* Điều chỉnh màu sắc theo ý muốn */
+}
+.btn-icon i {
+  font-size: 16px;
+  color: black;
+}

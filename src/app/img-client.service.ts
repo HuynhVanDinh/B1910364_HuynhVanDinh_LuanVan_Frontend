@@ -8,11 +8,23 @@ import { map, Observable } from 'rxjs';
 export class ImgClientService {
   constructor(private http: HttpClient) {}
   getDefaultImageAsFile(): Observable<File> {
-    return this.http.get('assets/imgs/student.png', { responseType: 'blob' }).pipe(
-      map((blob: BlobPart) => {
-        const fileName = 'student.png';
-        return new File([blob], fileName);
-      })
-    );
+    return this.http
+      .get('assets/imgs/student.png', { responseType: 'blob' })
+      .pipe(
+        map((blob: BlobPart) => {
+          const fileName = 'student.png';
+          return new File([blob], fileName);
+        })
+      );
+  }
+  getDefaultImageGVAsFile(): Observable<File> {
+    return this.http
+      .get('assets/imgs/giangvien.png', { responseType: 'blob' })
+      .pipe(
+        map((blob: BlobPart) => {
+          const fileName = 'giangvien.png';
+          return new File([blob], fileName);
+        })
+      );
   }
 }

@@ -1,0 +1,186 @@
+<app-progress-spinner-overlay *ngIf="isLoading"></app-progress-spinner-overlay>
+<div class="h-25 bg-success text-white head-from">
+  <div class="row">
+    <div class="col-11 mt-2">
+      <h1 class="pl-4">
+        {{ isEdit ? "Sửa giảng viên" : "Thêm giảng viên" }}
+      </h1>
+      <!-- <h1 class="p-2">{{ "addbasetype" | translate }}</h1> -->
+    </div>
+    <div class="col-1 mt-2">
+      <b class="text-white h2" (click)="closedialog()">X</b>
+    </div>
+  </div>
+</div>
+<form [formGroup]="myForm">
+  <div *ngIf="currentPage === 1">
+    <div class="row my-3 m-2">
+      <div class="col-md-6 mb-2">
+        <mat-form-field class="w-100">
+          <mat-label>Tên giảng viên</mat-label>
+          <input
+            #inputElement
+            matInput
+            formControlName="tenGV"
+            placeholder="Vd: Nguyễn Văn A"
+            [(ngModel)]="tenGV"
+            required
+          />
+          <mat-error
+            *ngIf="myForm.get('tenGV')!.invalid && myForm.get('tenGV')!.touched"
+            >Vui lòng nhập tên giảng viên!!</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 mb-2">
+        <mat-form-field class="w-100">
+          <mat-label>Tên khoa</mat-label>
+          <mat-select formControlName="khoaId">
+            <mat-option
+              *ngFor="let khoa of danhSachTenKhoa"
+              [value]="khoa.khoaId"
+            >
+              {{ khoa.khoaName }}
+            </mat-option>
+          </mat-select>
+
+          <mat-error
+            *ngIf="
+              myForm.get('khoaId')!.invalid && myForm.get('khoaId')!.touched
+            "
+          >
+            Vui lòng nhập tên khoa !!
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-3">
+      <div class="col-md-12 mt-2 mb-2">
+        <!-- <button
+          class="btn btn-success float-right ml-2"
+          *ngIf="!isEditMode"
+          (click)="
+            themSinhVien(
+              tenCB,
+              gender,
+              ngaysinh,
+              quequan,
+              sdt,
+              myForm.get('lopNameControl')?.value
+            )
+          "
+        >
+          {{ "add" | translate }}
+        </button> -->
+        <button
+          *ngIf="!isEditMode"
+          class="btn btn-success float-right ml-2"
+          (click)="onNext()"
+        >
+          Tiếp theo
+        </button>
+        <button
+          class="btn btn-success float-right ml-2"
+          *ngIf="isEditMode"
+          (click)="suaGiangVien(maGV, tenGV, khoaId)"
+        >
+          {{ "edit" | translate }}
+        </button>
+        <button class="btn btn-primary float-right" (click)="refreshForm()">
+          {{ "refresh" | translate }}
+        </button>
+        <button class="btn btn-danger mr-2 float-right" (click)="closedialog()">
+          {{ "close" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="currentPage === 2">
+    <div class="row my-3 m-2">
+      <div class="col-md-6 mb-2">
+        <mat-form-field class="w-100">
+          <mat-label>Tài khoản</mat-label>
+          <input
+            #inputElement
+            matInput
+            formControlName="username"
+            placeholder="Vd: nguyenvana"
+            [(ngModel)]="username"
+            required
+          />
+          <mat-error
+            *ngIf="
+              myForm.get('username')!.invalid && myForm.get('username')!.touched
+            "
+            >Vui lòng nhập username!!</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 mb-2">
+        <mat-form-field class="w-100">
+          <mat-label>Mật khẩu</mat-label>
+          <input
+            #inputElement
+            matInput
+            formControlName="password"
+            placeholder="Vd: 12345678"
+            [(ngModel)]="password"
+            required
+          />
+          <mat-error
+            *ngIf="
+              myForm.get('password')!.invalid && myForm.get('password')!.touched
+            "
+            >Vui lòng nhập password!!</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 mb-2">
+        <mat-form-field class="w-100">
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            formControlName="email"
+            placeholder="Vd: dinhb1910364@student.ctu.vn"
+            [(ngModel)]="email"
+            required
+          />
+          <mat-error
+            *ngIf="myForm.get('email')!.invalid && myForm.get('email')!.touched"
+            >Vui lòng nhập email !!</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-3">
+      <div class="col-md-12 mt-2 mb-2">
+        <button
+          class="btn btn-success float-right ml-2"
+          *ngIf="!isEditMode"
+          (click)="themGiangVien(tenGV, khoaId, username, password, email)"
+        >
+          {{ "add" | translate }}
+        </button>
+
+        <button
+          class="btn btn-success float-right ml-2"
+          *ngIf="isEditMode"
+          (click)="suaGiangVien(maGV, tenGV, khoaId)"
+        >
+          {{ "edit" | translate }}
+        </button>
+        <button class="btn btn-primary float-right" (click)="refreshForm()">
+          {{ "refresh" | translate }}
+        </button>
+        <button class="btn btn-danger mr-2 float-right" (click)="closedialog()">
+          {{ "close" | translate }}
+        </button>
+        <button class="btn btn-primary float-right mr-2" (click)="onPrevious()">
+          Trở lại
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

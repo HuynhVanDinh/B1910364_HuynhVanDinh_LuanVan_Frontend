@@ -35,6 +35,10 @@ export class AuthGuard implements CanActivate {
           requiredRoles.includes('student'):
           return true; // Người dùng có vai trò user và trang yêu cầu vai trò user
         // Thêm các trường hợp khác tùy theo vai trò và trang
+        case this.authService.hasRole('ROLE_LECTURER') &&
+          requiredRoles.includes('lecturer'):
+          return true; // Người dùng có vai trò user và trang yêu cầu vai trò user
+        // Thêm các trường hợp khác tùy theo vai trò và trang
         default:
           return this.router.createUrlTree(['/error']); // Người dùng không có quyền truy cập, chuyển hướng đến trang lỗi
       }

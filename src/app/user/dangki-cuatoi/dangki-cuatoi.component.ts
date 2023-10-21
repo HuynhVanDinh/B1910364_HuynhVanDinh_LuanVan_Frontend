@@ -54,7 +54,10 @@ export class DangkiCuatoiComponent implements OnInit {
         color = { color: 'green' };
         break;
       case 2:
-        color = { color: 'red' }; 
+        color = { color: 'red' };
+        break;
+      case 3:
+        color = { color: 'blue' };
         break;
       default:
         color = {}; // Mặc định không có màu

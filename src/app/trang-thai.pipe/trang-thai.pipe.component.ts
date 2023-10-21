@@ -12,6 +12,8 @@ export class TrangThaiPipeComponent implements PipeTransform {
         return 'Đã duyệt';
       case 2:
         return 'Đã từ chối';
+      case 3:
+        return 'Đã tiếp nhận hồ sơ';
       default:
         return 'Không rõ';
     }

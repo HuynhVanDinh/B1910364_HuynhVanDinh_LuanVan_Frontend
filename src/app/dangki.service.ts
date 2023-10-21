@@ -11,6 +11,10 @@ export class DangkiService {
   getAllDangky(): Observable<any> {
     return this.http.get(this.baseUrl);
   }
+  getDangKyDaDuyet(masv: number): Observable<any>{
+    const url = `${this.baseUrl}/` + masv + `/baidangdaduyet`;
+    return this.http.get(url);
+  }
   createDangky(
     cv: string,
     bangDiem: string,

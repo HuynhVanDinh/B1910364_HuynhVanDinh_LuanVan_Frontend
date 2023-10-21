@@ -55,6 +55,13 @@
                   </button>
                   <button
                     mat-button
+                    (click)="navigateTo('test')"
+                    [routerLink]="['/student/test']"
+                  >
+                    test
+                  </button>
+                  <button
+                    mat-button
                     (click)="navigateTo('dk-coquan')"
                     [routerLink]="['/student/list-dangki']"
                   >

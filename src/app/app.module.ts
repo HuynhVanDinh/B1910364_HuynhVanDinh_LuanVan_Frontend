@@ -69,8 +69,20 @@ import { KetquaThuctapComponent } from './user/ketqua-thuctap/ketqua-thuctap.com
 import { DangkiCuatoiComponent } from './user/dangki-cuatoi/dangki-cuatoi.component';
 import { TrangThaiPipeComponent } from './trang-thai.pipe/trang-thai.pipe.component';
 import { CapnhatThongtinComponent } from './user/capnhat-thongtin/capnhat-thongtin.component';
-
-
+import { DotthuctapComponent } from './admin/dotthuctap/dotthuctap.component';
+import { GiangvienComponent } from './admin/giangvien/giangvien.component';
+import { DialogDotComponent } from './admin/dialog/dialog-dot/dialog-dot.component';
+import { DialogGiangvienComponent } from './admin/dialog/dialog-giangvien/dialog-giangvien.component';
+import { PageGiangvienComponent } from './giangvien/page-giangvien/page-giangvien.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { PasswordModule } from 'primeng/password';
+import { PicklistComponent } from './picklist/picklist.component';
+import { PickListModule } from 'primeng/picklist';
+import { ThoigianDangkyComponent } from './admin/thoigian-dangky/thoigian-dangky.component';
+import { DialogThoigianDangkyComponent } from './admin/dialog/dialog-thoigian-dangky/dialog-thoigian-dangky.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { HuongdanComponent } from './user/huongdan/huongdan.component';
+import { MatStepperModule } from '@angular/material/stepper';
 @NgModule({
   declarations: [
     AppComponent,
@@ -109,6 +121,15 @@ import { CapnhatThongtinComponent } from './user/capnhat-thongtin/capnhat-thongt
     DangkiCuatoiComponent,
     TrangThaiPipeComponent,
     CapnhatThongtinComponent,
+    DotthuctapComponent,
+    GiangvienComponent,
+    DialogDotComponent,
+    DialogGiangvienComponent,
+    PageGiangvienComponent,
+    PicklistComponent,
+    ThoigianDangkyComponent,
+    DialogThoigianDangkyComponent,
+    HuongdanComponent,
   ],
   imports: [
     TranslateModule.forRoot({
@@ -118,6 +139,9 @@ import { CapnhatThongtinComponent } from './user/capnhat-thongtin/capnhat-thongt
         deps: [HttpClient],
       },
     }),
+    PickListModule,
+    PasswordModule,
+    DropdownModule,
     CalendarModule,
     MatGridListModule,
     MatProgressSpinnerModule,
@@ -148,6 +172,8 @@ import { CapnhatThongtinComponent } from './user/capnhat-thongtin/capnhat-thongt
     MatRadioModule,
     MatCardModule,
     SidebarModule,
+    MatTabsModule,
+    MatStepperModule,
     ToastrModule.forRoot({
       timeOut: 1500, // Thiết lập thời gian tồn tại là 1,5 giây
       progressBar: true, // Hiển thị thanh tiến trình

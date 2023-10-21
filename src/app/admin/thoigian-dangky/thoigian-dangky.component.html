@@ -1,0 +1,233 @@
+<div class="shadow p-2 mx-2 my-2 rounded">
+  <div class="row">
+    <div class="col-md-10">
+      <h2 class="text-success m-0">Quản trị thông tin lớp</h2>
+      <!-- <h2 class="text-success m-0">{{ "Mgtype" | translate }}</h2> -->
+      <p>Danh mục > Lớp</p>
+      <!-- <p>{{ "path" | translate }}</p> -->
+    </div>
+    <div class="col-md-2 mt-3">
+      <button
+        class="ml-3 bg-success text-white"
+        mat-raised-button
+        (click)="openDialogthem()"
+      >
+        <mat-icon>add</mat-icon>{{ "add" | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="my-2 p-2">
+  <mat-accordion>
+    <mat-expansion-panel
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title class="text-success h5">
+          {{ "search" | translate }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="col-md-6">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="searchName"
+            [placeholder]="'keysearch' | translate"
+            (keyup.enter)="searchLop()"
+          />
+        </div>
+        <div class="col-md-6 align-center">
+          <button
+            class="mr-2"
+            mat-raised-button
+            color="primary"
+            (click)="refreshSearch()"
+          >
+            <mat-icon>refresh</mat-icon>{{ "refresh" | translate }}
+          </button>
+          <button class="mr-2 t-search" mat-raised-button (click)="searchLop()">
+            <mat-icon>search</mat-icon>{{ "search" | translate }}
+          </button>
+          <button class="mr-2" mat-raised-button (click)="exportToPdf()">
+            <mat-icon> picture_as_pdf </mat-icon>Xuất PDF
+          </button>
+          <!-- <button class="btn btn-primary mr-2" (click)="refreshSearch()">
+            <mat-icon class="pt-1">refresh</mat-icon>{{ "refresh" | translate }}
+          </button>
+          <button class="btn btn-success mr-2" (click)="searchLop()">
+            <mat-icon class="pt-1">search</mat-icon>{{ "search" | translate }}
+          </button> -->
+          <!-- <button class="btn btn-info" (click)="exportData()">
+            <mat-icon class="pt-1">arrow_downward</mat-icon> Export
+          </button> -->
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="mat-elevation-z8 p-2 mt-2">
+    <div class="line m-1 float-left"></div>
+    <div class="row">
+      <div class="col-8">
+        <div>
+          <h1>
+            <b>Danh sách lớp</b>
+            <!-- <b>{{ "Base type" | translate }}</b> -->
+          </h1>
+        </div>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="float-right w-50">
+          <mat-label>Bộ lọc</mat-label>
+          <input
+            matInput
+            (keyup)="applyFilter($event)"
+            placeholder="Vd: Mia"
+            #input
+          />
+          <mat-icon matSuffix>filter_alt</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
+    <table class="rounded border p-3" mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="position">
+        <th
+          class="bg-success text-white text-center"
+          mat-header-cell
+          *matHeaderCellDef
+        >
+          {{ "stt" | translate }}
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let item; let i = index">
+          {{ i + 1 }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="code">
+        <th
+          class="bg-success text-white text-center"
+          mat-header-cell
+          *matHeaderCellDef
+        >
+          Mã đăng ký
+          <!-- {{ "Base code" | translate }} -->
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let item">
+          {{ item.id_tgdk }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="tgbd">
+        <th
+          class="bg-success text-white text-center"
+          mat-header-cell
+          *matHeaderCellDef
+        >
+          Thời gian bắt đầu
+          <!-- {{ "type" | translate }} -->
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let item">
+          {{ item.tgbd }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="tgkt">
+        <th
+          class="bg-success text-white text-center"
+          mat-header-cell
+          *matHeaderCellDef
+        >
+          Thời gian kết thúc
+          <!-- {{ "type" | translate }} -->
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let item">
+          {{ item.tgkt }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="ghichu">
+        <th
+          class="bg-success text-white text-center"
+          mat-header-cell
+          *matHeaderCellDef
+        >
+          Ghi chú
+          <!-- {{ "type" | translate }} -->
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let item">
+          {{ item.ghichu }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="khoa">
+        <th
+          class="bg-success text-white text-center"
+          mat-header-cell
+          *matHeaderCellDef
+        >
+          Khoa
+          <!-- {{ "type" | translate }} -->
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let item">
+          {{ item.khoa.khoaName }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="delete">
+        <th
+          class="bg-success text-white text-center"
+          mat-header-cell
+          *matHeaderCellDef
+        >
+          {{ "Operation" | translate }}
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let item">
+          <button
+            class="mr-2"
+            mat-raised-button
+            color="accent"
+            (click)="openEditDialog(item)"
+          >
+            <mat-icon>edit</mat-icon> {{ "edit" | translate }}
+          </button>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="openDialog(item.id, item.image)"
+          >
+            <mat-icon>delete</mat-icon>{{ "delete" | translate }}
+          </button>
+        </td>
+      </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="[
+          'position',
+          'code',
+          'tgbd',
+          'tgkt',
+          'ghichu',
+          'khoa',
+          'delete'
+        ]"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="
+          let row;
+          columns: [
+            'position',
+            'code',
+            'tgbd',
+            'tgkt',
+            'ghichu',
+            'khoa',
+            'delete'
+          ]
+        "
+      ></tr>
+    </table>
+    <mat-paginator
+      (page)="onPageChange($event)"
+      showFirstLastButtons
+      [pageSizeOptions]="pageSizeOptions"
+      aria-label="Select page of periodic
+          elements"
+    ></mat-paginator>
+  </div>
+</div>

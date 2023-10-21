@@ -58,8 +58,11 @@ export class LoginComponent {
           case this.authService.hasRole('ROLE_STUDENT'):
             this.router.navigate(['/student']); // Chuyển hướng đến trang user
             break;
+          case this.authService.hasRole('ROLE_LECTURER'):
+            this.router.navigate(['/lecturer']); // Chuyển hướng đến trang user
+            break;
           default:
-           this.showError = true;
+            this.showError = true;
         }
       },
       (error) => {

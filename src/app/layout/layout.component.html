@@ -31,7 +31,14 @@
         <p class="pl-5 text-white child-bar" [routerLink]="['/admin/sinhvien']">
           <mat-icon>pets</mat-icon>{{ "Base type" | translate }}
         </p>
-
+        <p
+          class="pl-5 text-white child-bar"
+          [routerLink]="['/admin/giangvien']"
+        >
+          <mat-icon>pets</mat-icon>
+          Quản lý giảng viên
+          <!-- {{ "Base type" | translate }} -->
+        </p>
         <!-- Menu con 2 -->
         <p class="pl-5 text-white child-bar" [routerLink]="['/admin/lop']">
           <mat-icon>maps</mat-icon>Quản lý lớp
@@ -45,7 +52,18 @@
         <p class="pl-5 text-white child-bar" [routerLink]="['/admin/donvi']">
           <mat-icon>maps</mat-icon>Quản lý đơn vị
         </p>
-
+        <p
+          class="pl-5 text-white child-bar"
+          [routerLink]="['/admin/thoigiandangky']"
+        >
+          <mat-icon>maps</mat-icon>Quản lý thời gian đăng ký
+        </p>
+        <p
+          class="pl-5 text-white child-bar"
+          [routerLink]="['/admin/dotthuctap']"
+        >
+          <mat-icon>maps</mat-icon>Quản lý đợt thực tập
+        </p>
         <!-- Menu con 4 -->
         <p class="pl-5 text-white child-bar" [routerLink]="['/admin/test']">
           <mat-icon>maps</mat-icon>thử nghiệm 1

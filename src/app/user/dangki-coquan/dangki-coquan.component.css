@@ -11,6 +11,13 @@ mat-grid-tile {
   border: solid rgb(180, 180, 180) 1px;
   border-radius: 5px;
 }
+.coquancuatoi {
+  margin-top: 4px;
+  background-color: white;
+  padding: 5px;
+  border: solid rgb(180, 180, 180) 1px;
+  border-radius: 5px;
+}
 .title {
   color: #317ac4;
   padding: 5px;

@@ -24,6 +24,12 @@ import { ThongtinDangkiComponent } from './user/thongtin-dangki/thongtin-dangki.
 import { KetquaThuctapComponent } from './user/ketqua-thuctap/ketqua-thuctap.component';
 import { DangkiCuatoiComponent } from './user/dangki-cuatoi/dangki-cuatoi.component';
 import { CapnhatThongtinComponent } from './user/capnhat-thongtin/capnhat-thongtin.component';
+import { GiangvienComponent } from './admin/giangvien/giangvien.component';
+import { DotthuctapComponent } from './admin/dotthuctap/dotthuctap.component';
+import { PageGiangvienComponent } from './giangvien/page-giangvien/page-giangvien.component';
+import { PicklistComponent } from './picklist/picklist.component';
+import { ThoigianDangkyComponent } from './admin/thoigian-dangky/thoigian-dangky.component';
+import { HuongdanComponent } from './user/huongdan/huongdan.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -47,8 +53,20 @@ const routes: Routes = [
         data: { roles: ['admin'] },
       },
       {
+        path: 'giangvien',
+        component: GiangvienComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
+      {
         path: 'sinhvien',
         component: SinhvienComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
+      {
+        path: 'dotthuctap',
+        component: DotthuctapComponent,
         canActivate: [AuthGuard],
         data: { roles: ['admin'] },
       },
@@ -67,6 +85,12 @@ const routes: Routes = [
       {
         path: 'khoa',
         component: KhoaComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
+      {
+        path: 'thoigiandangky',
+        component: ThoigianDangkyComponent,
         canActivate: [AuthGuard],
         data: { roles: ['admin'] },
       },
@@ -144,7 +168,25 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: { roles: ['student'] },
       },
+      {
+        path: 'huongdan',
+        component: HuongdanComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['student'] },
+      },
+      {
+        path: 'test',
+        component: PicklistComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['student'] },
+      },
     ],
+  },
+  {
+    path: 'lecturer',
+    component: PageGiangvienComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['lecturer'] },
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: '/error' },

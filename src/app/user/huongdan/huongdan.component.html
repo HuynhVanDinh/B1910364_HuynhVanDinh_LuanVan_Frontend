@@ -1,0 +1,60 @@
+<div class="btn-header" style="display: flex; justify-content: flex-end">
+  <button class="close-button" (click)="closedialog()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Chọn giảng viên hướng dẫn</ng-template>
+      <!-- <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+      </mat-form-field> -->
+      <div class="img-container">
+        <img
+          src="../../../assets/imgs/CTU.jpg"
+          alt="Ảnh CTU"
+          class="centered-image"
+        />
+      </div>
+      <div>
+        <button mat-button matStepperNext>Tiếp</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" label="Chọn cán bộ hướng dẫn">
+    <form [formGroup]="secondFormGroup">
+      <!-- <mat-form-field>
+        <mat-label>Chọn cán bộ hướng dẫn</mat-label>
+        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+               required>
+      </mat-form-field> -->
+      <div class="img-container">
+        <img
+          src="../../../assets/imgs/CTU.jpg"
+          alt="Ảnh CTU"
+          class="centered-image"
+        />
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Trở lại</button>
+        <button mat-button matStepperNext>Tiếp</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Chọn đợt thực tập</ng-template>
+    <div class="img-container">
+      <img
+        src="../../../assets/imgs/CTU.jpg"
+        alt="Ảnh CTU"
+        class="centered-image"
+      />
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>Trở lại</button>
+      <button mat-button (click)="stepper.reset()">Làm mới</button>
+    </div>
+  </mat-step>
+</mat-stepper>
