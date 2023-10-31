@@ -39,7 +39,7 @@ export class DangkiThuctapComponent implements OnInit {
     },
   ];
   isLoading: boolean = false;
-  listGiangVien: GiangVien[] = [];
+  listGiangVien: any;
   listCoQuan: DonVi[] = [];
   listDot: Dot[] = [];
   listKetQua: any;
@@ -49,6 +49,9 @@ export class DangkiThuctapComponent implements OnInit {
   showDotValidationError: boolean = false;
   ngOnInit(): void {
     this.getAll();
+    if (this.listKetQua == null) {
+      this.getCoQuan();
+    }
   }
   constructor(
     public dialog: MatDialog,
@@ -66,8 +69,9 @@ export class DangkiThuctapComponent implements OnInit {
   }
   getAll() {
     this.getDangKy();
-    this.getGiangVien();
-    this.getCoQuan();
+    // this.getGiangVien();
+    this.getGiangVienById();
+
     this.getDot();
     this.getThoiGianDangKy();
   }
@@ -89,18 +93,26 @@ export class DangkiThuctapComponent implements OnInit {
       this.thoigianDangkyService
         .getAllThoiGianDangKyKhoa(data.lop.khoa.khoaId)
         .subscribe((data) => {
-          // console.log('ajfgkj', data);
+          console.log('ajfgkj', data);
           this.thoi_gian_dang_ky = data;
         });
     });
   }
-  getGiangVien() {
-    this.giangVienService.getGiangVien().subscribe((data) => {
-      this.listGiangVien = data;
-      this.cities = this.listGiangVien;
-      console.log(this.listGiangVien);
+  getGiangVienById(){
+    const accountid = localStorage.getItem('accountid');
+    this.sinhvienService.getSinhVien(accountid).subscribe((data) => {
+      // console.log("hỏ",data.lop.giangVien.tenGV);
+      this.listGiangVien = data.lop.giangVien;
+
     });
   }
+  // getGiangVien() {
+  //   this.giangVienService.getGiangVien().subscribe((data) => {
+  //     this.listGiangVien = data;
+  //     this.cities = this.listGiangVien;
+  //     console.log(this.listGiangVien);
+  //   });
+  // }
   getDot() {
     this.dotThucTapService.getAllDotthuctap().subscribe((data) => {
       this.listDot = data;
@@ -117,25 +129,25 @@ export class DangkiThuctapComponent implements OnInit {
       });
     });
   }
-  filterCities(event: any) {
-    if (!event.value && this.selectedCity !== this.initialCity) {
-      this.selectedCity = this.initialCity;
-    } else {
-      const selectedCity = event.value.tenGV; // Lấy giá trị được chọn trong dropdown
-      console.log(selectedCity);
-      this.showCityValidationError = false;
+  // filterCities(event: any) {
+  //   if (!event.value && this.selectedCity !== this.initialCity) {
+  //     this.selectedCity = this.initialCity;
+  //   } else {
+  //     const selectedCity = event.value.tenGV; // Lấy giá trị được chọn trong dropdown
+  //     console.log(selectedCity);
+  //     this.showCityValidationError = false;
 
-      // Thực hiện lọc danh sách tùy chọn dựa trên selectedCity
-      // if (selectedCity) {
-      //   // Nếu đã chọn một giá trị, lọc danh sách tùy chọn
-      //   this.cities = this.cities.filter((city) => city.tenGV === selectedCity);
-      // } else {
-      //   // Nếu không có giá trị nào được chọn, hiển thị lại toàn bộ danh sách
-      //   this.cities = this.listGiangVien;
-      // }
-      this.selectedCity = event.value.maGV;
-    }
-  }
+  //     // Thực hiện lọc danh sách tùy chọn dựa trên selectedCity
+  //     // if (selectedCity) {
+  //     //   // Nếu đã chọn một giá trị, lọc danh sách tùy chọn
+  //     //   this.cities = this.cities.filter((city) => city.tenGV === selectedCity);
+  //     // } else {
+  //     //   // Nếu không có giá trị nào được chọn, hiển thị lại toàn bộ danh sách
+  //     //   this.cities = this.listGiangVien;
+  //     // }
+  //     this.selectedCity = event.value.maGV;
+  //   }
+  // }
   filterCoQuans(event: any) {
     if (!event.value && this.selectedCoquan !== this.initialCoquan) {
       this.selectedCoquan = this.initialCoquan;
@@ -177,11 +189,11 @@ export class DangkiThuctapComponent implements OnInit {
     }
   }
   onSubmit() {
-    if (!this.selectedCity) {
-      // Hiển thị thông báo hoặc thực hiện hành động phù hợp, ví dụ:
-      this.showCityValidationError = true;
-      return;
-    }
+    // if (!this.selectedCity) {
+    //   // Hiển thị thông báo hoặc thực hiện hành động phù hợp, ví dụ:
+    //   this.showCityValidationError = true;
+    //   return;
+    // }
 
     if (!this.selectedCoquan) {
       // Hiển thị thông báo hoặc thực hiện hành động phù hợp, ví dụ:
@@ -193,13 +205,13 @@ export class DangkiThuctapComponent implements OnInit {
       this.showDotValidationError = true;
       return;
     }
-    if (this.selectedCity || this.selectedCoquan || this.selectedDot) {
+    if ( this.selectedCoquan || this.selectedDot) {
       // Lấy giá trị được chọn từ dropdowns
-      const selectedCityValue = this.selectedCity;
+      // const selectedCityValue = this.selectedCity;
       const selectedCoquanValue = this.selectedCoquan;
       const selectedDotValue = this.selectedDot;
       // Bây giờ bạn có thể sử dụng giá trị này để thực hiện các xử lý cần thiết, ví dụ: gửi lên máy chủ hoặc hiển thị trong console
-      console.log('Giảng viên đã chọn:', selectedCityValue);
+      // console.log('Giảng viên đã chọn:', selectedCityValue);
       console.log('Cơ quan thực tập đã chọn:', selectedCoquanValue);
       console.log('Đợt thực tập đã chọn:', selectedDotValue);
       // Thực hiện các xử lý tiếp theo dựa trên giá trị đã lấy được
@@ -207,9 +219,10 @@ export class DangkiThuctapComponent implements OnInit {
       this.sinhvienService.getSinhVien(accountid).subscribe((data) => {
         const maSV = data.maSV; // Thay bằng giá trị tương ứng
         const maDvtt = this.selectedCoquan; // Thay bằng giá trị tương ứng
-        const maGv = this.selectedCity; // Thay bằng giá trị tương ứng
+        const maGv = this.listGiangVien.maGV;
+        // this.selectedCity; // Thay bằng giá trị tương ứng
         const maDot = this.selectedDot; // Thay bằng giá trị tương ứng
-
+        // console.log(maDot,maDvtt,maSV,maGv)
         this.dangkyThuctapService
           .createKetQuaThucTap(maSV, maDvtt, maGv, maDot)
           .subscribe(
@@ -217,13 +230,22 @@ export class DangkiThuctapComponent implements OnInit {
               this.isLoading = false;
               this.toastr.success('Đăng ký thành công');
               // Xử lý kết quả từ server nếu cần
-              this.getAll();
+               this.getDangKy();
+               // this.getGiangVien();
+               this.getGiangVienById();
+
+               this.getDot();
+               this.getThoiGianDangKy();
               console.log(response);
             },
             (error) => {
               this.isLoading = false;
               this.toastr.error('Lỗi đăng ký thực tập');
-              this.getAll();
+               this.getDangKy();
+               // this.getGiangVien();
+               this.getGiangVienById();
+               this.getDot();
+               this.getThoiGianDangKy();
               // Xử lý lỗi nếu có
               console.error(error);
             }

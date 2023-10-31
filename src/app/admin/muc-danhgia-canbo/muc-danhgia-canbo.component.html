@@ -1,0 +1,83 @@
+<table class="rounded border p-3" mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="position">
+        <th
+          class="bg-success text-white text-center"
+          mat-header-cell
+          *matHeaderCellDef
+        >
+          {{ "stt" | translate }}
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let item; let i = index">
+          {{ i + 1 }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="code">
+        <th
+          class="bg-success text-white text-center"
+          mat-header-cell
+          *matHeaderCellDef
+        >
+          Mã phiếu
+          <!-- {{ "Base code" | translate }} -->
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let item">
+          {{ item.maPDCB }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="noidung">
+        <th
+          class="bg-success text-white text-center"
+          mat-header-cell
+          *matHeaderCellDef
+        >
+          Nội dung
+          <!-- {{ "type" | translate }} -->
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let item">
+          {{ item.noiDungPD | truncate : 50 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th
+          class="bg-success text-white text-center"
+          mat-header-cell
+          *matHeaderCellDef
+        >
+          {{ "Operation" | translate }}
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let item">
+          <button
+            class="mr-2"
+            mat-raised-button
+            color="accent"
+            (click)="openEditDialog(item)"
+          >
+            <mat-icon>edit</mat-icon> {{ "edit" | translate }}
+          </button>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="openDialog(item.id, item.image)"
+          >
+            <mat-icon>delete</mat-icon>{{ "delete" | translate }}
+          </button>
+        </td>
+      </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="['position', 'code', 'noidung', 'delete']"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['position', 'code', 'noidung', 'delete']"
+      ></tr>
+    </table>
+    <mat-paginator
+      (page)="onPageChange($event)"
+      showFirstLastButtons
+      [pageSizeOptions]="pageSizeOptions"
+      aria-label="Select page of periodic
+          elements"
+    ></mat-paginator>

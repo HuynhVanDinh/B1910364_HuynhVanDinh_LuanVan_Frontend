@@ -1,19 +1,19 @@
 <div class="shadow p-2 mx-2 my-2 rounded">
   <div class="row">
     <div class="col-md-10">
-      <h2 class="text-success m-0">Quản trị thông thời gian đăng ký</h2>
+      <h2 class="text-success m-0">Phân công giảng viên hướng dẫn</h2>
       <!-- <h2 class="text-success m-0">{{ "Mgtype" | translate }}</h2> -->
-      <p>Danh mục > Thời gian đăng ký</p>
+      <p>Danh mục > Phân công giảng viên</p>
       <!-- <p>{{ "path" | translate }}</p> -->
     </div>
     <div class="col-md-2 mt-3">
-      <button
+      <!-- <button
         class="ml-3 bg-success text-white"
         mat-raised-button
         (click)="openDialogthem()"
       >
         <mat-icon>add</mat-icon>{{ "add" | translate }}
-      </button>
+      </button> -->
     </div>
   </div>
 </div>
@@ -72,7 +72,7 @@
       <div class="col-8">
         <div>
           <h1>
-            <b>Danh sách thời gian đăng ký</b>
+            <b>Phân công giảng viên</b>
             <!-- <b>{{ "Base type" | translate }}</b> -->
           </h1>
         </div>
@@ -109,50 +109,24 @@
           mat-header-cell
           *matHeaderCellDef
         >
-          Mã đăng ký
+          Mã lớp
           <!-- {{ "Base code" | translate }} -->
         </th>
         <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.id_tgdk }}
+          {{ item.lopId }}
         </td>
       </ng-container>
-      <ng-container matColumnDef="tgbd">
+      <ng-container matColumnDef="tenlop">
         <th
           class="bg-success text-white text-center"
           mat-header-cell
           *matHeaderCellDef
         >
-          Thời gian bắt đầu
+          Lớp
           <!-- {{ "type" | translate }} -->
         </th>
         <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.tgbd }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="tgkt">
-        <th
-          class="bg-success text-white text-center"
-          mat-header-cell
-          *matHeaderCellDef
-        >
-          Thời gian kết thúc
-          <!-- {{ "type" | translate }} -->
-        </th>
-        <td class="text-center" mat-cell *matCellDef="let item">
-          {{ item.tgkt }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="ghichu">
-        <th
-          class="bg-success text-white text-center"
-          mat-header-cell
-          *matHeaderCellDef
-        >
-          Ghi chú
-          <!-- {{ "type" | translate }} -->
-        </th>
-        <td class="text-center" mat-cell *matCellDef="let item">
-           {{ item.ghichu | truncate: 50 }}
+          {{ item.tenLop }}
         </td>
       </ng-container>
       <ng-container matColumnDef="khoa">
@@ -168,6 +142,24 @@
           {{ item.khoa.khoaName }}
         </td>
       </ng-container>
+      <ng-container matColumnDef="giangvien">
+        <th
+          class="bg-success text-white text-center"
+          mat-header-cell
+          *matHeaderCellDef
+        >
+          Giảng viên
+          <!-- {{ "type" | translate }} -->
+        </th>
+        <td class="text-center" mat-cell *matCellDef="let item">
+          <span *ngIf="item.giangVien != null">{{ item.giangVien.tenGV }}</span>
+          <p-tag
+            *ngIf="item.giangVien == null"
+            severity="warning"
+            value="Chưa phân công"
+          ></p-tag>
+        </td>
+      </ng-container>
       <ng-container matColumnDef="delete">
         <th
           class="bg-success text-white text-center"
@@ -178,20 +170,32 @@
         </th>
         <td class="text-center" mat-cell *matCellDef="let item">
           <button
-            class="mr-2"
+            *ngIf="item.giangVien == null"
+            class="bg-success text-white"
             mat-raised-button
-            color="accent"
             (click)="openEditDialog(item)"
           >
-            <mat-icon>edit</mat-icon> {{ "edit" | translate }}
+            <mat-icon>add</mat-icon>
+            Phân công
+            <!-- {{ "edit" | translate }} -->
           </button>
           <button
+            *ngIf="item.giangVien != null"
+            mat-raised-button
+            color="accent"
+            (click)="openPhancongDialog(item)"
+          >
+            <mat-icon>edit</mat-icon>
+            Chỉnh sửa
+            <!-- {{ "edit" | translate }} -->
+          </button>
+          <!-- <button
             mat-raised-button
             color="warn"
-            (click)="openDialog(item.id, item.image)"
+            (click)="openDialog(item.id)"
           >
             <mat-icon>delete</mat-icon>{{ "delete" | translate }}
-          </button>
+          </button> -->
         </td>
       </ng-container>
       <tr
@@ -199,10 +203,9 @@
         *matHeaderRowDef="[
           'position',
           'code',
-          'tgbd',
-          'tgkt',
-          'ghichu',
+          'tenlop',
           'khoa',
+          'giangvien',
           'delete'
         ]"
       ></tr>
@@ -210,15 +213,7 @@
         mat-row
         *matRowDef="
           let row;
-          columns: [
-            'position',
-            'code',
-            'tgbd',
-            'tgkt',
-            'ghichu',
-            'khoa',
-            'delete'
-          ]
+          columns: ['position', 'code', 'tenlop', 'khoa', 'giangvien', 'delete']
         "
       ></tr>
     </table>

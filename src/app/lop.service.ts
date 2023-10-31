@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -45,6 +45,25 @@ export class LopService {
       headers: headers,
     });
   }
+  phanCongGiangVien(
+    id: number,
+    maGV: number,
+    authToken: string
+  ): Observable<any> {
+    const url = `${this.baseUrl}/phanconggiangvien/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Bearer ${authToken}`,
+    });
+
+    const params = new HttpParams().set('maGV', maGV.toString()); // Tạo tham số và đặt giá trị 'maGV'
+
+    return this.http.put<any>(url, null, {
+      params: params, // Truyền tham số vào yêu cầu
+      headers: headers,
+    });
+  }
+
   searchLop(tenLop: string, authToken: string) {
     // Tạo URL với tham số tenSV
     const url = `${this.baseUrl}/search?tenLop=${tenLop}`;
@@ -58,3 +77,5 @@ export class LopService {
     return this.http.get(url, { headers });
   }
 }
+
+

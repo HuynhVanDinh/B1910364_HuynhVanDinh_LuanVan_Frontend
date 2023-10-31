@@ -83,6 +83,22 @@ import { DialogThoigianDangkyComponent } from './admin/dialog/dialog-thoigian-da
 import { MatTabsModule } from '@angular/material/tabs';
 import { HuongdanComponent } from './user/huongdan/huongdan.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { TruncatePipe } from './truncate.pipe';
+import { PhancongGiangvienComponent } from './admin/phancong-giangvien/phancong-giangvien.component';
+import { TagModule } from 'primeng/tag';
+import { DialogPhancongGiangvienComponent } from './admin/dialog/dialog-phancong-giangvien/dialog-phancong-giangvien.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { CongviecCuatoiComponent } from './user/congviec-cuatoi/congviec-cuatoi.component';
+import { CongviecTuanComponent } from './user/congviec-tuan/congviec-tuan.component';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { PhieudiemCanboComponent } from './admin/phieudiem-canbo/phieudiem-canbo.component';
+import { DialogPhieudiemCanboComponent } from './admin/dialog/dialog-phieudiem-canbo/dialog-phieudiem-canbo.component';
+import { MucDanhgiaCanboComponent } from './admin/muc-danhgia-canbo/muc-danhgia-canbo.component';
+import { NgParticlesModule } from 'ng-particles';
+import { KnobModule } from 'primeng/knob';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSliderModule } from '@angular/material/slider';
 @NgModule({
   declarations: [
     AppComponent,
@@ -130,6 +146,14 @@ import { MatStepperModule } from '@angular/material/stepper';
     ThoigianDangkyComponent,
     DialogThoigianDangkyComponent,
     HuongdanComponent,
+    TruncatePipe,
+    PhancongGiangvienComponent,
+    DialogPhancongGiangvienComponent,
+    CongviecCuatoiComponent,
+    CongviecTuanComponent,
+    PhieudiemCanboComponent,
+    DialogPhieudiemCanboComponent,
+    MucDanhgiaCanboComponent,
   ],
   imports: [
     TranslateModule.forRoot({
@@ -174,6 +198,14 @@ import { MatStepperModule } from '@angular/material/stepper';
     SidebarModule,
     MatTabsModule,
     MatStepperModule,
+    TagModule,
+    InputTextModule,
+    CheckboxModule,
+    ProgressBarModule,
+    NgParticlesModule,
+    KnobModule,
+    MatProgressBarModule,
+    MatSliderModule,
     ToastrModule.forRoot({
       timeOut: 1500, // Thiết lập thời gian tồn tại là 1,5 giây
       progressBar: true, // Hiển thị thanh tiến trình

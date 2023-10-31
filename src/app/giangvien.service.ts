@@ -12,6 +12,14 @@ export class GiangvienService {
     const url = `${this.baseUrl}`;
     return this.http.get(url);
   }
+  getGiangVienById(id: number): Observable<any> {
+    const url = `${this.baseUrl}/`+id;
+    return this.http.get(url);
+  }
+  getGiangVienByKhoa(khoaId: number): Observable<any> {
+    const url = `${this.baseUrl}/khoa/` + khoaId;
+    return this.http.get(url);
+  }
   createGiangVien(
     tengv: string,
     khoaId: number | null,

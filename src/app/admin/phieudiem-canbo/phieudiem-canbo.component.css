@@ -1,0 +1,22 @@
+.line {
+  height: 45px;
+  width: 5px;
+  background-color: rgb(3, 146, 3);
+}
+.test {
+  position: relative;
+}
+.t-search{
+  background: rgb(10, 165, 10);
+  color: white;
+}
+::ng-deep .mat-tab-label-active {
+  background-color: #007acc; /* Màu nền khi tab được chọn */
+  color: #ffffff; /* Màu văn bản khi tab được chọn */
+}
+
+/* Định dạng nền của tab khi chưa được chọn */
+::ng-deep .mat-tab-label {
+  background-color: #ffffff; /* Màu nền khi tab chưa được chọn */
+  color: #000000; /* Màu văn bản khi tab chưa được chọn */
+}

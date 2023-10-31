@@ -1,0 +1,81 @@
+<app-progress-spinner-overlay *ngIf="isLoading"></app-progress-spinner-overlay>
+<div class="h-25 bg-success text-white head-from">
+  <div class="row">
+    <div class="col-11 mt-2">
+      <h1 class="pl-4">
+        {{ isEdit ? "Sửa nội dung phiếu điểm" : "Thêm nội dung phiếu điểm" }}
+      </h1>
+      <!-- <h1 class="p-2">{{ "addbasetype" | translate }}</h1> -->
+    </div>
+    <div class="col-1 mt-2">
+      <b class="text-white h2" (click)="closedialog()">X</b>
+    </div>
+  </div>
+</div>
+<form [formGroup]="myForm">
+  <div class="m-2 my-2">
+    <mat-form-field class="w-100">
+      <mat-label>Nội dung phiếu điểm</mat-label>
+      <!-- <input
+        matInput
+        formControlName="Noidung"
+        placeholder="Vd: abc"
+        [(ngModel)]="Noidung"
+        required
+      /> -->
+        <textarea matInput
+        formControlName="Noidung"
+        placeholder="Vd: abc"
+        [(ngModel)]="Noidung"
+        required></textarea>
+      <mat-error
+        *ngIf="myForm.get('Noidung')!.invalid && myForm.get('Noidung')!.touched"
+        >Vui lòng nhập nội dung phiếu điểm !!!</mat-error
+      >
+    </mat-form-field>
+ <mat-form-field class="w-100">
+        <mat-label>Tên mục</mat-label>
+        <mat-select formControlName="muc">
+          <mat-option
+            *ngFor="let muc of mucs"
+            [value]="muc.mucId"
+          >
+            {{ muc.tenMuc }}
+          </mat-option>
+        </mat-select>
+
+        <mat-error
+          *ngIf="
+            myForm.get('muc')!.invalid && myForm.get('muc')!.touched
+          "
+        >
+          Vui lòng nhập tên mục !!
+        </mat-error>
+      </mat-form-field>
+  </div>
+</form>
+<div class="row m-3">
+  <div class="col-md-12 mt-2 mb-2">
+    <button
+      class="btn btn-success float-right ml-2"
+      *ngIf="!isEditMode"
+      (click)="themPhieu(Noidung, muc)"
+    >
+      {{ "add" | translate }}
+    </button>
+
+    <button
+      class="btn btn-success float-right ml-2"
+      *ngIf="isEditMode"
+      (click)="suaPhieu(id, muc, Noidung)"
+    >
+      {{ "edit" | translate }}
+    </button>
+    <button class="btn btn-primary float-right" (click)="refreshForm()">
+      {{ "refresh" | translate }}
+    </button>
+    <button class="btn btn-danger mr-2 float-right" (click)="closedialog()">
+      {{ "close" | translate }}
+    </button>
+  </div>
+</div>

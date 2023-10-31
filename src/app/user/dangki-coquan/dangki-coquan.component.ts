@@ -20,6 +20,7 @@ import { SinhvienService } from 'src/app/sinhvien.service';
   // encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class DangkiCoquanComponent implements OnInit, PipeTransform {
+  isLoading: boolean = false;
   isSinhVienDaNhanHoSo!: any[];
   isGhiDanh: boolean = false;
   isGhiDanhMap: { [key: number]: boolean } = {};
@@ -35,7 +36,12 @@ export class DangkiCoquanComponent implements OnInit, PipeTransform {
     private dangkyThuctapService: DangkyThuctapService
   ) {}
   ngOnInit() {
-    this.getAll();
+    this.isLoading = true;
+    setTimeout(() => {
+      this.getAll();
+      this.isLoading = false;
+    }, 300);
+
     this.getSinhVienDaNhanHoSo();
     // this.isBaiDang();
   }
@@ -54,7 +60,7 @@ export class DangkiCoquanComponent implements OnInit, PipeTransform {
         .subscribe((data) => {
           // this.isSinhVienDaNhanHoSo =data as unknown as boolean;
           this.isSinhVienDaNhanHoSo = data;
-          console.log("kkk",data)
+          console.log('kkk', data);
         });
     });
   }

@@ -30,6 +30,9 @@ import { PageGiangvienComponent } from './giangvien/page-giangvien/page-giangvie
 import { PicklistComponent } from './picklist/picklist.component';
 import { ThoigianDangkyComponent } from './admin/thoigian-dangky/thoigian-dangky.component';
 import { HuongdanComponent } from './user/huongdan/huongdan.component';
+import { PhancongGiangvienComponent } from './admin/phancong-giangvien/phancong-giangvien.component';
+import { CongviecCuatoiComponent } from './user/congviec-cuatoi/congviec-cuatoi.component';
+import { PhieudiemCanboComponent } from './admin/phieudiem-canbo/phieudiem-canbo.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -112,6 +115,18 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: { roles: ['admin'] },
       },
+      {
+        path: 'phanconggiangvien',
+        component: PhancongGiangvienComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
+      {
+        path: 'phieudiemcanbo',
+        component: PhieudiemCanboComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
     ],
   },
   {
@@ -177,6 +192,12 @@ const routes: Routes = [
       {
         path: 'test',
         component: PicklistComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['student'] },
+      },
+      {
+        path: 'congviec-cuatoi',
+        component: CongviecCuatoiComponent,
         canActivate: [AuthGuard],
         data: { roles: ['student'] },
       },

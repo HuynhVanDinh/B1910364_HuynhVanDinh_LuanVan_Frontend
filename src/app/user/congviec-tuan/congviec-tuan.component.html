@@ -1,0 +1,93 @@
+<!-- <table class="task-list">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Mô tả công việc</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let congviec of listCongViec" class="task">
+      <td>
+        <p-checkbox
+          name="group"
+          [value]="congviec"
+          [(ngModel)]="selectedCongviec"
+          [inputId]="congviec.maCV"
+          (ngModelChange)="updateProgressBar()"
+        ></p-checkbox>
+      </td>
+      <td>{{ congviec.mota }}</td>
+    </tr>
+  </tbody>
+</table> -->
+<table class="table mt-2">
+  <thead>
+    <tr>
+      <th class="text-center" *ngFor="let column of displayedColumns">
+        {{ column }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="text-center" *ngFor="let congviec of listCongViec">
+      <td scope="row">{{ congviec.maCV }}</td>
+      <td>{{ congviec.mota }}</td>
+      <td>
+        <div class="flex justify-content-center">
+          <p-knob
+            [(ngModel)]="congviec.tienDo"
+            valueTemplate="{value}%"
+          ></p-knob>
+        </div>
+      </td>
+      <td>
+        <mat-slider class="example-margin">
+          <input type="range" [(ngModel)]="congviec.tienDo" matSliderThumb />
+        </mat-slider>
+        <br />
+
+        <button
+          [disabled]="congviec.trangThaiCV == 2 || congviec.trangThaiCV == 3"
+          class="btn btn-info rounded"
+          (click)="capNhatCongViec(congviec.maCV, congviec.tienDo)"
+        >
+          Cập nhật
+        </button>
+      </td>
+      <td>
+        <!-- {{ congviec.trangThaiCV }} -->
+        <p-tag
+          *ngIf="congviec.trangThaiCV == 0"
+          severity="info"
+          [rounded]="true"
+          value="Đã giao"
+        ></p-tag>
+        <p-tag
+          *ngIf="congviec.trangThaiCV == 1"
+          severity="warning"
+          [rounded]="true"
+          value="Đang thực hiện"
+        ></p-tag>
+        <p-tag
+          *ngIf="congviec.trangThaiCV == 2"
+          severity="success"
+          [rounded]="true"
+          value="Hoàn thành"
+        ></p-tag>
+        <p-tag
+          *ngIf="congviec.trangThaiCV == 3"
+          severity="danger"
+          [rounded]="true"
+          value="Chưa hoàn thành"
+        ></p-tag>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- <div class="progress-bar-container" *ngIf="listCongViec.length != 0">
+  <p-progressBar [value]="progressValue"></p-progressBar>
+</div> -->
+<div class="w-100 text-danger p-5 mt-4 mb-5" *ngIf="listCongViec.length == 0">
+  <p class="text-center mt-4">Không tồn tại công việc nào</p>
+  <p class="text-center">Chờ cán bộ hướng dẫn phân công công việc</p>
+</div>

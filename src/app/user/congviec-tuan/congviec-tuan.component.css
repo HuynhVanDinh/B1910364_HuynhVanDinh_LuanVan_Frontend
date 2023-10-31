@@ -1,0 +1,18 @@
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+}
+
+p-checkbox {
+  margin-right: 10px;
+}
+
+.progress-bar-container {
+  width: 100%;
+}

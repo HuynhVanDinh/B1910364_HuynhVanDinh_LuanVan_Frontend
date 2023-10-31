@@ -4,20 +4,31 @@
     <h5>ĐĂNG KÝ THỰC TẬP</h5>
     <hr />
   </div>
-  <div *ngIf="thoi_gian_dang_ky">
-    <h6 class="pl-2">
+  <div *ngIf="thoi_gian_dang_ky.length != 0">
+    <h6  class="pl-2">
       - Thời gian đăng ký thực tập: Từ ngày ({{ thoi_gian_dang_ky[0].tgbd }} -
       {{ thoi_gian_dang_ky[0].tgkt }})
     </h6>
-    <h6 class="pl-2 text-danger">
+    <h6  class="pl-2 text-danger">
       (Chú ý: {{ thoi_gian_dang_ky[0].ghichu }} )
     </h6>
   </div>
-  <div class="row">
+  <div *ngIf="listGiangVien" class="row">
     <div class="col-md-5">
-      <form class="pl-2" (ngSubmit)="onSubmit()">
+      <form  class="pl-2" (ngSubmit)="onSubmit()">
+        <div *ngIf="listGiangVien" class="mb-2 flex justify-content-center">
+          <input
+            id="disabled-input"
+            type="text"
+            pInputText
+            disabled="true"
+            [(ngModel)]="listGiangVien.maGV"
+            [style]="{ width: '100%' }"
+            [placeholder]="listGiangVien.tenGV"
+          />
+        </div>
         <section>
-          <div class="mb-2">
+          <!-- <div class="mb-2">
             <p-dropdown
               [options]="cities"
               [(ngModel)]="selectedCity"
@@ -32,9 +43,10 @@
             <div *ngIf="showCityValidationError" class="text-danger">
               Vui lòng chọn giảng viên hướng dẫn.
             </div>
-          </div>
+          </div> -->
           <div class="mb-2">
             <p-dropdown
+              [disabled]="listKetQua"
               [options]="coquans"
               [(ngModel)]="selectedCoquan"
               [filter]="true"
@@ -50,6 +62,7 @@
           </div>
           <div class="mb-2">
             <p-dropdown
+              [disabled]="listKetQua"
               [options]="dots"
               [(ngModel)]="selectedDot"
               [filter]="true"
@@ -79,6 +92,7 @@
           Đã đăng ký
         </button>
       </form>
+
     </div>
     <div class="col-md-7">
       <div class="vertical-table pr-2">
@@ -120,8 +134,10 @@
           <!-- Thêm các cột tiêu đề và dữ liệu bên phải ở đây -->
         </table>
       </div>
+
     </div>
   </div>
+  <div class="text-center" *ngIf="!listGiangVien">Chưa phân công giảng viên</div>
   <button (click)="openHuongDanDialog()" class="btn-icon">
     <mat-icon>help</mat-icon> <i>Hướng dẫn đăng ký</i>
   </button>
