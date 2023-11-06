@@ -33,6 +33,9 @@ import { HuongdanComponent } from './user/huongdan/huongdan.component';
 import { PhancongGiangvienComponent } from './admin/phancong-giangvien/phancong-giangvien.component';
 import { CongviecCuatoiComponent } from './user/congviec-cuatoi/congviec-cuatoi.component';
 import { PhieudiemCanboComponent } from './admin/phieudiem-canbo/phieudiem-canbo.component';
+import { HeaderGiangvienComponent } from './giangvien/layout/header-giangvien/header-giangvien.component';
+import { ThongtinGiangvienComponent } from './giangvien/thongtin-giangvien/thongtin-giangvien.component';
+import { SuaThongtinComponent } from './giangvien/sua-thongtin/sua-thongtin.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -205,9 +208,23 @@ const routes: Routes = [
   },
   {
     path: 'lecturer',
-    component: PageGiangvienComponent,
+    component: HeaderGiangvienComponent,
     canActivate: [AuthGuard],
     data: { roles: ['lecturer'] },
+    children: [
+      {
+        path: '',
+        component: ThongtinGiangvienComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['lecturer'] },
+      },
+      {
+        path: 'sua-thongtin',
+        component: SuaThongtinComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['lecturer'] },
+      },
+    ],
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: '/error' },

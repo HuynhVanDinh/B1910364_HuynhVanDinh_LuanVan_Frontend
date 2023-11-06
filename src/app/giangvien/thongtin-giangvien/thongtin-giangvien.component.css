@@ -1,0 +1,47 @@
+.list-student {
+  margin-top: 4px;
+  background-color: white;
+  margin-left: 15px;
+  margin-right: 5px;
+  border: solid rgb(180, 180, 180) 1px;
+  border-radius: 5px;
+  height: auto;
+}
+.list-news {
+  margin-top: 4px;
+  background-color: white;
+  margin-right: 15px;
+  border: solid rgb(180, 180, 180) 1px;
+  border-radius: 5px;
+  height: auto;
+  background: url(../../../assets/imgs/bg_module_thongbao.png) no-repeat center
+    top white;
+}
+.col-md-6 {
+  padding: 0;
+}
+.canhan {
+  border: solid rgb(180, 180, 180) 1px;
+  border-radius: 5px;
+  margin: 10px;
+}
+.text{
+  color: #317AC4;
+  margin: 5px;
+}
+.thongbao {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.thongbao li {
+  margin-right: 30px;
+  border-bottom: 1px dashed rgb(129, 129, 129); /* Tạo đường gạch dứt dưới màu đen */
+  list-style-type: decimal; /* Đổi kiểu hiển thị thành số thứ tự */
+  margin-bottom: 10px; /* Tạo khoảng cách giữa các số */
+}
+.thongbao a {
+  color: rgb(78, 78, 78);
+}
+.avt{
+  height: 190px;
+}

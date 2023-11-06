@@ -99,6 +99,13 @@ import { NgParticlesModule } from 'ng-particles';
 import { KnobModule } from 'primeng/knob';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSliderModule } from '@angular/material/slider';
+import { HeaderGiangvienComponent } from './giangvien/layout/header-giangvien/header-giangvien.component';
+import { FooterGiangvienComponent } from './giangvien/layout/footer-giangvien/footer-giangvien.component';
+import { ThongtinGiangvienComponent } from './giangvien/thongtin-giangvien/thongtin-giangvien.component';
+import { DiemSinhvienComponent } from './giangvien/diem-sinhvien/diem-sinhvien.component';
+import { SuaThongtinComponent } from './giangvien/sua-thongtin/sua-thongtin.component';
+import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
+import { MultilevelMenuService } from 'ng-material-multilevel-menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -154,6 +161,11 @@ import { MatSliderModule } from '@angular/material/slider';
     PhieudiemCanboComponent,
     DialogPhieudiemCanboComponent,
     MucDanhgiaCanboComponent,
+    HeaderGiangvienComponent,
+    FooterGiangvienComponent,
+    ThongtinGiangvienComponent,
+    DiemSinhvienComponent,
+    SuaThongtinComponent,
   ],
   imports: [
     TranslateModule.forRoot({
@@ -206,6 +218,7 @@ import { MatSliderModule } from '@angular/material/slider';
     KnobModule,
     MatProgressBarModule,
     MatSliderModule,
+    NgMaterialMultilevelMenuModule,
     ToastrModule.forRoot({
       timeOut: 1500, // Thiết lập thời gian tồn tại là 1,5 giây
       progressBar: true, // Hiển thị thanh tiến trình
@@ -213,6 +226,7 @@ import { MatSliderModule } from '@angular/material/slider';
     }),
   ],
   providers: [
+    MultilevelMenuService,
     {
       provide: MatPaginatorIntl,
       useClass: CustomPaginatorIntl, // Sử dụng custom PaginatorIntl

@@ -108,5 +108,117 @@ export class LayoutComponent implements OnInit {
     }
     this.translate.use(language);
   }
+  menuItems = [
+    {
+      label: 'Trang chủ',
+      icon: 'home',
+      link: '/admin',
+      externalRedirect: true,
+      // hrefTargetType: '_blank',
+    },
+    {
+      label: 'Biểu mẫu',
+      icon: 'file_present',
+      items: [
+        {
+          label: 'Đánh giá của cán bộ',
+          icon: 'edit_square',
+          link: '/admin/phieudiemcanbo',
+          externalRedirect: true,
+        },
+        {
+          label: 'Đánh giá của giảng viên',
+          icon: 'edit_calendar',
+          items: [
+            {
+              label: 'Item 1.2.1',
+              link: '/item-1-2-1',
+              faIcon: 'fas fa-allergies',
+            },
+            {
+              label: 'Item 1.2.2',
+              faIcon: 'fas fa-ambulance',
+              items: [
+                {
+                  label: 'Item 1.2.2.1',
+                  link: 'item-1-2-2-1',
+                  faIcon: 'fas fa-anchor',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: 'Danh mục',
+      icon: 'bookmark_manager',
+      items: [
+        {
+          label: 'Quản lý sinh viên',
+          link: '/admin/sinhvien',
+          icon: 'person',
+          externalRedirect: true,
+        },
+        {
+          label: 'Quản lý giảng viên',
+          link: '/admin/giangvien',
+          icon: 'personal_injury',
+          externalRedirect: true,
+        },
+        {
+          label: 'Quản lý đơn vị',
+          link: '/admin/donvi',
+          icon: 'groups',
+          externalRedirect: true,
+        },
+      ],
+    },
+
+    {
+      label: 'Thời gian',
+      icon: 'pending_actions',
+      items: [
+        {
+          label: 'Thời gian đăng ký',
+          link: '/admin/thoigiandangky',
+          icon: 'schedule',
+          externalRedirect: true,
+        },
+        {
+          label: 'Đợt thực tập',
+          link: '/admin/dotthuctap',
+          icon: 'tab_recent',
+          externalRedirect: true,
+        },
+      ],
+    },
+    {
+      label: 'Phân công giảng viên',
+      link: '/admin/phanconggiangvien',
+      icon: 'assignment_turned_in',
+      externalRedirect: true,
+    },
+    {
+      label: 'Quản lý lớp',
+      link: '/admin/lop',
+      icon: 'add_home_work',
+      externalRedirect: true,
+    },
+    {
+      label: 'Quản lý khoa',
+      link: '/admin/khoa',
+      icon: 'school',
+      externalRedirect: true,
+    },
+  ];
+  config = {
+    paddingAtStart: true,
+    classname: 'my-custom-class',
+    listBackgroundColor: 'rgb(0, 122, 27)',
+    fontColor: 'white',
+    backgroundColor: 'rgb(0, 122, 27)',
+    selectedListFontColor: '#ff5733',
+  };
 }
 

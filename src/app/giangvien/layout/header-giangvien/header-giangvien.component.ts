@@ -1,15 +1,14 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { elements } from 'chart.js';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/auth.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+  selector: 'app-header-giangvien',
+  templateUrl: './header-giangvien.component.html',
+  styleUrls: ['./header-giangvien.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderGiangvienComponent implements OnInit {
   componentBackgroundColor: string = '#ececec';
   items: MenuItem[] | undefined;
   dockVisible: boolean = false;
@@ -34,7 +33,6 @@ export class HeaderComponent implements OnInit {
       value: 'right',
     },
   ];
-  constructor(private authService: AuthService, private router: Router) {}
   @Output() menuToggle = new EventEmitter<boolean>();
   @Input() isMenuOpen: boolean = false;
   @Output() navigate = new EventEmitter<string>();
@@ -69,6 +67,7 @@ export class HeaderComponent implements OnInit {
       this.componentBackgroundColor = savedBackgroundColor;
     }
   }
+  constructor(private authService: AuthService, private router: Router) {}
   toggleDockVisibility() {
     this.dockVisible = !this.dockVisible;
   }
@@ -76,7 +75,7 @@ export class HeaderComponent implements OnInit {
     this.menuToggle.emit(true);
   }
   menuItems: { label: string; route: string }[] = [
-    { label: 'Trang chủ', route: '/' },
+    { label: 'Trang chủ', route: '/lecturer/' },
     { label: 'Về chúng tôi', route: '/about' },
     { label: 'Dịch vụ', route: '/services' },
     { label: 'Liên hệ', route: '/contact' },

@@ -12,8 +12,13 @@ export class GiangvienService {
     const url = `${this.baseUrl}`;
     return this.http.get(url);
   }
-  getGiangVienById(id: number): Observable<any> {
-    const url = `${this.baseUrl}/`+id;
+  getGiangVienById(id: string): Observable<any> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.get(url);
+  }
+  getGiangVienByAccount(accountid: string | null): Observable<any> {
+    const url = `${this.baseUrl}/account/${accountid}`;
+    console.log(url);
     return this.http.get(url);
   }
   getGiangVienByKhoa(khoaId: number): Observable<any> {
@@ -62,6 +67,22 @@ export class GiangvienService {
       tenGV: tengv,
     };
     return this.http.put<any>(url, body, {
+      headers: headers,
+    });
+  }
+  updateAvt(
+    magv: string | null,
+    hinhAnh: string,
+    authToken: string
+  ): Observable<any> {
+    const url = `${this.baseUrl}/${magv}/capnhatanhdien`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Bearer ${authToken}`,
+    });
+
+    // Đưa tên tệp hình ảnh vào trực tiếp, không cần bọc trong một đối tượng
+    return this.http.put<any>(url, hinhAnh, {
       headers: headers,
     });
   }

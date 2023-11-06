@@ -12,7 +12,7 @@
       </h6>
       <hr class="bg-white w-50" />
     </div>
-    <div class="tab-bar text-white pl-4 p-2" [routerLink]="['/admin/']">
+    <!-- <div class="tab-bar text-white pl-4 p-2" [routerLink]="['/admin/']">
       <mat-icon class="mr-1">home</mat-icon> {{ "home" | translate }}
     </div>
     <mat-accordion>
@@ -27,7 +27,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <!-- Menu con 1 -->
+
         <p class="pl-5 text-white child-bar" [routerLink]="['/admin/sinhvien']">
           <mat-icon>pets</mat-icon>{{ "Base type" | translate }}
         </p>
@@ -37,14 +37,14 @@
         >
           <mat-icon>pets</mat-icon>
           Quản lý giảng viên
-          <!-- {{ "Base type" | translate }} -->
+
         </p>
-        <!-- Menu con 2 -->
+
         <p class="pl-5 text-white child-bar" [routerLink]="['/admin/lop']">
           <mat-icon>maps</mat-icon>Quản lý lớp
         </p>
 
-        <!-- Menu con 3 -->
+
         <p class="pl-5 text-white child-bar" [routerLink]="['/admin/khoa']">
           <mat-icon>maps</mat-icon>Quản lý khoa
         </p>
@@ -76,12 +76,12 @@
         >
           <mat-icon>maps</mat-icon>Nội dung phiếu điểm cán bộ
         </p>
-        <!-- Menu con 4 -->
+
         <p class="pl-5 text-white child-bar" [routerLink]="['/admin/test']">
           <mat-icon>maps</mat-icon>thử nghiệm 1
         </p>
 
-        <!-- Menu con 5 -->
+
         <p class="pl-5 text-white child-bar" [routerLink]="['/admin/province']">
           <mat-icon>maps</mat-icon>thử nghiệm 2
         </p>
@@ -89,7 +89,12 @@
           <mat-icon>maps</mat-icon>thử nghiệm 3
         </p>
       </mat-expansion-panel>
-    </mat-accordion>
+    </mat-accordion> -->
+    <ng-material-multilevel-menu [configuration]="config" [items]="menuItems">
+      <ng-container *ngFor="let item of menuItems">
+        <a [routerLink]="[item.link]">{{ item.label }}</a>
+      </ng-container>
+    </ng-material-multilevel-menu>
   </mat-drawer>
   <mat-drawer-content>
     <mat-toolbar class="bg-white">

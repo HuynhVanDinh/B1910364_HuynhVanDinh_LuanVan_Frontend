@@ -1,0 +1,89 @@
+<app-progress-spinner-overlay *ngIf="isLoading"></app-progress-spinner-overlay>
+<div class="list-thongtin">
+  <div class="title">
+    <h5>CẬP NHẬT THÔNG TIN ({{ giangVien.tenGV }})</h5>
+    <hr />
+  </div>
+  <div class="p-2" *ngIf="giangVien">
+    <div class="row">
+      <div class="col-md-4">
+        <div *ngIf="selectedFile" class="preview">
+          <img
+            class="img_download img-fluid img-thumbnail"
+            [src]="selectedFile"
+            alt="Selected Image"
+            width="300px"
+          />
+        </div>
+        <img
+          *ngIf="!selectedFile"
+          class="img_download img-fluid img-thumbnail"
+          [src]="
+            giangVien.anhGV
+              ? 'http://localhost:8080/file/' +  giangVien.anhGV
+              : 'http://localhost:8080/file/20230918201356_user.png'
+          "
+          alt="File Image"
+          width="300px"
+        />
+        <mat-form-field class="w-100 mt-3">
+          <mat-label>Tải lên ảnh đại diện</mat-label>
+          <input
+            type="file"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+            #fileInput
+            hidden
+          />
+          <mat-icon (click)="fileInput.click()" matSuffix>folder</mat-icon>
+          <!-- <mat-hint>Select a profile picture</mat-hint> -->
+          <input matInput [formControl]="avatarControl" hidden />
+        </mat-form-field>
+
+        <!-- Add a button to trigger file upload -->
+        <button
+          type="button"
+          class="btn btn-outline-primary w-100"
+          (click)="uploadFile()"
+        >
+          Thay đổi
+        </button>
+      </div>
+      <div class="col-md-8">
+        <div class="thongtin">
+          <mat-form-field class="w-100">
+            <mat-label>Mã số giảng viên</mat-label>
+            <input readonly matInput value="{{ giangVien.maGV }}" />
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Họ tên giảng viên</mat-label>
+            <input type="text" matInput value="{{ giangVien.tenGV }}" />
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Email</mat-label>
+            <input type="text" matInput value="{{ giangVien.account.email }}" />
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Thuộc khoa</mat-label>
+            <input readonly matInput value="{{ giangVien.khoa.khoaName }}" />
+          </mat-form-field>
+          <!-- <mat-form-field class="w-100">
+            <mat-label>Ngày sinh</mat-label>
+            <input type="date" matInput value="{{ sinhVien.ngaySinh }}" />
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Quê quán</mat-label>
+            <input type="text" matInput value="{{ sinhVien.queQuan }}" />
+          </mat-form-field> -->
+          <button
+            type="button"
+            class="btn btn-outline-primary w-25 float-right"
+          >
+            Cập nhật
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
