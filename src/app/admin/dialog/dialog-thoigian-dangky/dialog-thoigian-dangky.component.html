@@ -1,1 +1,116 @@
-<p>dialog-thoigian-dangky works!</p>
+<app-progress-spinner-overlay *ngIf="isLoading"></app-progress-spinner-overlay>
+<div class="h-25 bg-success text-white head-from">
+  <div class="row">
+    <div class="col-11 mt-2">
+      <h1 class="pl-4">
+        {{ isEdit ? ("suadonvi" | translate) : ("themdonvi" | translate) }}
+      </h1>
+      <!-- <h1 class="p-2">{{ "addbasetype" | translate }}</h1> -->
+    </div>
+    <div class="col-1 mt-2">
+      <b class="text-white h2" (click)="closedialog()">X</b>
+    </div>
+  </div>
+</div>
+<form [formGroup]="myForm">
+  <div class="m-2 my-2">
+     <mat-form-field class="w-100">
+        <mat-label>Tên khoa</mat-label>
+        <mat-select formControlName="khoaName">
+          <mat-option
+            *ngFor="let khoa of danhSachTenKhoa"
+            [value]="khoa.khoaId"
+          >
+            {{ khoa.khoaName }}
+          </mat-option>
+        </mat-select>
+
+        <mat-error
+          *ngIf="
+            myForm.get('khoaName')!.invalid && myForm.get('khoaName')!.touched
+          "
+        >
+          Vui lòng nhập tên khoa !!
+        </mat-error>
+      </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Ghi chú</mat-label>
+      <input
+        matInput
+        formControlName="ghiChu"
+        placeholder="Vd: abc"
+        [(ngModel)]="ghiChu"
+        required
+      />
+      <mat-error
+        *ngIf="myForm.get('ghiChu')!.invalid && myForm.get('ghiChu')!.touched"
+        >Vui lòng nhập ghi chú !!</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="w-100">
+        <mat-label>Thời gian bắt đầu</mat-label>
+        <!-- <p-calendar [(ngModel)]="date" matInput
+          formControlName="ngaysinh"
+          placeholder="Vd: 16/06/2001"></p-calendar> -->
+        <input
+          type="date"
+          matInput
+          formControlName="thoiGianBatDau"
+          placeholder="Vd: 16/06/2001"
+          [(ngModel)]="thoiGianBatDau"
+          required
+        />
+        <mat-error
+          *ngIf="
+            myForm.get('thoiGianBatDau')!.invalid && myForm.get('thoiGianBatDau')!.touched
+          "
+          >Vui lòng nhập thời gian bắt đầu !!</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Thời gian kết thúc</mat-label>
+        <!-- <p-calendar [(ngModel)]="date" matInput
+          formControlName="ngaysinh"
+          placeholder="Vd: 16/06/2001"></p-calendar> -->
+        <input
+          type="date"
+          matInput
+          formControlName="thoiGianKetThuc"
+          placeholder="Vd: 16/06/2001"
+          [(ngModel)]="thoiGianKetThuc"
+          required
+        />
+        <mat-error
+          *ngIf="
+            myForm.get('thoiGianKetThuc')!.invalid && myForm.get('thoiGianKetThuc')!.touched
+          "
+          >Vui lòng nhập thời gian kết thúc !!</mat-error
+        >
+      </mat-form-field>
+  </div>
+</form>
+<div class="row m-3">
+  <div class="col-md-12 mt-2 mb-2">
+    <button
+      class="btn btn-success float-right ml-2"
+      *ngIf="!isEditMode"
+      (click)="themThoigian(ghiChu, thoiGianBatDau, thoiGianKetThuc, khoaName)"
+    >
+      {{ "add" | translate }}
+    </button>
+
+    <button
+      class="btn btn-success float-right ml-2"
+      *ngIf="isEditMode"
+      (click)="suaThoigian(id, ghiChu, thoiGianBatDau, thoiGianKetThuc, khoaName)"
+    >
+      {{ "edit" | translate }}
+    </button>
+    <button class="btn btn-primary float-right" (click)="refreshForm()">
+      {{ "refresh" | translate }}
+    </button>
+    <button class="btn btn-danger mr-2 float-right" (click)="closedialog()">
+      {{ "close" | translate }}
+    </button>
+  </div>
+</div>

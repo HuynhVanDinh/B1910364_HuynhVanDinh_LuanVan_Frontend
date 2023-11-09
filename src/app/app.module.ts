@@ -29,9 +29,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import {
+  MatPaginatorIntl,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastNoAnimation, ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 import { ChecktokenComponent } from './checktoken/checktoken.component';
 import { LopComponent } from './admin/lop/lop.component';
 import { DialogLopComponent } from './admin/dialog/dialog-lop/dialog-lop.component';
@@ -106,6 +109,16 @@ import { DiemSinhvienComponent } from './giangvien/diem-sinhvien/diem-sinhvien.c
 import { SuaThongtinComponent } from './giangvien/sua-thongtin/sua-thongtin.component';
 import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
 import { MultilevelMenuService } from 'ng-material-multilevel-menu';
+import { PhieudiemGiangvienComponent } from './admin/phieudiem-giangvien/phieudiem-giangvien.component';
+import { DialogMucCanboComponent } from './admin/dialog/dialog-muc-canbo/dialog-muc-canbo.component';
+import { DialogMucGiangvienComponent } from './admin/dialog/dialog-muc-giangvien/dialog-muc-giangvien.component';
+import { MucDanhgiaGiangvienComponent } from './admin/muc-danhgia-giangvien/muc-danhgia-giangvien.component';
+import { DialogPhieudiemGiangvienComponent } from './admin/dialog/dialog-phieudiem-giangvien/dialog-phieudiem-giangvien.component';
+import { DsSinhvienComponent } from './giangvien/ds-sinhvien/ds-sinhvien.component';
+import { GalleriaModule } from 'primeng/galleria';
+import { GalleriaComponent } from './galleria/galleria.component';
+import { FilterPipe } from './filter.pipe';
+import { FilterByMucPipe } from './filter-by-muc.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -166,6 +179,15 @@ import { MultilevelMenuService } from 'ng-material-multilevel-menu';
     ThongtinGiangvienComponent,
     DiemSinhvienComponent,
     SuaThongtinComponent,
+    PhieudiemGiangvienComponent,
+    DialogMucCanboComponent,
+    DialogMucGiangvienComponent,
+    MucDanhgiaGiangvienComponent,
+    DialogPhieudiemGiangvienComponent,
+    DsSinhvienComponent,
+    GalleriaComponent,
+    FilterPipe,
+    FilterByMucPipe,
   ],
   imports: [
     TranslateModule.forRoot({
@@ -219,10 +241,15 @@ import { MultilevelMenuService } from 'ng-material-multilevel-menu';
     MatProgressBarModule,
     MatSliderModule,
     NgMaterialMultilevelMenuModule,
+    GalleriaModule,
+    ToastNoAnimationModule.forRoot(),
     ToastrModule.forRoot({
-      timeOut: 1500, // Thiết lập thời gian tồn tại là 1,5 giây
+      timeOut: 1500,
+      closeButton: true,
       progressBar: true, // Hiển thị thanh tiến trình
       progressAnimation: 'increasing',
+      preventDuplicates: true,
+      toastComponent: ToastNoAnimation,
     }),
   ],
   providers: [

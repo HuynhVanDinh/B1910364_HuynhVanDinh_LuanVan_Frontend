@@ -24,10 +24,9 @@ export class MucDanhgiaCanboService {
       headers: headers,
     });
   }
-  editLop(
+  editMuc(
     id: number,
-    lop: string,
-    khoaId: number,
+    tenMuc: string,
     authToken: string
   ): Observable<any> {
     const url = `${this.baseUrl}/` + id;
@@ -36,10 +35,10 @@ export class MucDanhgiaCanboService {
       Authorization: `Bearer ${authToken}`,
     });
     const body = {
-      tenLop: lop,
+      tenMuc: tenMuc,
     };
     return this.http.put<any>(url, body, {
-      params: { khoaId: khoaId.toString() },
+      // params: { khoaId: khoaId.toString() },
       headers: headers,
     });
   }

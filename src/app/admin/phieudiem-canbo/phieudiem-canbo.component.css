@@ -6,17 +6,25 @@
 .test {
   position: relative;
 }
-.t-search{
+.t-search {
   background: rgb(10, 165, 10);
   color: white;
 }
 ::ng-deep .mat-tab-label-active {
-  background-color: #007acc; /* Màu nền khi tab được chọn */
-  color: #ffffff; /* Màu văn bản khi tab được chọn */
+  background-color: #007acc;
+  color: #ffffff;
 }
 
-/* Định dạng nền của tab khi chưa được chọn */
 ::ng-deep .mat-tab-label {
-  background-color: #ffffff; /* Màu nền khi tab chưa được chọn */
-  color: #000000; /* Màu văn bản khi tab chưa được chọn */
+  background-color: #ffffff;
+  color: #000000; 
+}
+.chua-co-tuan {
+  height: 410px;
+}
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
 }

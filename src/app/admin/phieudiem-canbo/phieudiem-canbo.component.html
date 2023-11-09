@@ -95,7 +95,7 @@
       <mat-tab-group>
         <mat-tab *ngFor="let muc of mucs">
           <ng-template mat-tab-label>
-            {{ muc.tenMuc }}
+            {{ muc.tenMuc }}<mat-icon class="ml-3" (click)="openDialogSua(muc)">edit</mat-icon>
             <!-- <mat-icon
               (click)="openDialogSua(tuan)"
               >edit</mat-icon
@@ -166,6 +166,20 @@
           </div>
         </mat-tab>
       </mat-tab-group>
+    </div>
+      <div
+      *ngIf="mucs.length == 0"
+      class="mat-elevation-z8 p-2 m-2 text-center chua-co-tuan"
+    >
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="center-container">
+          <h1>Chưa có mục đánh giá nào</h1>
+        </div>
+        <button (click)="openDialogThemMuc()" class="ml-3 bg-success text-white" mat-raised-button>
+          <mat-icon>add</mat-icon>
+          Thêm mục đánh giá
+        </button>
+      </div>
     </div>
   </div>
 </div>

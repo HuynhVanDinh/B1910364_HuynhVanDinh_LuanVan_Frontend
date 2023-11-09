@@ -8,8 +8,6 @@ import { DotthuctapService } from 'src/app/dotthuctap.service';
 import { GiangvienService } from 'src/app/giangvien.service';
 import { DonVi } from 'src/app/model/donvi.model';
 import { Dot } from 'src/app/model/dot.model';
-import { GiangVien } from 'src/app/model/giangvien.model';
-import { KetQua } from 'src/app/model/ketqua.model';
 import { SinhvienService } from 'src/app/sinhvien.service';
 import { ThoigianDangkyService } from 'src/app/thoigian-dangky.service';
 import { HuongdanComponent } from '../huongdan/huongdan.component';
@@ -255,6 +253,7 @@ export class DangkiThuctapComponent implements OnInit {
   }
   openHuongDanDialog(): void {
     const dialogRef = this.dialog.open(HuongdanComponent, {
+      panelClass: 'custom-dialog-content',
     });
 
     dialogRef.afterClosed().subscribe((result) => {

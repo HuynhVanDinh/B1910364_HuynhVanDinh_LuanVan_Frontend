@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -13,7 +13,7 @@ import { DialogThoigianDangkyComponent } from '../dialog/dialog-thoigian-dangky/
   templateUrl: './thoigian-dangky.component.html',
   styleUrls: ['./thoigian-dangky.component.css'],
 })
-export class ThoigianDangkyComponent {
+export class ThoigianDangkyComponent implements OnInit {
   isEdit: boolean = false;
   isDrawerOpen: boolean = true;
   panelOpenState = false;
@@ -37,22 +37,20 @@ export class ThoigianDangkyComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  ngOnInit() {
+  ngOnInit(): void {
     this.getAll();
   }
 
   getAll() {
-    this.thoigianDangkyService
-      .getAllThoiGianDangKy()
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          // Khởi tạo MatTableDataSource và thiết lập paginator
-          this.dataSource = new MatTableDataSource(res);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        },
-      });
+    this.thoigianDangkyService.getAllThoiGianDangKy().subscribe({
+      next: (res) => {
+        console.log(res);
+        // Khởi tạo MatTableDataSource và thiết lập paginator
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+    });
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -63,15 +61,14 @@ export class ThoigianDangkyComponent {
     }
   }
 
-  openDialog(code: any, image: any): void {
+  openDialog(code: any): void {
     this.dialog.open(OpenwarningComponent, {
       width: '350px',
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '300ms',
       data: {
         code: code,
-        image: image,
-        SinhvienComponent: this,
+        ThoigianDangkyComponent: this,
       },
       disableClose: true,
     });
@@ -84,7 +81,7 @@ export class ThoigianDangkyComponent {
       exitAnimationDuration: '300ms',
       data: {
         isEdit: this.isEdit,
-        ThoigiandangkyComponent: this,
+        ThoigianDangkyComponent: this,
       },
       disableClose: true,
     });

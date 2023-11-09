@@ -1,4 +1,4 @@
-<mat-drawer-container class="h-100">
+<mat-drawer-container class="h-100 layout">
   <mat-drawer
     class="draw"
     mode="side"
@@ -96,52 +96,57 @@
       </ng-container>
     </ng-material-multilevel-menu>
   </mat-drawer>
+
   <mat-drawer-content>
-    <mat-toolbar class="bg-white">
-      <button
-        (click)="closeDrawer()"
-        mat-icon-button
-        class="example-icon"
-        aria-label="Example icon-button with menu icon"
-      >
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span class="text-primary">{{ "title" | translate }}</span>
-      <span class="example-spacer"></span>
-      <button
-        [routerLink]="['/admin']"
-        mat-icon-button
-        class="example-icon home-icon"
-        aria-label="Example icon-button with heart icon"
-      >
-        <mat-icon>home</mat-icon>
-      </button>
-      <button mat-button [matMenuTriggerFor]="menu">
-        <mat-icon>account_circle</mat-icon>{{ loggedInUser?.name }}
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>Thông tin cá nhân</button>
+    <div class="main">
+      <mat-toolbar class="bg-white">
         <button
-          mat-menu-item
-          (click)="logout()"
-          routerLinkActive="router-link-active"
+          (click)="closeDrawer()"
+          mat-icon-button
+          class="example-icon"
+          aria-label="Example icon-button with menu icon"
         >
-          Đăng xuất
+          <mat-icon>menu</mat-icon>
         </button>
-      </mat-menu>
-      <button class="mr-2" mat-button [matMenuTriggerFor]="language">
-        <img [src]="currentLanguageImage" alt="" width="30px" />
-      </button>
-      <mat-menu #language="matMenu">
-        <button mat-menu-item (click)="changeLanguage('vn')">
-          <img src="../../assets/logo/vn.gif" alt="" width="30px" /> Tiếng việt
+        <span class="text-primary">{{ "title" | translate }}</span>
+        <span class="example-spacer"></span>
+        <button
+          [routerLink]="['/admin']"
+          mat-icon-button
+          class="example-icon home-icon"
+          aria-label="Example icon-button with heart icon"
+        >
+          <mat-icon>home</mat-icon>
         </button>
-        <button mat-menu-item (click)="changeLanguage('en')">
-          <img src="../../assets/logo/en.png" alt="" width="30px" /> English
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon>account_circle</mat-icon>{{ loggedInUser?.name }}
         </button>
-      </mat-menu>
-    </mat-toolbar>
-    <router-outlet></router-outlet>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Thông tin cá nhân</button>
+          <button
+            mat-menu-item
+            (click)="logout()"
+            routerLinkActive="router-link-active"
+          >
+            Đăng xuất
+          </button>
+        </mat-menu>
+        <button class="mr-2" mat-button [matMenuTriggerFor]="language">
+          <img [src]="currentLanguageImage" alt="" width="30px" />
+        </button>
+        <mat-menu #language="matMenu">
+          <button mat-menu-item (click)="changeLanguage('vn')">
+            <img src="../../assets/logo/vn.gif" alt="" width="30px" /> Tiếng
+            việt
+          </button>
+          <button mat-menu-item (click)="changeLanguage('en')">
+            <img src="../../assets/logo/en.png" alt="" width="30px" /> English
+          </button>
+        </mat-menu>
+      </mat-toolbar>
+
+      <router-outlet></router-outlet>
+    </div>
   </mat-drawer-content>
   <app-checktoken></app-checktoken>
 </mat-drawer-container>

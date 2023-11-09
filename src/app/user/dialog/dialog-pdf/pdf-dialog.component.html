@@ -1,11 +1,17 @@
-<div class="btn-header" style="display: flex; justify-content: flex-end;">
-  <button class="close-button" (click)="closedialog()">
-    <mat-icon>close</mat-icon>
-  </button>
+<div class="dialog-main">
+  <div class="btn-header" style="display: flex; justify-content: flex-end">
+    <button class="close-button" (click)="closedialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="pdf-viewer-container">
+    <ngx-extended-pdf-viewer
+      [src]="data.url"
+      [height]="'90vh'"
+      [useBrowserLocale]="true"
+      [handTool]="false"
+      [showHandToolButton]="true"
+    >
+    </ngx-extended-pdf-viewer>
+  </div>
 </div>
-<div class="pdf-viewer-container">
-  <ngx-extended-pdf-viewer [src]="data.url"  [height]="'90vh'" [useBrowserLocale]="true" [handTool]="false" [showHandToolButton]="true">
-  </ngx-extended-pdf-viewer>
-</div>
-
-

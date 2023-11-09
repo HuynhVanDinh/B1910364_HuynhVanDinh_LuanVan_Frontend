@@ -10,6 +10,7 @@ import { DialogPhieudiemCanboComponent } from 'src/app/admin/dialog/dialog-phieu
 import { MucDanhgiaCanboService } from 'src/app/muc-danhgia-canbo.service';
 import { OpenwarningComponent } from 'src/app/openwarning/openwarning.component';
 import { PhieudiemCanboService } from 'src/app/phieudiem-canbo.service';
+import { DialogMucCanboComponent } from '../dialog/dialog-muc-canbo/dialog-muc-canbo.component';
 
 @Component({
   selector: 'app-phieudiem-canbo',
@@ -127,6 +128,21 @@ export class PhieudiemCanboComponent {
       disableClose: true,
     });
   }
+  openDialogSua(data: any): void {
+    this.isEdit = true;
+    this.dialog.open(DialogMucCanboComponent, {
+      width: '700px',
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+      data: {
+        isEdit: this.isEdit,
+        muc: data,
+        MucCanBoComponent: this,
+      },
+      disableClose: true,
+    });
+    console.log(data);
+  }
   openDialogthem(): void {
     this.isEdit = false;
     this.dialog.open(DialogPhieudiemCanboComponent, {
@@ -136,6 +152,19 @@ export class PhieudiemCanboComponent {
       data: {
         isEdit: this.isEdit,
         PhieudiemCanboComponent: this,
+      },
+      disableClose: true,
+    });
+  }
+  openDialogThemMuc(): void {
+    this.isEdit = false;
+    this.dialog.open(DialogMucCanboComponent, {
+      width: '700px',
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+      data: {
+        isEdit: this.isEdit,
+        MucCanBoComponent: this,
       },
       disableClose: true,
     });

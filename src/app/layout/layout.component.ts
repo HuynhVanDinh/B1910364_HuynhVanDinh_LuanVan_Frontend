@@ -2,40 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-// import {
-//   MatTreeFlatDataSource,
-//   MatTreeFlattener,
-// } from '@angular/material/tree';
-// import { FlatTreeControl } from '@angular/cdk/tree';
-// interface FoodNode {
-//   name: string;
-//   children?: FoodNode[];
-// }
+import { KhoaService } from '../khoa.service';
+import { MultilevelNode } from 'ng-material-multilevel-menu';
 
-// const TREE_DATA: FoodNode[] = [
-//   {
-//     name: 'Fruit',
-//     children: [{ name: 'Apple' }, { name: 'Banana' }, { name: 'Fruit loops' }],
-//   },
-//   {
-//     name: 'Vegetables',
-//     children: [
-//       {
-//         name: 'Green',
-//         children: [{ name: 'Broccoli' }, { name: 'Brussels sprouts' }],
-//       },
-//       {
-//         name: 'Orange',
-//         children: [{ name: 'Pumpkins' }, { name: 'Carrots' }],
-//       },
-//     ],
-//   },
-// ];
-// interface ExampleFlatNode {
-//   expandable: boolean;
-//   name: string;
-//   level: number;
-// }
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -47,8 +16,11 @@ export class LayoutComponent implements OnInit {
   panelOpenState = false;
   currentLanguageImage: string = '../../assets/logo/vn.gif';
   username = localStorage.getItem('username');
-
+  khoaList!: any[];
+  menuData!: MultilevelNode[];
+  menuItems!: any[];
   constructor(
+    private khoaService: KhoaService,
     private translate: TranslateService,
     private authService: AuthService,
     private router: Router
@@ -56,32 +28,95 @@ export class LayoutComponent implements OnInit {
     translate.setDefaultLang('vn');
   }
 
-  // treeControl = new FlatTreeControl<ExampleFlatNode>(
-  //   (node) => node.level,
-  //   (node) => node.expandable
-  // );
-  // private _transformer = (node: FoodNode, level: number) => {
-  //   return {
-  //     expandable: !!node.children && node.children.length > 0,
-  //     name: node.name,
-  //     level: level,
-  //   };
-  // };
-  // treeFlattener = new MatTreeFlattener(
-  //   this._transformer,
-  //   (node) => node.level,
-  //   (node) => node.expandable,
-  //   (node) => node.children
-  // );
-
-  // dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
   ngOnInit(): void {
-    // this.dataSource.data = TREE_DATA;
-    // Lấy thông tin tài khoản đã đăng nhập từ AuthService
-    // this.loggedInUser = this.authService.getLoggedInUser();
     this.loggedInUser = { name: this.username };
     console.log(this.loggedInUser);
+    this.getAllKhoa();
+  }
+  getAllKhoa() {
+    this.khoaService.getAllKhoa().subscribe((data) => {
+      this.khoaList = data;
+      // console.log('trước', this.khoaList);
+      this.menuData = this.mapKhoaToMenuData();
+      // console.log(this.menuData);
+      this.menuItems = [
+        {
+          label: 'Trang chủ',
+          icon: 'home',
+          link: '/admin',
+          // hrefTargetType: '_blank',
+        },
+        {
+          label: 'Biểu mẫu',
+          icon: 'file_present',
+          items: [
+            {
+              label: 'Đánh giá của cán bộ',
+              icon: 'edit_square',
+              link: '/admin/phieudiemcanbo',
+            },
+            {
+              label: 'Đánh giá của giảng viên',
+              icon: 'edit_calendar',
+              items: this.menuData,
+            },
+          ],
+        },
+        {
+          label: 'Danh mục',
+          icon: 'bookmark_manager',
+          items: [
+            {
+              label: 'Quản lý sinh viên',
+              link: '/admin/sinhvien',
+              icon: 'person',
+            },
+            {
+              label: 'Quản lý giảng viên',
+              link: '/admin/giangvien',
+              icon: 'personal_injury',
+            },
+            {
+              label: 'Quản lý đơn vị',
+              link: '/admin/donvi',
+              icon: 'groups',
+            },
+          ],
+        },
+
+        {
+          label: 'Thời gian',
+          icon: 'pending_actions',
+          items: [
+            {
+              label: 'Thời gian đăng ký',
+              link: '/admin/thoigiandangky',
+              icon: 'schedule',
+            },
+            {
+              label: 'Đợt thực tập',
+              link: '/admin/dotthuctap',
+              icon: 'tab_recent',
+            },
+          ],
+        },
+        {
+          label: 'Phân công giảng viên',
+          link: '/admin/phanconggiangvien',
+          icon: 'assignment_turned_in',
+        },
+        {
+          label: 'Quản lý lớp',
+          link: '/admin/lop',
+          icon: 'add_home_work',
+        },
+        {
+          label: 'Quản lý khoa',
+          link: '/admin/khoa',
+          icon: 'school',
+        },
+      ];
+    });
   }
   // hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
   logout() {
@@ -108,111 +143,30 @@ export class LayoutComponent implements OnInit {
     }
     this.translate.use(language);
   }
-  menuItems = [
-    {
-      label: 'Trang chủ',
-      icon: 'home',
-      link: '/admin',
-      externalRedirect: true,
-      // hrefTargetType: '_blank',
-    },
-    {
-      label: 'Biểu mẫu',
-      icon: 'file_present',
-      items: [
-        {
-          label: 'Đánh giá của cán bộ',
-          icon: 'edit_square',
-          link: '/admin/phieudiemcanbo',
-          externalRedirect: true,
-        },
-        {
-          label: 'Đánh giá của giảng viên',
-          icon: 'edit_calendar',
-          items: [
-            {
-              label: 'Item 1.2.1',
-              link: '/item-1-2-1',
-              faIcon: 'fas fa-allergies',
-            },
-            {
-              label: 'Item 1.2.2',
-              faIcon: 'fas fa-ambulance',
-              items: [
-                {
-                  label: 'Item 1.2.2.1',
-                  link: 'item-1-2-2-1',
-                  faIcon: 'fas fa-anchor',
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      label: 'Danh mục',
-      icon: 'bookmark_manager',
-      items: [
-        {
-          label: 'Quản lý sinh viên',
-          link: '/admin/sinhvien',
-          icon: 'person',
-          externalRedirect: true,
-        },
-        {
-          label: 'Quản lý giảng viên',
-          link: '/admin/giangvien',
-          icon: 'personal_injury',
-          externalRedirect: true,
-        },
-        {
-          label: 'Quản lý đơn vị',
-          link: '/admin/donvi',
-          icon: 'groups',
-          externalRedirect: true,
-        },
-      ],
-    },
-
-    {
-      label: 'Thời gian',
-      icon: 'pending_actions',
-      items: [
-        {
-          label: 'Thời gian đăng ký',
-          link: '/admin/thoigiandangky',
-          icon: 'schedule',
-          externalRedirect: true,
-        },
-        {
-          label: 'Đợt thực tập',
-          link: '/admin/dotthuctap',
-          icon: 'tab_recent',
-          externalRedirect: true,
-        },
-      ],
-    },
-    {
-      label: 'Phân công giảng viên',
-      link: '/admin/phanconggiangvien',
-      icon: 'assignment_turned_in',
-      externalRedirect: true,
-    },
-    {
-      label: 'Quản lý lớp',
-      link: '/admin/lop',
-      icon: 'add_home_work',
-      externalRedirect: true,
-    },
-    {
-      label: 'Quản lý khoa',
-      link: '/admin/khoa',
-      icon: 'school',
-      externalRedirect: true,
-    },
-  ];
+  mapKhoaToMenuData() {
+    // console.log('sau', this.khoaList);
+    if (this.khoaList) {
+      // console.log('hihihihi');
+      const a = this.khoaList.map((khoa) => ({
+        label: khoa.khoaName,
+        icon: 'edit_calendar',
+        link: `/admin/phieudiemgiangvien/${khoa.khoaId}`,
+      }));
+      // console.log(a.length);
+      return a;
+    } else {
+      // console.log('jbhjfhsgdttf');
+      return [];
+    }
+  }
+  // onMenuItemClick(khoaId: number) {
+  //   if (khoaId) {
+  //     // Truyền khoaId qua route
+  //     this.router.navigate([`/admin/phieudiemgiangvien/${khoaId}`]);
+  //   }
+  // }
   config = {
+    interfaceWithRoute: true,
     paddingAtStart: true,
     classname: 'my-custom-class',
     listBackgroundColor: 'rgb(0, 122, 27)',
@@ -221,4 +175,3 @@ export class LayoutComponent implements OnInit {
     selectedListFontColor: '#ff5733',
   };
 }
-

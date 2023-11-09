@@ -14,4 +14,7 @@ export class KetquaService {
   getAllKetQuaThucTapBySinhVien(masv: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/masv/${masv}`);
   }
+  getAllKetQuaThucTapByGiangVien(magv: string | null): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/magv/${magv}`);
+  }
 }

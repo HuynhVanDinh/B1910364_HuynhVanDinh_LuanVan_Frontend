@@ -1,0 +1,63 @@
+<app-progress-spinner-overlay *ngIf="isLoading"></app-progress-spinner-overlay>
+<div class="h-25 bg-success text-white head-from">
+  <div class="row">
+    <div class="col-11 mt-2">
+      <h1 class="pl-4">
+        {{ isEdit ? "Sửa mục đánh giá của giảng viên" : "Thêm mục đánh giá của giảng viên" }}
+      </h1>
+      <!-- <h1 class="p-2">{{ "addbasetype" | translate }}</h1> -->
+    </div>
+    <div class="col-1">
+      <b class="text-white h2" (click)="closedialog()">X</b>
+    </div>
+  </div>
+</div>
+<form [formGroup]="myForm">
+  <div class="row my-3 m-2">
+    <div class="col-md-12">
+      <mat-form-field class="w-100">
+        <mat-label>Tên mục đánh giá</mat-label>
+        <input
+          matInput
+          formControlName="muc"
+          [(ngModel)]="muc"
+          placeholder="Mục đánh giá"
+          required
+        />
+
+        <mat-error
+          *ngIf="
+            myForm.get('muc')!.invalid && myForm.get('muc')!.touched
+          "
+        >
+          Vui lòng nhập mục đánh giá !!
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+<div class="row m-3">
+  <div class="col-md-12 mt-2 mb-2">
+    <button
+      class="btn btn-success float-right ml-2"
+      *ngIf="isEditMode"
+      (click)="themMuc()"
+    >
+      {{ "add" | translate }}
+    </button>
+
+    <button
+      class="btn btn-success float-right ml-2"
+      *ngIf="!isEditMode"
+      (click)="suaMuc(id)"
+    >
+      {{ "edit" | translate }}
+    </button>
+    <button class="btn btn-primary float-right" (click)="refreshForm()">
+      {{ "refresh" | translate }}
+    </button>
+    <button class="btn btn-danger mr-2 float-right" (click)="closedialog()">
+      {{ "close" | translate }}
+    </button>
+  </div>
+</div>

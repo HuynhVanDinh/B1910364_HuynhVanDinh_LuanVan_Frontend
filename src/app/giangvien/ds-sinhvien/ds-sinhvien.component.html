@@ -1,0 +1,77 @@
+<app-galleria></app-galleria>
+<div class="list-dangki">
+  <div class="title">
+    <h5>DANH SÁCH CÁC SINH VIÊN</h5>
+    <hr />
+  </div>
+  <div>
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="ma">
+        <th mat-header-cell *matHeaderCellDef>Mã sinh viên</th>
+        <td mat-cell *matCellDef="let element">{{ element.sinhVien.maSV }}</td>
+      </ng-container>
+      <ng-container matColumnDef="tensinhvien">
+        <th mat-header-cell *matHeaderCellDef>Tên sinh viên</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.sinhVien.tenSV }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="gioitinh">
+        <th mat-header-cell *matHeaderCellDef>Giới tính</th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [innerHTML]="element.sinhVien.gioiTinh"
+        ></td>
+      </ng-container>
+
+      <ng-container matColumnDef="ngaysinh">
+        <th mat-header-cell *matHeaderCellDef>Ngày sinh</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.sinhVien.ngaySinh }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="quequan">
+        <th mat-header-cell *matHeaderCellDef>Quê quán</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.sinhVien.queQuan }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="coquan">
+        <th mat-header-cell *matHeaderCellDef>Cơ quan thực tập</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.donViThucTap.tenDvtt }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="canbo">
+        <th mat-header-cell *matHeaderCellDef>Cán bộ hướng dẫn</th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf="element.canBoHuongDan != null">
+            {{ element.canBoHuongDan.tenCB }}
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="thaotac">
+        <th mat-header-cell *matHeaderCellDef class="thaotac">Thao tác</th>
+        <td mat-cell *matCellDef="let element">
+          <!-- {{ element.canBoHuongDan.tenCB }} -->
+          <!-- <div *ngIf="element.canBoHuongDan != null"></div> -->
+          <button
+            [disabled]="element.canBoHuongDan == null || element.diem != null"
+            class="btn btn-outline-primary"
+            (click)="navigateToAnotherPage(element)"
+          >
+            Chấm điểm
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 50]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

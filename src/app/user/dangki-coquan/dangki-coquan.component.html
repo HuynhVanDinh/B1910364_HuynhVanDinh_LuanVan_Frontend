@@ -1,8 +1,12 @@
 <app-progress-spinner-overlay *ngIf="isLoading"></app-progress-spinner-overlay>
+<app-galleria></app-galleria>
 <div *ngIf="isSinhVienDaNhanHoSo == null; else notNhanHoSo" class="list-cq">
   <div class="title">
     <h5>TIN THỰC TẬP</h5>
     <hr />
+  </div>
+  <div>
+    <h3 class="pl-2 pb-3 text-danger">Chú ý: Sinh viên chỉ có 3 lượt đăng ký cơ quan</h3>
   </div>
   <mat-grid-list cols="2" rowHeight="2:1">
     <mat-grid-tile *ngFor="let baidang of dataSource.data">

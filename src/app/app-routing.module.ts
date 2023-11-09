@@ -36,6 +36,9 @@ import { PhieudiemCanboComponent } from './admin/phieudiem-canbo/phieudiem-canbo
 import { HeaderGiangvienComponent } from './giangvien/layout/header-giangvien/header-giangvien.component';
 import { ThongtinGiangvienComponent } from './giangvien/thongtin-giangvien/thongtin-giangvien.component';
 import { SuaThongtinComponent } from './giangvien/sua-thongtin/sua-thongtin.component';
+import { PhieudiemGiangvienComponent } from './admin/phieudiem-giangvien/phieudiem-giangvien.component';
+import { DsSinhvienComponent } from './giangvien/ds-sinhvien/ds-sinhvien.component';
+import { DiemSinhvienComponent } from './giangvien/diem-sinhvien/diem-sinhvien.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -130,6 +133,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: { roles: ['admin'] },
       },
+      {
+        path: 'phieudiemgiangvien/:khoaId',
+        component: PhieudiemGiangvienComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
     ],
   },
   {
@@ -221,6 +230,18 @@ const routes: Routes = [
       {
         path: 'sua-thongtin',
         component: SuaThongtinComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['lecturer'] },
+      },
+      {
+        path: 'ds-sinhvien',
+        component: DsSinhvienComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['lecturer'] },
+      },
+      {
+        path: 'diem-sinhvien',
+        component: DiemSinhvienComponent,
         canActivate: [AuthGuard],
         data: { roles: ['lecturer'] },
       },

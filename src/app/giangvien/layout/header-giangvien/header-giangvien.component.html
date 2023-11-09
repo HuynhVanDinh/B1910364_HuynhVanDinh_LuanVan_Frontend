@@ -14,7 +14,7 @@
               <mat-icon>logout</mat-icon>
               Đăng xuất
             </button>
-            <a id="logo" [routerLink]="'/student'">
+            <a id="logo" [routerLink]="'/lecturer'">
               <img src="/../assets/imgs/banner_cict _header.jpg" width="100%" />
             </a>
           </div>
@@ -44,7 +44,7 @@
                 <ng-template #desktopMenu>
                   <span [routerLink]="['/lecturer/']">Trang chủ</span>
                   <div class="spacer"></div>
-                  <button
+                  <!-- <button
                     mat-button
                     (click)="navigateTo('dk-thuctap')"
                     [routerLink]="['/student/dktt']"
@@ -78,6 +78,22 @@
                     [routerLink]="['/student/list-dangki']"
                   >
                     Đăng kí của tôi
+                  </button> -->
+                  <button
+                    mat-button
+                    (click)="navigateTo('ds-sinhvien')"
+                    [routerLink]="['/lecturer/ds-sinhvien']"
+                    routerLinkActive="router-link-active"
+                  >
+                    Danh sách sinh viên
+                  </button>
+                   <button
+                    mat-button
+                    (click)="navigateTo('ketqua')"
+                    [routerLink]="['/lecturer/ketqua']"
+                    routerLinkActive="router-link-active"
+                  >
+                    Lịch sử chấm điểm
                   </button>
                   <button
                     mat-button
@@ -85,7 +101,7 @@
                     [routerLink]="['/student/ketqua']"
                     routerLinkActive="router-link-active"
                   >
-                    Kết quả
+                    Thống kê
                   </button>
                   <button mat-button (click)="showSidebar()">Cài đặt</button>
                 </ng-template>

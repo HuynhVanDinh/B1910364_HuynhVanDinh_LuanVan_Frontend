@@ -3,7 +3,8 @@
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 @import "primeflex/primeflex.css";
-html, body { height: 100%; }
+
+html, body { height: auto;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* Thanh cuộn cho toàn bộ ứng dụng */
 body {

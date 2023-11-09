@@ -13,5 +13,6 @@ export class DialogPdfComponent {
   ) {}
   closedialog() {
     this.dialogRef.close('Closed using function');
+    
   }
 }

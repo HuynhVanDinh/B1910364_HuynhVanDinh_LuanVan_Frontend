@@ -1,0 +1,189 @@
+<app-progress-spinner-overlay *ngIf="isLoading"></app-progress-spinner-overlay>
+<div class="shadow p-2 mx-2 my-2 rounded">
+  <div class="row">
+    <div class="col-md-10">
+      <h2 class="text-success m-0">Quản trị thông tin biểu mẫu</h2>
+      <!-- <h2 class="text-success m-0">{{ "Mgtype" | translate }}</h2> -->
+      <p>Biểu mẫu > Đánh giá của giảng viên</p>
+      <!-- <p>{{ "path" | translate }}</p> -->
+    </div>
+    <div class="col-md-2 mt-3">
+      <button
+        [hidden]="mucs.length == 0"
+        class="ml-3 bg-success text-white"
+        mat-raised-button
+        (click)="openDialogthem()"
+      >
+        <mat-icon>add</mat-icon>{{ "add" | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="my-2 p-2">
+  <mat-accordion>
+    <mat-expansion-panel
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title class="text-success h5">
+          {{ "search" | translate }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="col-md-6">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="searchName"
+            [placeholder]="'keysearch' | translate"
+            (keyup.enter)="searchLop()"
+          />
+        </div>
+        <div class="col-md-6 align-center">
+          <button
+            class="mr-2"
+            mat-raised-button
+            color="primary"
+            (click)="refreshSearch()"
+          >
+            <mat-icon>refresh</mat-icon>{{ "refresh" | translate }}
+          </button>
+          <button class="mr-2 t-search" mat-raised-button (click)="searchLop()">
+            <mat-icon>search</mat-icon>{{ "search" | translate }}
+          </button>
+          <!-- <button class="mr-2" mat-raised-button (click)="exportToPdf()">
+            <mat-icon> picture_as_pdf </mat-icon>Xuất PDF
+          </button> -->
+          <!-- <button class="btn btn-primary mr-2" (click)="refreshSearch()">
+            <mat-icon class="pt-1">refresh</mat-icon>{{ "refresh" | translate }}
+          </button>
+          <button class="btn btn-success mr-2" (click)="searchLop()">
+            <mat-icon class="pt-1">search</mat-icon>{{ "search" | translate }}
+          </button> -->
+          <!-- <button class="btn btn-info" (click)="exportData()">
+            <mat-icon class="pt-1">arrow_downward</mat-icon> Export
+          </button> -->
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="mat-elevation-z8 p-2 mt-2">
+    <div class="line m-1 float-left"></div>
+    <div class="row">
+      <div class="col-8">
+        <div>
+          <h1>
+            <b>Nội dung biểu mẫu đánh giá cho giảng viên</b>
+            <!-- <b>{{ "Base type" | translate }}</b> -->
+          </h1>
+        </div>
+      </div>
+      <div class="col-4">
+        <!-- <mat-form-field class="float-right w-50">
+          <mat-label>Bộ lọc</mat-label>
+          <input
+            matInput
+            (keyup)="applyFilter($event)"
+            placeholder="Vd: Mia"
+            #input
+          />
+          <mat-icon matSuffix>filter_alt</mat-icon>
+        </mat-form-field> -->
+      </div>
+    </div>
+    <div *ngIf="mucs.length != 0" class="mat-elevation-z8 p-2 m-2">
+      <mat-tab-group>
+        <mat-tab *ngFor="let muc of mucs">
+          <ng-template mat-tab-label>
+            {{ muc.tenMuc }}
+            <mat-icon class="ml-3" (click)="openDialogsuaMuc(muc)"
+              >edit</mat-icon
+            >
+            <!-- Hiển thị tên của tuần làm tiêu đề của tab -->
+          </ng-template>
+          <app-muc-danhgia-giangvien [muc]="muc"></app-muc-danhgia-giangvien>
+          <!-- <app-congviec-sinhvien [tuan]="tuan"></app-congviec-sinhvien> -->
+          <!-- Nội dung của từng tab -->
+
+          <!-- Thêm nội dung khác tùy ý -->
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label> Thêm mục mới </ng-template>
+          <div class="h-25 bg-success text-white">
+            <h1 class="pl-4 pt-2">Thêm mục mới</h1>
+          </div>
+          <form [formGroup]="myForm">
+            <div class="row my-3 m-2">
+              <div class="col-md-12">
+                <mat-form-field class="w-100">
+                  <mat-label>Tên mục</mat-label>
+                  <textarea
+                    matInput
+                    formControlName="TenMuc"
+                    placeholder="Vd: abc"
+                    [(ngModel)]="TenMuc"
+                    required
+                  ></textarea>
+                  <mat-error
+                    *ngIf="
+                      myForm.get('TenMuc')!.invalid &&
+                      myForm.get('TenMuc')!.touched
+                    "
+                  >
+                    Vui lòng nhập tên mục !!
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+          <div class="row m-3">
+            <div class="col-md-12 mt-2 mb-2">
+              <button
+                class="btn btn-success float-right ml-2"
+                (click)="themMuc(TenMuc)"
+              >
+                {{ "add" | translate }}
+              </button>
+
+              <!-- <button
+      class="btn btn-success float-right ml-2"
+      *ngIf="isEditMode"
+      (click)="suaLop(id, giangVien)"
+    >
+      {{ "edit" | translate }}
+    </button> -->
+              <button
+                class="btn btn-primary float-right"
+                (click)="refreshForm()"
+              >
+                {{ "refresh" | translate }}
+              </button>
+              <!-- <button class="btn btn-danger mr-2 float-right" (click)="closedialog()">
+      {{ "close" | translate }}
+    </button> -->
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <div
+      *ngIf="mucs.length == 0"
+      class="mat-elevation-z8 p-2 m-2 text-center chua-co-tuan"
+    >
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="center-container">
+          <h1>Chưa có mục đánh giá nào</h1>
+        </div>
+        <button
+          (click)="openDialogthemMuc()"
+          class="ml-3 bg-success text-white"
+          mat-raised-button
+        >
+          <mat-icon>add</mat-icon>
+          Thêm mục đánh giá
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
