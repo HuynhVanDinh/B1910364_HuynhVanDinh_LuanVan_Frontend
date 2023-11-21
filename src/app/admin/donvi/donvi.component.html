@@ -3,7 +3,7 @@
     <div class="col-md-10">
       <h2 class="text-success m-0">Quản trị thông tin đơn vị thực tập</h2>
       <!-- <h2 class="text-success m-0">{{ "Mgtype" | translate }}</h2> -->
-      <p>Danh mục > Đơn vị</p>
+      <p>Danh mục > Quản lý đơn vị</p>
       <!-- <p>{{ "path" | translate }}</p> -->
     </div>
     <div class="col-md-2 mt-3">
@@ -47,7 +47,11 @@
           >
             <mat-icon>refresh</mat-icon>{{ "refresh" | translate }}
           </button>
-          <button class="mr-2 t-search" mat-raised-button (click)="searchDonVi()">
+          <button
+            class="mr-2 t-search"
+            mat-raised-button
+            (click)="searchDonVi()"
+          >
             <mat-icon>search</mat-icon>{{ "search" | translate }}
           </button>
           <button class="mr-2" mat-raised-button (click)="exportToPdf()">

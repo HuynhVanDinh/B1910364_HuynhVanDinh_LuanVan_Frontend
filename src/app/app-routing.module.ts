@@ -39,6 +39,7 @@ import { SuaThongtinComponent } from './giangvien/sua-thongtin/sua-thongtin.comp
 import { PhieudiemGiangvienComponent } from './admin/phieudiem-giangvien/phieudiem-giangvien.component';
 import { DsSinhvienComponent } from './giangvien/ds-sinhvien/ds-sinhvien.component';
 import { DiemSinhvienComponent } from './giangvien/diem-sinhvien/diem-sinhvien.component';
+import { SinhvienChuadangkyComponent } from './admin/sinhvien-chuadangky/sinhvien-chuadangky.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -70,6 +71,12 @@ const routes: Routes = [
       {
         path: 'sinhvien',
         component: SinhvienComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
+      {
+        path: 'sinhvien-chuadangky',
+        component: SinhvienChuadangkyComponent,
         canActivate: [AuthGuard],
         data: { roles: ['admin'] },
       },

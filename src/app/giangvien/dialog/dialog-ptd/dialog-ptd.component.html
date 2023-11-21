@@ -1,0 +1,57 @@
+<div class="dialog-main">
+  <div class="btn-header" style="display: flex; justify-content: flex-end">
+    <button class="close-button" (click)="closedialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="p-body p-3 ">
+    <h5 class="text-center mt-2">PHIẾU THEO DÕI SINH VIÊN THỰC TẬP THỰC TẾ</h5>
+    <h5 class="text-center">{{ data.sinhvien.dotThucTap.tenDot }}</h5>
+
+    <p>
+      Họ và tên sinh viên: <b>{{ data.sinhvien.sinhVien.tenSV }}</b>
+      <span style="padding-left: 200px"
+        >MSSV: {{ data.sinhvien.sinhVien.maSV }}</span
+      >
+    </p>
+    <p>Cơ quan thực tập: {{ data.sinhvien.donViThucTap.tenDvtt }}</p>
+    <p>Họ và tên cán bộ hướng dẫn: {{ data.sinhvien.canBoHuongDan.tenCB }}</p>
+    <p>
+      Thời gian thực tập: Từ ngày {{ data.sinhvien.dotThucTap.thoiGianBatDau
+      }}<span style="padding-left: 30px"
+        >đến {{ data.sinhvien.dotThucTap.thoiGianKetThuc }}</span
+      >
+    </p>
+    <table class="table table-bordered " mat-table [dataSource]="combinedData">
+      <ng-container matColumnDef="tuan">
+        <th mat-header-cell *matHeaderCellDef>Tuần</th>
+        <td mat-cell *matCellDef="let data">{{ data.tenTuan }} <p> Từ ngày: {{data.batdau}}</p> đến ngày: {{data.hethan}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="congViec">
+        <th mat-header-cell *matHeaderCellDef>Nội dung công việc được giao</th>
+        <td mat-cell *matCellDef="let data">
+          <div *ngFor="let item of data.congViec">- {{ item.mota }}</div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="danhGia">
+        <th mat-header-cell *matHeaderCellDef>Nhận xét của CB hướng dẫn</th>
+        <td mat-cell *matCellDef="let data">
+          <div *ngFor="let item of data.danhGia">- {{ item.noidungDG }}</div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="soBuoi">
+        <th mat-header-cell *matHeaderCellDef>Số buổi</th>
+        <td mat-cell *matCellDef="let data">
+          <div> {{ data.soBuoi}} buổi</div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <hr>
+    <p class="footer">Kết thúc đợt thực tập, kính nhờ quí cơ quan để phiếu này và phiếu đánh giá vào phong bì, dán niêm phong và giao cho sinh viên. GV sẽ căn cứ vào đánh giá này và quyển báo cáo để chấm điểm cho SV</p>
+  </div>
+</div>

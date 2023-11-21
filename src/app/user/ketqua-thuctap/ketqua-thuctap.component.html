@@ -4,12 +4,22 @@
     <h5>KẾT QUẢ THỰC TẬP CỦA TÔI</h5>
     <hr />
   </div>
-  <div >
-    <p>Cơ quan thực tập: VNPT-IT khu vực 5</p>
-    <p>Thời gian bắt đầu thực tập: 12/06/2030</p>
-    <p>Thời gian kết thúc thực tập: 12/08/2030</p>
-    <p>Trạng thái: Đã hoàn thành</p>
+  <div *ngIf="listKetQua">
+    <p>Cơ quan thực tập: {{ listKetQua.donViThucTap.tenDvtt }}</p>
+    <p>
+      Thời gian bắt đầu thực tập: {{ listKetQua.dotThucTap.thoiGianBatDau }}
+    </p>
+    <p>
+      Thời gian kết thúc thực tập: {{ listKetQua.dotThucTap.thoiGianKetThuc }}
+    </p>
+    <div *ngIf="listKetQua.trangThai != 2">
+      <p>Trạng thái: Chưa hoàn thành</p>
+    </div>
+    <div *ngIf="listKetQua.trangThai == 2">
+      <p>Trạng thái: Đã hoàn thành</p>
+    </div>
     <h1 class="text-center">Điểm số</h1>
-    <h2 class="text-center">9.5</h2>
+    <div *ngIf="listKetQua.diem == null"><h2 class="text-center">Chưa chấm điểm</h2></div>
+    <div *ngIf="listKetQua.diem != null"><h2 class="text-center">{{listKetQua.diem}}</h2></div>
   </div>
 </div>

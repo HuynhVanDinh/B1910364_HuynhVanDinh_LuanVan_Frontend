@@ -13,7 +13,14 @@ export class SinhvienService {
   getAllSinhVien(): Observable<any> {
     return this.http.get(this.baseUrl);
   }
-
+  getAllSinhVienChuaDangKy(): Observable<any> {
+    const url = `${this.baseUrl}/chuadangky`;
+    return this.http.get(url);
+  }
+  guicanhbao(): Observable<any> {
+    const url = `${this.baseUrl}/guicanhbao`;
+    return this.http.post(url,"");
+  }
   getSinhVien(accountid: string | null): Observable<any> {
     const url = `${this.baseUrl}/account/${accountid}`;
     console.log(url);

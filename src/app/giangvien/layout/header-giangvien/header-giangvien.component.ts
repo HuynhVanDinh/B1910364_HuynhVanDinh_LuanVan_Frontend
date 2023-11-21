@@ -39,25 +39,25 @@ export class HeaderGiangvienComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {
-        label: 'dkcq',
-        title: 'Đăng kí cơ quan',
-        icon: 'https://dkmh.ctu.edu.vn/htql/sinhvien/images/phanhe/hetinchi.gif',
+        label: 'ds-sinhvien',
+        title: 'Danh sách sinh vien',
+        icon: '../../../assets/imgs/kqtt.png',
       },
       {
         label: 'sinhvien',
-        title: 'Đăng kí thực tập',
-        icon: 'https://dkmh.ctu.edu.vn/htql/sinhvien/images/phanhe/korganizer.png',
+        title: 'Thống kê',
+        icon: '../../../assets/imgs/tk.png',
       },
       {
         label: 'Photos',
-        title: 'Kết quả thực tập',
-        icon: 'https://dkmh.ctu.edu.vn/htql/sinhvien/images/phanhe/ql_diem.gif',
+        title: 'Lịch sử chấm điểm',
+        icon: '../../../assets/imgs/ls.png',
       },
-      {
-        label: 'Trash',
-        title: 'Đăng kí cơ quan',
-        icon: 'https://primefaces.org/cdn/primeng/images/dock/trash.png',
-      },
+      // {
+      //   label: 'Trash',
+      //   title: 'Cài đặt',
+      //   icon: '../../../assets/imgs/st.png',
+      // },
     ];
     // Đọc màu nền từ localStorage
     const savedBackgroundColor = localStorage.getItem(

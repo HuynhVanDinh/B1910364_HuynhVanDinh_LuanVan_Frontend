@@ -1,9 +1,9 @@
 <div class="shadow p-2 mx-2 my-2 rounded">
   <div class="row">
     <div class="col-md-10">
-      <h2 class="text-success m-0"> Quản trị thông tin lớp</h2>
+      <h2 class="text-success m-0">Quản trị thông tin lớp</h2>
       <!-- <h2 class="text-success m-0">{{ "Mgtype" | translate }}</h2> -->
-      <p>Danh mục > Lớp</p>
+      <p>Lớp</p>
       <!-- <p>{{ "path" | translate }}</p> -->
     </div>
     <div class="col-md-2 mt-3">
@@ -39,7 +39,7 @@
           />
         </div>
         <div class="col-md-6 align-center">
-                    <button
+          <button
             class="mr-2"
             mat-raised-button
             color="primary"
@@ -47,11 +47,7 @@
           >
             <mat-icon>refresh</mat-icon>{{ "refresh" | translate }}
           </button>
-          <button
-            class="mr-2 t-search"
-            mat-raised-button
-            (click)="searchLop()"
-          >
+          <button class="mr-2 t-search" mat-raised-button (click)="searchLop()">
             <mat-icon>search</mat-icon>{{ "search" | translate }}
           </button>
           <button class="mr-2" mat-raised-button (click)="exportToPdf()">
@@ -72,7 +68,7 @@
   </mat-accordion>
   <div class="mat-elevation-z8 p-2 mt-2">
     <div class="line m-1 float-left"></div>
-        <div class="row">
+    <div class="row">
       <div class="col-8">
         <div>
           <h1>
@@ -113,7 +109,7 @@
           mat-header-cell
           *matHeaderCellDef
         >
-        Mã lớp
+          Mã lớp
           <!-- {{ "Base code" | translate }} -->
         </th>
         <td class="text-center" mat-cell *matCellDef="let item">
@@ -174,25 +170,13 @@
       </ng-container>
       <tr
         mat-header-row
-        *matHeaderRowDef="[
-          'position',
-          'code',
-          'tenlop',
-          'khoa',
-          'delete'
-        ]"
+        *matHeaderRowDef="['position', 'code', 'tenlop', 'khoa', 'delete']"
       ></tr>
       <tr
         mat-row
         *matRowDef="
           let row;
-          columns: [
-            'position',
-            'code',
-            'tenlop',
-            'khoa',
-            'delete'
-          ]
+          columns: ['position', 'code', 'tenlop', 'khoa', 'delete']
         "
       ></tr>
     </table>

@@ -77,7 +77,9 @@
         *ngIf="myForm.get('soDt')!.invalid && myForm.get('soDt')!.touched"
         >Vui lòng nhập số điện thoại !!</mat-error
       >
+
     </mat-form-field>
+    <mat-checkbox [(ngModel)]="taiKhoanKhoa">Tài khoản khoa</mat-checkbox>
   </div>
 </form>
 <div class="row m-3">

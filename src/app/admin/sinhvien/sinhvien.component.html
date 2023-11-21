@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-10">
       <h2 class="text-success m-0">{{ "Mgtype" | translate }}</h2>
-      <p>Danh mục > Sinh viên</p>
+      <p>Danh mục > Quản lý sinh viên</p>
       <!-- <p>{{ "path" | translate }}</p> -->
     </div>
     <div class="col-md-2 mt-3">
@@ -102,7 +102,7 @@
           mat-header-cell
           *matHeaderCellDef
         >
-        Quê quán
+          Quê quán
           <!-- {{ "Base name" | translate }} -->
         </th>
         <td class="text-center" mat-cell *matCellDef="let item">
@@ -177,7 +177,8 @@
                 ? 'http://localhost:8080/file/' + item.hinhAnh
                 : 'http://localhost:8080/file/20230918201356_user.png'
             "
-            alt="File Image" loading="lazy"
+            alt="File Image"
+            loading="lazy"
           />
           <button class="download" (click)="downloadFile(item.image)">
             <mat-icon>download</mat-icon>

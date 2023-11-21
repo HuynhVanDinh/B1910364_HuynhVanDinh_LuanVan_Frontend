@@ -35,6 +35,7 @@
   width: 300px;
   height: 100%;
   background-color: rgb(0, 122, 27);
+  /* background-color: #7FCAFC; */
 }
 .example-spacer {
   flex: 1 1 auto;
@@ -45,7 +46,7 @@
 }
 
 .tab-bar:hover {
-  background-color: rgb(0, 170, 37);
+  background-color: rgb(0, 170, 65);
 }
 
 .child-bar:hover {

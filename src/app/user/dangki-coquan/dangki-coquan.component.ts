@@ -93,14 +93,14 @@ export class DangkiCoquanComponent implements OnInit, PipeTransform {
             this.isGhiDanhMap[baiDangId] = true;
 
             console.log(this.isGhiDanh);
-            // Xử lý tương ứng khi sinh viên đã đăng ký
+
           } else {
             console.log(
               `Sinh viên ${sinhVienId} chưa đăng ký bài đăng ${baiDangId}`
             );
             this.isGhiDanhMap[baiDangId] = false;
             console.log(this.isGhiDanh);
-            // Xử lý tương ứng khi sinh viên chưa đăng ký
+          
           }
         },
         (error) => {

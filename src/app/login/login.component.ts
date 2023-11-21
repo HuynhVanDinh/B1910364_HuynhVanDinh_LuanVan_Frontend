@@ -18,6 +18,7 @@ import { loadSlim } from 'tsparticles-slim';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  isLoading: boolean = false;
   id = 'tsparticles';
 
   particlesOptions = {
@@ -95,11 +96,6 @@ export class LoginComponent {
 
   async particlesInit(engine: Engine): Promise<void> {
     console.log(engine);
-
-    // Starting from 1.19.0 you can add custom presets or shape here, using the current tsParticles instance (main)
-    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-    // starting from v2 you can add only the features you need reducing the bundle size
-    //await loadFull(engine);
     await loadSlim(engine);
   }
   username: string = '';
@@ -130,6 +126,7 @@ export class LoginComponent {
   //   );
   // }
   login() {
+    this.isLoading = true;
     this.authService.login(this.username, this.password).subscribe(
       (data) => {
         console.log('Login successful:', data);
@@ -156,10 +153,12 @@ export class LoginComponent {
           default:
             this.showError = true;
         }
+        this.isLoading = false;
       },
       (error) => {
         console.log('Login error:', error);
         this.showError = true;
+        this.isLoading = false;
       }
     );
   }

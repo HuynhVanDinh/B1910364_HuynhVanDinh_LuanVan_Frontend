@@ -150,7 +150,7 @@
         <div class="dock-window" [ngClass]="{ 'dock-hidden': !dockVisible }">
           <p-dock [model]="items" [position]="'bottom'">
             <ng-template pTemplate="item" let-item>
-              <a [routerLink]="['/student', item.label]" [title]="item.title">
+              <a [routerLink]="['/lecturer', item.label]" [title]="item.title">
                 <img [src]="item.icon" [alt]="item.label" width="100%" />
               </a>
             </ng-template>

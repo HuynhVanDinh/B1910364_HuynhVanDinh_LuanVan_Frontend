@@ -115,6 +115,11 @@ export class LayoutComponent implements OnInit {
           link: '/admin/khoa',
           icon: 'school',
         },
+        {
+          label: 'Sinh viên chưa đăng ký',
+          link: '/admin/sinhvien-chuadangky',
+          icon: 'warning',
+        },
       ];
     });
   }

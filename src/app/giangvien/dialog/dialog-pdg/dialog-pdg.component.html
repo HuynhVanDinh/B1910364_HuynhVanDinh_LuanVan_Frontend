@@ -1,0 +1,89 @@
+<div class="dialog-main">
+  <div class="btn-header" style="display: flex; justify-content: flex-end">
+    <button class="close-button" (click)="closedialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="p-body p-3">
+    <h5 class="text-center mt-2">PHIẾU ĐÁNH GIÁ KẾT QUẢ THỰC TẬP</h5>
+    <h6 class="text-center">
+      (Dùng cho cán bộ hướng dẫn thực tập tại cơ quan)
+    </h6>
+    <p>
+      Họ và tên cán bộ hướng dẫn thực tập:
+      {{ data.sinhvien.canBoHuongDan.tenCB }}
+    </p>
+    <p>
+      Điện thoại: {{ data.sinhvien.canBoHuongDan.sdtCB }}<b></b>
+      <span style="padding-left: 200px"
+        >Email: {{ data.sinhvien.canBoHuongDan.account.email }}</span
+      >
+    </p>
+    <p>Đơn vị thực tập: {{ data.sinhvien.donViThucTap.tenDvtt }}</p>
+    <p>
+      Họ và tên sinh viên thực tập: <b> {{ data.sinhvien.sinhVien.tenSV }}</b>
+      <span style="padding-left: 200px"
+        >MSSV: {{ data.sinhvien.sinhVien.maSV }}</span
+      >
+    </p>
+    <p>
+      Thời gian thực tập: Từ ngày {{ data.sinhvien.dotThucTap.thoiGianBatDau
+      }}<span style="padding-left: 30px"
+        >đến {{ data.sinhvien.dotThucTap.thoiGianKetThuc }}</span
+      >
+    </p>
+    <table class="table" mat-table [dataSource]="combinedData">
+      <ng-container matColumnDef="noidung">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>
+          <b>Nội dung đánh giá</b>
+        </th>
+        <td mat-cell *matCellDef="let data; let i = index">
+          <div class="space">
+            <b>{{ i + 1 }}. {{ data.tenMuc }}</b>
+          </div>
+          <div
+            *ngFor="let item of data.noidung; let j = index"
+            style="border: 1px solid #ddd; padding: 5px"
+          >
+            {{ i + 1 }}.{{ j + 1 }}. {{ item.noiDungPD }}
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="diem">
+        <th class="text-center" mat-header-cell *matHeaderCellDef>
+          <b>Điểm (từ 1 -10)</b>
+        </th>
+        <td mat-cell *matCellDef="let data">
+          <div class="space"></div>
+          <div
+            class="text-center"
+            *ngFor="let item of data.diem"
+            style="border: 1px solid #ddd; padding: 5px"
+          >
+            {{ item.diemCB }}
+          </div>
+        </td>
+        <!-- <td mat-cell *matCellDef="let data"> <div class="text-center">
+      {{ calculateTotalScore(data.diem) }}
+    </div></td> -->
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <table class="table table-bordered">
+      <tr class="total-row ">
+        <td  class="text-center">Cộng</td>
+        <td class="w-total text-center">{{ calculateTotalScoreForAllRows(combinedData) }}</td>
+      </tr>
+    </table>
+    <hr />
+    <p class="footer">
+      Kết thúc đợt thực tập, kính nhờ quí cơ quan để phiếu này và phiếu đánh giá
+      vào phong bì, dán niêm phong và giao cho sinh viên . GV sẽ căn cứ vào đánh
+      giá này và quyển báo cáo để chấm điểm cho SV
+    </p>
+  </div>
+</div>

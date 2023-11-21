@@ -115,7 +115,7 @@ export class DialogSinhvienComponent implements OnInit {
       return;
     }
     this.dialogRef.close('Closed using function');
-    this.isLoading = true;
+
     // const khoaNameValue = this.myForm.get('khoaNameControl')!.value;
     const lopNameValue = this.myForm.get('lopNameControl')!.value;
 
@@ -129,6 +129,7 @@ export class DialogSinhvienComponent implements OnInit {
       console.error('Access token not found. User is not authenticated.');
       return;
     }
+    this.isLoading = true;
     this.imgService
       .getDefaultImageAsFile()
       .subscribe((defaultImageFile: File) => {

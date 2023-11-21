@@ -17,9 +17,77 @@
   margin-right: 100px;
   box-shadow: 3px black;
 }
+.p-dg-coquan {
+  border: solid rgb(180, 180, 180) 1px;
+  border-radius: 5px;
+  padding: 10px;
+  margin-left: 100px;
+  margin-right: 100px;
+  box-shadow: 3px black;
+}
 
 .footer {
   color: rgb(70, 70, 70);
   font-weight: 100;
   font-family: "Times New Roman", Times, serif;
 }
+
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.xem-chitiet {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 10px 20px;
+  border: none;
+  background-color: #3498db;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.xem-chitiet:hover {
+  background-color: #2076af;
+}
+
+.image-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease;
+  border-radius: 5px;
+  opacity: 0;
+}
+
+.image-container:hover::before {
+  opacity: 1;
+}
+
+.image-container:hover .xem-chitiet {
+  opacity: 1;
+}
+

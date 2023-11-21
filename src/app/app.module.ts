@@ -119,6 +119,13 @@ import { GalleriaModule } from 'primeng/galleria';
 import { GalleriaComponent } from './galleria/galleria.component';
 import { FilterPipe } from './filter.pipe';
 import { FilterByMucPipe } from './filter-by-muc.pipe';
+import { DialogPtdComponent } from './giangvien/dialog/dialog-ptd/dialog-ptd.component';
+import { DialogPdgComponent } from './giangvien/dialog/dialog-pdg/dialog-pdg.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SinhvienChuadangkyComponent } from './admin/sinhvien-chuadangky/sinhvien-chuadangky.component';
+import { DialogGuicanhbaoComponent } from './admin/dialog/dialog-guicanhbao/dialog-guicanhbao.component';
+import { DialoaPhancongcoquanComponent } from './admin/dialog/dialoa-phancongcoquan/dialoa-phancongcoquan.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     AppComponent,
@@ -188,6 +195,11 @@ import { FilterByMucPipe } from './filter-by-muc.pipe';
     GalleriaComponent,
     FilterPipe,
     FilterByMucPipe,
+    DialogPtdComponent,
+    DialogPdgComponent,
+    SinhvienChuadangkyComponent,
+    DialogGuicanhbaoComponent,
+    DialoaPhancongcoquanComponent,
   ],
   imports: [
     TranslateModule.forRoot({
@@ -242,6 +254,8 @@ import { FilterByMucPipe } from './filter-by-muc.pipe';
     MatSliderModule,
     NgMaterialMultilevelMenuModule,
     GalleriaModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
     ToastNoAnimationModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 1500,

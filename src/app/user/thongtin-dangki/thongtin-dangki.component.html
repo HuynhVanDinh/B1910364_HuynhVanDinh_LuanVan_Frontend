@@ -5,42 +5,56 @@
     <hr />
   </div>
   <div class="from-submit">
-    <form (ngSubmit)="onSubmit()" #form="ngForm">
-      <!-- Bảng điểm -->
-      <div class="form-group">
-        <label for="diem" class="custom-file-upload">
-          <span>Chọn tệp bảng điểm (PDF)</span>
-          <input
-            type="file"
-            id="diem"
-            name="diem"
-            (change)="onFileChange($event, 'diem')"
-            accept="application/pdf"
-            required
-          />
-        </label>
-        <span class="file-name">{{ selectedFileNameDiem }}</span>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card p-3">
+          <h5>Thông tin cơ quan đăng ký</h5>
+          <p>Tên cơ quan: VNPT-IT</p>
+          <p>Liên hệ: 0398576532</p>
+          <p>Địa chỉ: Tiền giang</p>
+        </div>
       </div>
-      <div class="form-group">
-
-        <label for="cv" class="custom-file-upload">
-          <span>Chọn CV (PDF)</span>
-          <input
-            type="file"
-            id="cv"
-            name="cv"
-            (change)="onFileChange($event, 'cv')"
-            accept="application/pdf"
-            required
-          />
-        </label>
-        <span class="file-name">{{ selectedFileNameCv }}</span>
+      <div class="col-md-8">
+        <div class="border rounded p-3">
+          <h5>Thông tin sinh viên</h5>
+          <form (ngSubmit)="onSubmit()" #form="ngForm">
+            <div class="form-group">
+              <label for="diem" class="custom-file-upload">
+                <span>Chọn tệp bảng điểm (PDF)</span>
+                <input
+                  type="file"
+                  id="diem"
+                  name="diem"
+                  (change)="onFileChange($event, 'diem')"
+                  accept="application/pdf"
+                  required
+                />
+              </label>
+              <span class="file-name">{{ selectedFileNameDiem }}</span>
+            </div>
+            <div class="form-group">
+              <label for="cv" class="custom-file-upload">
+                <span>Chọn CV (PDF)</span>
+                <input
+                  type="file"
+                  id="cv"
+                  name="cv"
+                  (change)="onFileChange($event, 'cv')"
+                  accept="application/pdf"
+                  required
+                />
+              </label>
+              <span class="file-name">{{ selectedFileNameCv }}</span>
+            </div>
+            <h6 class="text-danger">***Lưu ý các file là định dạng PDF</h6>
+            <div class="btn-submit">
+              <button type="submit" class="btn btn-primary">
+                Ghi danh tôi
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-        <h6 class="text-danger">***Lưu ý các file là định dạng PDF</h6>
-      <div class="btn-submit">
-        <button type="submit" class="btn btn-primary">Ghi danh tôi</button>
-      </div>
-    </form>
-
+    </div>
   </div>
 </div>

@@ -6,14 +6,14 @@
 <mat-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Chọn giảng viên hướng dẫn</ng-template>
+      <ng-template matStepLabel>Chọn cán bộ hướng dẫn</ng-template>
       <!-- <mat-form-field>
         <mat-label>Name</mat-label>
         <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
       </mat-form-field> -->
       <div class="img-container">
         <img
-          src="../../../assets/imgs/CTU.jpg"
+          src="../../../assets/imgs/hd-cq.png"
           alt="Ảnh CTU"
           class="centered-image"
         />
@@ -23,7 +23,7 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup" label="Chọn cán bộ hướng dẫn">
+  <mat-step [stepControl]="secondFormGroup" label="Chọn đợt thực tập">
     <form [formGroup]="secondFormGroup">
       <!-- <mat-form-field>
         <mat-label>Chọn cán bộ hướng dẫn</mat-label>
@@ -32,7 +32,7 @@
       </mat-form-field> -->
       <div class="img-container">
         <img
-          src="../../../assets/imgs/CTU.jpg"
+          src="../../../assets/imgs/hd-dot.png"
           alt="Ảnh CTU"
           class="centered-image"
         />
@@ -44,10 +44,10 @@
     </form>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Chọn đợt thực tập</ng-template>
+    <ng-template matStepLabel>Tiến hành đăng ký</ng-template>
     <div class="img-container">
       <img
-        src="../../../assets/imgs/CTU.jpg"
+        src="../../../assets/imgs/done.png"
         alt="Ảnh CTU"
         class="centered-image"
       />

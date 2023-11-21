@@ -3,6 +3,36 @@
     <h5>ĐÁNH GIÁ SINH VIÊN</h5>
     <hr />
   </div>
+  <div class="p-dg-coquan mb-3">
+    <div class="title">
+      <h5 class="text-center">ĐÁNH GIÁ CỦA CƠ QUAN</h5>
+      <hr />
+    </div>
+    <div class="row text-center">
+      <div class="col-md-6">
+        <h6>PHIẾU ĐÁNG GIÁ</h6>
+        <div class="container">
+          <div class="image-container">
+            <img src="../../../assets/imgs/PDG.png" alt="" height="300px" />
+            <button class="xem-chitiet" (click)="opendialogpdg(elements)">
+              Xem chi tiết
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h6>PHIẾU THEO DÕI</h6>
+        <div class="container">
+          <div class="image-container">
+            <img src="../../../assets/imgs/PTD.png" alt="" height="300px" />
+            <button class="xem-chitiet" (click)="opendialogptd(elements)">
+              Xem chi tiết
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="p-danhgia">
     <h4 class="text-center">PHIẾU ĐÁNH GIÁ BÁO CÁO KẾT QUẢ THỰC TẬP</h4>
     <h4 class="text-center">{{ elements.dotThucTap.tenDot }}</h4>
@@ -56,7 +86,11 @@
               >
                 <tr class="group-row">
                   <td>{{ i + 1 }}. {{ bieuMau.mucDG.tenMuc }}</td>
-                  <td> <b>{{ getTotalMaxScoreForSection(bieuMau.mucDG.tenMuc) }}</b></td>
+                  <td>
+                    <b>{{
+                      getTotalMaxScoreForSection(bieuMau.mucDG.tenMuc)
+                    }}</b>
+                  </td>
                   <td></td>
                 </tr>
                 <tr
@@ -78,8 +112,8 @@
                         (ngModelChange)="tinhTongDiem()"
                         type="number"
                         step="0.1"
-                        min="0.1"
-                        max="{{item.diemMax}}"
+                        min="0"
+                        max="{{ item.diemMax }}"
                         required
                       />
                       <mat-error
@@ -107,15 +141,17 @@
                           myForm.get('diem' + item.maPDGV)!.touched
                         "
                       >
-                        Điểm =< {{item.diemMax}} !!!
+                        Điểm =< {{ item.diemMax }} !!!
                       </mat-error>
                     </mat-form-field>
                   </td>
                 </tr>
               </ng-container>
               <tr class="group-row">
-                <td  class="text-center w-75">Cộng</td>
-                <td>{{getTotalMaxScoreForAllSections()}}</td>
+                <td class="text-center w-75">Cộng</td>
+                <td class="text-center">
+                  {{ getTotalMaxScoreForAllSections() }}
+                </td>
                 <td>
                   <input
                     class="float-right w-75 text-center"
@@ -129,7 +165,14 @@
           </table>
         </form>
       </div>
-
+      <div class="footer-from">
+        <button
+          class="btn btn-primary float-right mt-2 mr-2"
+          (click)="submitDiem()"
+        >
+          Thực hiện
+        </button>
+      </div>
       <p class="footer">
         Phiếu này đóng vào cuốn báo cáo, không nộp cho cơ quan
       </p>

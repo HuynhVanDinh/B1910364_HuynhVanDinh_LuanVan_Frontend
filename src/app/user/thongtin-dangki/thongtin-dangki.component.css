@@ -20,7 +20,7 @@
   padding-top: 30px;
   border: solid rgb(180, 180, 180) 1px;
   border-radius: 5px;
-  height: 280px;
+  height: 320px;
 }
 /* CSS cho label tùy chỉnh */
 .form-group label.custom-file-upload {
@@ -57,4 +57,21 @@
   content: "\f07c"; /* Unicode của biểu tượng thư mục */
   font-family: FontAwesome;
   margin-right: 5px;
+}
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+p {
+  margin: 5px 0;
+  color: #666;
 }

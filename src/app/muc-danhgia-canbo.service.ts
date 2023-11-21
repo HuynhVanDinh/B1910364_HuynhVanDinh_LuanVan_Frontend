@@ -24,11 +24,7 @@ export class MucDanhgiaCanboService {
       headers: headers,
     });
   }
-  editMuc(
-    id: number,
-    tenMuc: string,
-    authToken: string
-  ): Observable<any> {
+  editMuc(id: number, tenMuc: string, authToken: string): Observable<any> {
     const url = `${this.baseUrl}/` + id;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',

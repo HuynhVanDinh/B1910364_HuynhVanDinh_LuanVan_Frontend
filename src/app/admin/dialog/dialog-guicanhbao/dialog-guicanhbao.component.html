@@ -1,0 +1,22 @@
+<app-progress-spinner-overlay *ngIf="isLoading"></app-progress-spinner-overlay>
+<div class="container p-3 text-center">
+  <h1 mat-dialog-title class="red-heading">Cảnh báo</h1>
+  <div mat-dialog-content>
+    <h3><b>Bạn có chắn chắn muốn gửi cảnh báo đến sinh viên?</b></h3>
+  </div>
+  <div >
+    <button
+      class="btn btn-info"
+      (click)="closedialog()"
+    >
+      Không
+    </button>
+    <button
+      class="btn btn-danger ml-2"
+      (click)="accept()"
+      cdkFocusInitial
+    >
+      Có
+    </button>
+  </div>
+</div>

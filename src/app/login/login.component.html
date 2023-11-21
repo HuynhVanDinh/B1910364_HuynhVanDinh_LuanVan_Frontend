@@ -4,7 +4,7 @@
     [particlesInit]="particlesInit"
     (particlesLoaded)="particlesLoaded($event)"
 ></ng-particles>
-
+<app-progress-spinner-overlay *ngIf="isLoading"></app-progress-spinner-overlay>
 <div class="bg-login">
   <div class="text-center text-white pt-5">
     <div class="kc-logo-text"></div>

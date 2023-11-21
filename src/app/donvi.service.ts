@@ -12,11 +12,16 @@ export class DonviService {
   getAllDonVi(): Observable<any> {
     return this.http.get(this.baseUrl);
   }
+  getAllDonViByKhoa(): Observable<any> {
+    const url = `${this.baseUrl}/coquan-khoa`;
+    return this.http.get(url);
+  }
   createDonvi(
     tenDv: string,
     diaChi: string,
     soDt: string,
     email: string,
+    isKhoa: number,
     authToken: string
   ): Observable<any> {
     const url = `${this.baseUrl}`;
@@ -28,6 +33,7 @@ export class DonviService {
       tenDvtt: tenDv,
       diaChi: diaChi,
       soDt: soDt,
+      isKhoa: isKhoa,
     };
     return this.http.post<any>(url, body, {
       params: { email: email },
@@ -40,6 +46,7 @@ export class DonviService {
     diaChi: string,
     soDt: string,
     email: string,
+    isKhoa: number,
     authToken: string
   ): Observable<any> {
     const url = `${this.baseUrl}/` + id;
@@ -51,6 +58,7 @@ export class DonviService {
       tenDvtt: tenDv,
       diaChi: diaChi,
       soDt: soDt,
+      isKhoa: isKhoa,
     };
     return this.http.put<any>(url, body, {
       params: { email: email },

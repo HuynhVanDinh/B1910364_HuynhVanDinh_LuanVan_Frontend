@@ -28,7 +28,7 @@ export class DialogDonviComponent implements OnInit {
   email!: string;
   isEdit!: boolean;
   isEditMode!: boolean;
-
+  taiKhoanKhoa: number = 0;
   ngOnInit(): void {
     this.myForm = new FormGroup({
       tenDv: new FormControl(),
@@ -63,11 +63,11 @@ export class DialogDonviComponent implements OnInit {
 
   refreshForm() {
     if (this.data.isEdit) {
-       this.id = this.data.donvi.maDvtt;
-       this.tenDv = this.data.donvi.tenDvtt;
-       this.diaChi = this.data.donvi.diaChi;
-       this.soDt = this.data.donvi.soDt;
-       this.email = this.data.donvi.account.email;
+      this.id = this.data.donvi.maDvtt;
+      this.tenDv = this.data.donvi.tenDvtt;
+      this.diaChi = this.data.donvi.diaChi;
+      this.soDt = this.data.donvi.soDt;
+      this.email = this.data.donvi.account.email;
     } else {
       this.myForm.reset();
       this.myForm.markAsUntouched();
@@ -103,9 +103,10 @@ export class DialogDonviComponent implements OnInit {
       console.error('Access token not found. User is not authenticated.');
       return;
     }
+    this.taiKhoanKhoa = this.taiKhoanKhoa ? 0 : 1;
     this.isLoading = true;
     this.donviService
-      .createDonvi(tenDv, diaChi, soDt, email, authToken)
+      .createDonvi(tenDv, diaChi, soDt, email, this.taiKhoanKhoa, authToken)
       .subscribe(
         () => {
           this.dialog.closeAll();
@@ -122,7 +123,13 @@ export class DialogDonviComponent implements OnInit {
         }
       );
   }
-  suaDonVi(id: number, tenDv: string, diaChi: string, soDt: string, email: string): void {
+  suaDonVi(
+    id: number,
+    tenDv: string,
+    diaChi: string,
+    soDt: string,
+    email: string
+  ): void {
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched();
       return;
@@ -134,9 +141,10 @@ export class DialogDonviComponent implements OnInit {
       console.error('Access token not found. User is not authenticated.');
       return;
     }
+    this.taiKhoanKhoa = this.taiKhoanKhoa ? 0 : 1;
     this.isLoading = true;
     this.donviService
-      .editDonvi(id, tenDv, diaChi, soDt, email, authToken)
+      .editDonvi(id, tenDv, diaChi, soDt, email, this.taiKhoanKhoa, authToken)
       .subscribe(
         (data) => {
           console.log(data);

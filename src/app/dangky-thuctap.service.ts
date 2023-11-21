@@ -34,4 +34,24 @@ export class DangkyThuctapService {
       data
     );
   }
+  createKetQuaThucTapKhoa(
+    maSV: number,
+    maDvtt: number | null,
+    maGv: number,
+    maDot: number | null,
+  ): Observable<any> {
+    // Tạo một đối tượng dữ liệu để gửi lên server, có thể là một đối tượng JSON tuỳ theo yêu cầu của API
+    const data = {
+      maSV: maSV,
+      maDvtt: maDvtt,
+      maGv: maGv,
+      maDot: maDot,
+    };
+
+    // Thực hiện yêu cầu POST đến API
+    return this.http.post(
+      `${this.baseUrl}/phancongcoquan/${maSV}/${maDvtt}/${maGv}/${maDot}`,
+      data
+    );
+  }
 }
