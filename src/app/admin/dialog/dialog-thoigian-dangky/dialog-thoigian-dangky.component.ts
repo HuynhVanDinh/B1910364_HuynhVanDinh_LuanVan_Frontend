@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
@@ -24,7 +24,7 @@ export class DialogThoigianDangkyComponent {
   thoiGianKetThuc!: Date;
   isEdit!: boolean;
   isEditMode!: boolean;
-  khoaName!: number;
+  khoaName = new FormControl<number | null>(null, Validators.required);
   danhSachTenKhoa: Khoa[] = [];
   ngOnInit(): void {
     console.log(this.data);
@@ -93,7 +93,7 @@ export class DialogThoigianDangkyComponent {
     const khoaNameValue = this.myForm.get('khoaName')!.value;
     khoaId = khoaNameValue;
     // console.log("fkfhgj");
-    this.dialogRef.close('Closed using function');
+    // this.dialogRef.close('Closed using function');
     const authToken = localStorage.getItem('authToken');
 
     if (!authToken) {
@@ -120,13 +120,14 @@ export class DialogThoigianDangkyComponent {
           this.ThoigianDangkyComponent.getAll();
         },
         (error: any) => {
-          this.dialogRef.close('Closed using function');
+          // this.dialogRef.close('Closed using function');
           this.isLoading = false;
-          this.toastr.error('Lỗi thêm thời gian đang ký');
+          this.toastr.error(error);
           console.error('Lỗi thêm thời gian đang ký:', error);
         }
       );
   }
+
   suaThoigian(
     id: number,
     ghiChu: string,
@@ -138,7 +139,7 @@ export class DialogThoigianDangkyComponent {
       this.myForm.markAllAsTouched();
       return;
     }
-    this.dialogRef.close('Closed using function');
+    // this.dialogRef.close('Closed using function');
     const authToken = localStorage.getItem('authToken');
     if (!authToken) {
       // console.log(authToken);
@@ -165,9 +166,9 @@ export class DialogThoigianDangkyComponent {
           this.ThoigianDangkyComponent.getAll();
         },
         (error: any) => {
-          this.dialogRef.close('Closed using function');
+          // this.dialogRef.close('Closed using function');
           this.isLoading = false;
-          this.toastr.error('Lỗi sửa thời gian đang ký');
+          this.toastr.error(error);
           console.error('Lỗi sữa thời gian đang ký:', error);
         }
       );

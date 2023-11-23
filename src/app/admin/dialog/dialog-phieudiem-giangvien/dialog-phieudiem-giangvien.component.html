@@ -61,15 +61,14 @@
     </mat-form-field>
     <mat-form-field class="w-100">
       <mat-label>Tên mục</mat-label>
-      <mat-select formControlName="muc">
+      <mat-select formControlName="muc" required>
         <mat-option *ngFor="let muc of mucs" [value]="muc.mucId">
           {{ muc.tenMuc }}
         </mat-option>
       </mat-select>
 
       <mat-error
-        *ngIf="myForm.get('muc')!.invalid && myForm.get('muc')!.touched"
-      >
+         *ngIf="muc.hasError('required')">
         Vui lòng nhập tên mục !!
       </mat-error>
     </mat-form-field>
@@ -80,7 +79,7 @@
     <button
       class="btn btn-success float-right ml-2"
       *ngIf="!isEditMode"
-      (click)="themPhieu(Noidung, diemMax, muc)"
+      (click)="themPhieu(Noidung, diemMax, myForm.get('muc')?.value)"
     >
       {{ "add" | translate }}
     </button>
@@ -88,7 +87,7 @@
     <button
       class="btn btn-success float-right ml-2"
       *ngIf="isEditMode"
-      (click)="suaPhieu(id, muc, diemMax, Noidung)"
+      (click)="suaPhieu(id, myForm.get('muc')?.value, diemMax, Noidung)"
     >
       {{ "edit" | translate }}
     </button>

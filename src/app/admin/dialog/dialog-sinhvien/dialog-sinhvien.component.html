@@ -64,8 +64,8 @@
           required
         />
         <mat-error
-          *ngIf="myForm.get('email')!.invalid && myForm.get('email')!.touched"
-          >Vui lòng nhập email !!</mat-error
+          *ngIf="myForm.get('email')!.invalid && myForm.get('email')!.touched &&  myForm.get('email')!.hasError('email')"
+          >Vui lòng nhập email đúng định dạng !!!</mat-error
         >
       </mat-form-field>
     </div>

@@ -105,8 +105,8 @@ export class DialoaPhancongcoquanComponent {
       this.myForm.markAllAsTouched();
       return;
     }
-    this.dialogRef.close('Closed using function');
-
+    this.isLoading = true;
+    // this.dialogRef.close('Closed using function');
     // if (this.selectedFile) {
     //   this.fileUploadService.uploadFile(this.selectedFile).subscribe(
     //     (data) => {
@@ -128,12 +128,12 @@ export class DialoaPhancongcoquanComponent {
       console.error('Access token not found. User is not authenticated.');
       return;
     }
-    this.isLoading = true;
     this.dangkyThuctapService
       .createKetQuaThucTapKhoa(id, khoa, this.giangVien, dot)
       .subscribe(
         (response) => {
           this.isLoading = false;
+          this.dialogRef.close('Closed using function');
           this.toastr.success('Phân công thành công');
           this.SinhvienComponent.getAll();
           console.log(response);
@@ -141,6 +141,7 @@ export class DialoaPhancongcoquanComponent {
         (error) => {
           this.isLoading = false;
           this.toastr.error('Lỗi');
+          this.dialogRef.close('Closed using function');
           this.SinhvienComponent.getAll();
           console.error(error);
         }
@@ -171,11 +172,6 @@ export class DialoaPhancongcoquanComponent {
       return;
     }
     this.dialogRef.close('Closed using function');
-
-    // if (this.selectedFile) {
-    //   this.fileUploadService.uploadFile(this.selectedFile).subscribe(
-    //     (data) => {
-    //       image = data.filename;
     const authToken = localStorage.getItem('authToken');
     if (!authToken) {
       // console.log(authToken);

@@ -156,7 +156,7 @@ export class DiemSinhvienComponent implements OnInit {
                     //   parseFloat(this.tongDiem.toString()),
                     // ]);
                     this.ketquaService
-                      .chamDiem(this.elements.maKqtt, this.tongDiem, data.maGV, authToken)
+                      .chamDiem(this.elements.maKqtt, this.tongDiem, data.maGV,this.elements.canBoHuongDan.maCB, authToken)
                       .subscribe(
                         () => {
                           this.isLoading = false;

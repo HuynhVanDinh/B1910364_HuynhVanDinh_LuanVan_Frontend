@@ -57,7 +57,7 @@ export class DialogPtdComponent implements OnInit {
       .getTuanCanBo(this.data.sinhvien.canBoHuongDan.maCB)
       .subscribe((res) => {
         this.listTuan = res;
-        console.log("babababa",res);
+        console.log('babababa', this.data.sinhvien.canBoHuongDan.maCB, res);
         const combinedData: CombinedData[] = [];
 
         for (const tuan of this.listTuan) {

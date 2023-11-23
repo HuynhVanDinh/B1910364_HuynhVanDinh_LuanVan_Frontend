@@ -1,5 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploadService } from 'src/app/file-upload.service';
@@ -12,6 +17,7 @@ import { SinhvienService } from 'src/app/sinhvien.service';
   styleUrls: ['./sua-thongtin.component.css'],
 })
 export class SuaThongtinComponent {
+  giangVienForm!: FormGroup;
   giangVien: any;
   maGV: string | null;
   @ViewChild('fileInput') fileInput: any;
@@ -20,8 +26,9 @@ export class SuaThongtinComponent {
     private toastr: ToastrService,
     private fileUploadService: FileUploadService,
     private route: ActivatedRoute,
+    private fb: FormBuilder,
     // private sinhvienService: SinhvienService
-    private giangVienService: GiangvienService,
+    private giangVienService: GiangvienService
   ) {
     this.maGV = this.route.snapshot.queryParamMap.get('maGV');
   }
@@ -32,6 +39,12 @@ export class SuaThongtinComponent {
   getGiangVienDetails(id: string): void {
     this.giangVienService.getGiangVienById(id).subscribe((data) => {
       this.giangVien = data;
+      this.giangVienForm = this.fb.group({
+        maGV: [{ value: this.maGV, disabled: true }],
+        tenGV: [this.giangVien.tenGV, Validators.required],
+        email: [{ value: this.giangVien.account.email, disabled: true }],
+        khoaName: [{ value: this.giangVien.khoa.khoaName, disabled: true }],
+      });
       console.log(this.giangVien);
     });
   }
@@ -102,5 +115,34 @@ export class SuaThongtinComponent {
     } else {
       console.error('No file selected.');
     }
+  }
+  updateGiangVien() {
+    const updatedGiangVien = this.giangVienForm.value;
+    console.log(updatedGiangVien);
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+      // console.log(authToken);
+      console.error('Access token not found. User is not authenticated.');
+      return;
+    }
+
+    this.giangVienService
+      .editTenGiangVien(
+        this.maGV,
+        updatedGiangVien.tenGV,
+        this.giangVien.khoa.khoaId,
+        authToken
+      )
+      .subscribe((data) => {
+        this.isLoading = false;
+        this.toastr.success("cập nhật thành công");
+        console.log('File uploaded successfully:', data);
+        this.getGiangVienDetails(this.maGV!);
+      },
+      (error)=>{
+         this.isLoading = false;
+         this.toastr.error('Lỗi cập nhật');
+         console.error('Lỗi cập nhật', error);
+      });
   }
 }

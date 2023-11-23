@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
@@ -20,7 +20,7 @@ export class DialogPhieudiemCanboComponent {
   id!: number;
   myForm!: FormGroup;
   Noidung!: string;
-  muc!: number;
+  muc = new FormControl<number | null>(null, Validators.required);
   isEdit!: boolean;
   isEditMode!: boolean;
   mucs: any[] = [];

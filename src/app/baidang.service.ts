@@ -13,8 +13,18 @@ export class BaidangService {
   getAllBaiDang(): Observable<any> {
     return this.http.get(this.baseUrl);
   }
+  getBaiDangById(baiDangId: string | null): Observable<any> {
+    const url = `${this.baseUrl}/${baiDangId}`;
+    return this.http.get(url);
+  }
 
-  thembaidang(text: string, soluong: string, trocap: number | null, madv:  string | null, authToken: string): Observable<any> {
+  thembaidang(
+    text: string,
+    soluong: string,
+    trocap: number | null,
+    madv: string | null,
+    authToken: string
+  ): Observable<any> {
     const url = `${this.baseUrl}`;
     if (!text || !soluong) {
       return throwError('Vui lòng nhập đầy đủ thông tin.');
@@ -29,7 +39,7 @@ export class BaidangService {
       Authorization: `Bearer ${authToken}`,
     });
     return this.http.post(url, body, {
-      params: { donViThucTapId: madv!},
+      params: { donViThucTapId: madv! },
       headers: headers,
     });
   }

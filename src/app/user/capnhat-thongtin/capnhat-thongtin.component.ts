@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FileUploadService } from 'src/app/file-upload.service';
@@ -11,6 +16,7 @@ import { SinhvienService } from 'src/app/sinhvien.service';
   styleUrls: ['./capnhat-thongtin.component.css'],
 })
 export class CapnhatThongtinComponent implements OnInit {
+  sinhVienForm!: FormGroup;
   sinhVien: any;
   maSV: string | null;
   @ViewChild('fileInput') fileInput: any;
@@ -19,7 +25,8 @@ export class CapnhatThongtinComponent implements OnInit {
     private toastr: ToastrService,
     private fileUploadService: FileUploadService,
     private route: ActivatedRoute,
-    private sinhvienService: SinhvienService
+    private sinhvienService: SinhvienService,
+    private fb: FormBuilder
   ) {
     this.maSV = this.route.snapshot.queryParamMap.get('maSV');
   }
@@ -30,6 +37,13 @@ export class CapnhatThongtinComponent implements OnInit {
   getSinhVienDetails(id: string): void {
     this.sinhvienService.getSinhVienById(id).subscribe((data) => {
       this.sinhVien = data;
+      this.sinhVienForm = this.fb.group({
+        maSV: [{ value: this.sinhVien.maSV, disabled: true }],
+        tenSV: [this.sinhVien.tenSV, Validators.required],
+        tenLop: [{ value: this.sinhVien.lop.tenLop, disabled: true }],
+        ngaySinh: [this.sinhVien.ngaySinh, Validators.required],
+        queQuan: [this.sinhVien.queQuan, Validators.required],
+      });
       console.log(this.sinhVien);
     });
   }
@@ -114,5 +128,40 @@ export class CapnhatThongtinComponent implements OnInit {
       console.error('No file selected.');
       // Show an error message or take appropriate action
     }
+  }
+  updateSinhVien() {
+    const updateSinhVien = this.sinhVienForm.value;
+    console.log(updateSinhVien);
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+      // console.log(authToken);
+      console.error('Access token not found. User is not authenticated.');
+      return;
+    }
+
+    this.sinhvienService
+      .editSinhVien(
+        this.maSV,
+        updateSinhVien.tenSV,
+        updateSinhVien.ngaySinh,
+        updateSinhVien.queQuan,
+        authToken
+      )
+      .subscribe(
+        (data) => {
+          this.isLoading = false;
+          this.toastr.success('Cập nhật thành công');
+          console.log('File uploaded successfully:', data);
+          this.getSinhVienDetails(this.maSV!);
+        },
+        (error) => {
+          this.isLoading = false;
+          this.toastr.error('Lỗi cập nhật');
+          console.error('Lỗi cập nhật', error);
+        }
+      );
+    // Implement the logic to update the student information
+    // You can access the updated values using this.sinhVienForm.value
+    // For example, this.sinhVienForm.value.tenSV contains the updated name
   }
 }

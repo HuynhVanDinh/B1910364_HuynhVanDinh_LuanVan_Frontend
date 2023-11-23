@@ -12,7 +12,7 @@ export class LopService {
   getAllLop(): Observable<any> {
     return this.http.get(this.baseUrl);
   }
-  createLop(lop: string, khoaId: number, authToken: string): Observable<any> {
+  createLop(lop: string, khoaId: number | null, authToken: string): Observable<any> {
     const url = `${this.baseUrl}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
@@ -22,14 +22,14 @@ export class LopService {
       tenLop: lop,
     };
     return this.http.post<any>(url, body, {
-      params: { khoaId: khoaId.toString() },
+      params: { khoaId: khoaId!.toString() },
       headers: headers,
     });
   }
   editLop(
     id: number,
     lop: string,
-    khoaId: number,
+    khoaId: number | null,
     authToken: string
   ): Observable<any> {
     const url = `${this.baseUrl}/` + id;
@@ -41,7 +41,7 @@ export class LopService {
       tenLop: lop,
     };
     return this.http.put<any>(url, body, {
-      params: { khoaId: khoaId.toString() },
+      params: { khoaId: khoaId!.toString() },
       headers: headers,
     });
   }

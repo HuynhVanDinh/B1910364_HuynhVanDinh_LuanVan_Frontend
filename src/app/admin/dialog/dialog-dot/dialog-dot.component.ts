@@ -70,7 +70,7 @@ export class DialogDotComponent {
       this.myForm.markAllAsTouched();
       return;
     }
-    this.dialogRef.close('Closed using function');
+    // this.dialogRef.close('Closed using function');
     const authToken = localStorage.getItem('authToken');
     if (!authToken) {
       console.error('Access token not found. User is not authenticated.');
@@ -88,9 +88,9 @@ export class DialogDotComponent {
           this.DotComponent.getAll();
         },
         (error: any) => {
-          this.dialogRef.close('Closed using function');
+          // this.dialogRef.close('Closed using function');
           this.isLoading = false;
-          this.toastr.error('Lỗi thêm đợt thực tập');
+          this.toastr.error(error);
           console.error('Lỗi thêm đợt thực tập:', error);
         }
       );
@@ -105,7 +105,7 @@ export class DialogDotComponent {
       this.myForm.markAllAsTouched();
       return;
     }
-    this.dialogRef.close('Closed using function');
+    // this.dialogRef.close('Closed using function');
     const authToken = localStorage.getItem('authToken');
     if (!authToken) {
       // console.log(authToken);
@@ -125,9 +125,9 @@ export class DialogDotComponent {
           this.DotComponent.getAll();
         },
         (error: any) => {
-          this.dialogRef.close('Closed using function');
+          // this.dialogRef.close('Closed using function');
           this.isLoading = false;
-          this.toastr.error('Lỗi sửa đơn vị');
+          this.toastr.error(error);
           console.error('Lỗi sữa đơn vị:', error);
         }
       );

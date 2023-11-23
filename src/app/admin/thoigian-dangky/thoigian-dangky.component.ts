@@ -44,14 +44,24 @@ export class ThoigianDangkyComponent implements OnInit {
   getAll() {
     this.thoigianDangkyService.getAllThoiGianDangKy().subscribe({
       next: (res) => {
-        console.log(res);
         // Khởi tạo MatTableDataSource và thiết lập paginator
         this.dataSource = new MatTableDataSource(res);
+
+        // Custom filter function
+        this.dataSource.filterPredicate = (data: any, filter: string) => {
+          // Convert the entire object to a string
+          const dataStr = this.flattenObject(data).toLowerCase();
+
+          // Check if the filter value is present in the string
+          return dataStr.includes(filter.toLowerCase());
+        };
+
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
     });
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -59,6 +69,26 @@ export class ThoigianDangkyComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  flattenObject(obj: any): string {
+    let result = '';
+
+    function recurse(curr: any, prop: string) {
+      if (typeof curr === 'object') {
+        for (const key in curr) {
+          if (curr.hasOwnProperty(key)) {
+            recurse(curr[key], prop + '.' + key);
+          }
+        }
+      } else {
+        result += prop + '=' + curr + ' ';
+      }
+    }
+
+    recurse(obj, '');
+
+    return result;
   }
 
   openDialog(code: any): void {

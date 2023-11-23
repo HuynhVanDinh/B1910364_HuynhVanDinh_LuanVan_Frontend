@@ -7,11 +7,11 @@
   </div>
   <div *ngIf="thoi_gian_dang_ky.length != 0">
     <h6  class="pl-2">
-      - Thời gian đăng ký thực tập: Từ ngày ({{ thoi_gian_dang_ky[0].tgbd }} -
-      {{ thoi_gian_dang_ky[0].tgkt }})
+      - Thời gian đăng ký thực tập: Từ ngày ({{ thoi_gian_dang_ky.tgbd }} -
+      {{ thoi_gian_dang_ky.tgkt }})
     </h6>
     <h6  class="pl-2 text-danger">
-      (Chú ý: {{ thoi_gian_dang_ky[0].ghichu }} )
+      (Chú ý: {{ thoi_gian_dang_ky.ghichu }} )
     </h6>
   </div>
   <div *ngIf="listGiangVien" class="row">

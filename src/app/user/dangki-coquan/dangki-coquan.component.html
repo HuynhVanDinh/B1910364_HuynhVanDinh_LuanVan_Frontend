@@ -6,7 +6,9 @@
     <hr />
   </div>
   <div>
-    <h3 class="pl-2 pb-3 text-danger">Chú ý: Sinh viên chỉ có 3 lượt đăng ký cơ quan</h3>
+    <h3 class="pl-2 pb-3 text-danger">
+      Chú ý: Sinh viên chỉ có 3 lượt đăng ký cơ quan
+    </h3>
   </div>
   <mat-grid-list cols="2" rowHeight="2:1">
     <mat-grid-tile *ngFor="let baidang of dataSource.data">
@@ -61,9 +63,41 @@
       <hr />
     </div>
     <mat-tab-group>
-      <mat-tab label="THÔNG TIN CƠ QUAN"> Content 1 </mat-tab>
-      <mat-tab label="THÔNG TIN CÁN BỘ HƯỚNG DẪN"> Content 2 </mat-tab>
-      <mat-tab label="Third"> Content 3 </mat-tab>
+      <mat-tab label="THÔNG TIN CƠ QUAN">
+        <div class="text-center mt-2">
+          <img src="../../../assets/imgs/CTU.jpg" alt="" height="250px" />
+          <p>
+            Tên đơn vị thực tập: {{ isSinhVienDaNhanHoSo.donViThucTap.tenDvtt }}
+          </p>
+          <p>Địa chỉ: {{ isSinhVienDaNhanHoSo.donViThucTap.diaChi }}</p>
+          <p>Số điện thoại: {{ isSinhVienDaNhanHoSo.donViThucTap.soDt }}</p>
+        </div>
+      </mat-tab>
+      <mat-tab label="THÔNG TIN CÁN BỘ HƯỚNG DẪN">
+        <div
+          class="text-center mt-2"
+          *ngIf="isSinhVienDaNhanHoSo.canBoHuongDan; else notCanbo"
+        >
+          <img
+            [src]="
+              isSinhVienDaNhanHoSo.canBoHuongDan.hinhAnh
+                ? 'http://localhost:8080/file/' +
+                  isSinhVienDaNhanHoSo.canBoHuongDan.hinhAnh
+                : 'http://localhost:8080/file/20230918201356_user.png'
+            "
+            alt="File Image"
+            width="300px"
+          />
+          <p>
+            Họ và tên cán bộ hướng dẫn:
+            {{ isSinhVienDaNhanHoSo.canBoHuongDan.tenCB }}<span></span>
+          </p>
+          <p>Giới tính: {{ isSinhVienDaNhanHoSo.canBoHuongDan.gtinh }}</p>
+        </div>
+        <ng-template #notCanbo>
+          <p class="text-center">Chưa phân công cán bộ</p>
+        </ng-template>
+      </mat-tab>
     </mat-tab-group>
   </div>
 </ng-template>

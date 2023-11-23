@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -36,10 +36,16 @@ export class ThoigianDangkyService {
       tgkt: tgkt,
       ghichu: ghichu,
     };
-    return this.http.post<any>(url, body, {
-      params: { khoaid: khoaId },
-      headers: headers,
-    });
+    return this.http
+      .post<any>(url, body, {
+        params: { khoaid: khoaId },
+        headers: headers,
+      })
+      .pipe(
+        catchError((error) => {
+          throw error.error.message; // Trả về thông điệp lỗi từ máy chủ
+        })
+      );;
   }
   editThoiGianDangKy(
     id: number,
@@ -59,9 +65,15 @@ export class ThoigianDangkyService {
       tgkt: tgkt,
       ghichu: ghichu,
     };
-    return this.http.put<any>(url, body, {
-      params: { khoaid: khoaId },
-      headers: headers,
-    });
+    return this.http
+      .put<any>(url, body, {
+        params: { khoaid: khoaId },
+        headers: headers,
+      })
+      .pipe(
+        catchError((error) => {
+          throw error.error.message; // Trả về thông điệp lỗi từ máy chủ
+        })
+      );;
   }
 }

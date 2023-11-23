@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { MucDanhgiaGiangvienService } from 'src/app/muc-danhgia-giangvien.service';
@@ -17,7 +17,7 @@ export class DialogPhieudiemGiangvienComponent {
   myForm!: FormGroup;
   Noidung!: string;
   diemMax!: Float32Array;
-  muc!: number;
+  muc = new FormControl<number | null>(null, Validators.required);
   isEdit!: boolean;
   isEditMode!: boolean;
   mucs: any[] = [];
@@ -94,23 +94,30 @@ export class DialogPhieudiemGiangvienComponent {
     }
     this.isLoading = true;
     // console.log(Noidung, muc)
-    this.phieuDiemGiangvienService.createPhieu(Noidung, diemMax, muc, khoaId, authToken).subscribe(
-      () => {
-        this.dialog.closeAll();
-        this.isLoading = false;
-        this.toastr.success('Thêm phiếu điểm thành công');
-        console.log('Thêm phiếu điểm thành công');
-        this.refreshService.triggerRefresh();
-      },
-      (error: any) => {
-        this.dialogRef.close('Closed using function');
-        this.isLoading = false;
-        this.toastr.error('Lỗi thêm phiếu điểm');
-        console.error('Lỗi thêm phiếu điểm:', error);
-      }
-    );
+    this.phieuDiemGiangvienService
+      .createPhieu(Noidung, diemMax, muc, khoaId, authToken)
+      .subscribe(
+        () => {
+          this.dialog.closeAll();
+          this.isLoading = false;
+          this.toastr.success('Thêm phiếu điểm thành công');
+          console.log('Thêm phiếu điểm thành công');
+          this.refreshService.triggerRefresh();
+        },
+        (error: any) => {
+          this.dialogRef.close('Closed using function');
+          this.isLoading = false;
+          this.toastr.error('Lỗi thêm phiếu điểm');
+          console.error('Lỗi thêm phiếu điểm:', error);
+        }
+      );
   }
-  suaPhieu(id: number, muc: number, diemMax: Float32Array, Noidung: string): void {
+  suaPhieu(
+    id: number,
+    muc: number,
+    diemMax: Float32Array,
+    Noidung: string
+  ): void {
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched();
       return;
@@ -125,22 +132,24 @@ export class DialogPhieudiemGiangvienComponent {
     const mucValue = this.myForm.get('muc')!.value;
     muc = mucValue;
     this.isLoading = true;
-    this.phieuDiemGiangvienService.editPhieu(id, Noidung, diemMax, muc, authToken).subscribe(
-      (data) => {
-        console.log(data);
-        this.dialog.closeAll();
-        this.isLoading = false;
-        this.toastr.success('Sửa phiếu điểm thành công');
-        console.log('Sửa phiếu điểm thành công');
-        this.refreshService.triggerRefresh();
-      },
-      (error: any) => {
-        this.dialogRef.close('Closed using function');
-        this.isLoading = false;
-        this.toastr.error('Lỗi sửa phiếu điểm');
-        console.error('Lỗi sữa phiếu điểm:', error);
-      }
-    );
+    this.phieuDiemGiangvienService
+      .editPhieu(id, Noidung, diemMax, muc, authToken)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.dialog.closeAll();
+          this.isLoading = false;
+          this.toastr.success('Sửa phiếu điểm thành công');
+          console.log('Sửa phiếu điểm thành công');
+          this.refreshService.triggerRefresh();
+        },
+        (error: any) => {
+          this.dialogRef.close('Closed using function');
+          this.isLoading = false;
+          this.toastr.error('Lỗi sửa phiếu điểm');
+          console.error('Lỗi sữa phiếu điểm:', error);
+        }
+      );
   }
   closedialog() {
     this.dialogRef.close('Closed using function');

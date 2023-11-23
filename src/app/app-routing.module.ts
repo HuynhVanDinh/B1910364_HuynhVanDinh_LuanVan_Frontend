@@ -40,6 +40,9 @@ import { PhieudiemGiangvienComponent } from './admin/phieudiem-giangvien/phieudi
 import { DsSinhvienComponent } from './giangvien/ds-sinhvien/ds-sinhvien.component';
 import { DiemSinhvienComponent } from './giangvien/diem-sinhvien/diem-sinhvien.component';
 import { SinhvienChuadangkyComponent } from './admin/sinhvien-chuadangky/sinhvien-chuadangky.component';
+import { ThongkeComponent } from './admin/thongke/thongke.component';
+import { LsDiemComponent } from './giangvien/ls-diem/ls-diem.component';
+import { GvThongkeComponent } from './giangvien/gv-thongke/gv-thongke.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -146,6 +149,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: { roles: ['admin'] },
       },
+      {
+        path: 'thongke',
+        component: ThongkeComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] },
+      },
     ],
   },
   {
@@ -249,6 +258,18 @@ const routes: Routes = [
       {
         path: 'diem-sinhvien',
         component: DiemSinhvienComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['lecturer'] },
+      },
+      {
+        path: 'ls-diem',
+        component: LsDiemComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['lecturer'] },
+      },
+      {
+        path: 'gv-thongke',
+        component: GvThongkeComponent,
         canActivate: [AuthGuard],
         data: { roles: ['lecturer'] },
       },

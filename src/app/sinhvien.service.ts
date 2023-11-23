@@ -19,7 +19,7 @@ export class SinhvienService {
   }
   guicanhbao(): Observable<any> {
     const url = `${this.baseUrl}/guicanhbao`;
-    return this.http.post(url,"");
+    return this.http.post(url, '');
   }
   getSinhVien(accountid: string | null): Observable<any> {
     const url = `${this.baseUrl}/account/${accountid}`;
@@ -93,6 +93,28 @@ export class SinhvienService {
     // console.log(body);
     return this.http.put<any>(url, body, {
       params: { lopId: lopId!.toString(), email: email },
+      headers: headers,
+    });
+  }
+  editSinhVien(
+    masv: string | null,
+    tensv: string,
+    ngaysinh: Date,
+    quequan: string,
+    authToken: string
+  ): Observable<any> {
+    const url = `${this.baseUrl}/chinhsua/` + masv;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Bearer ${authToken}`,
+    });
+    const body = {
+      tenSV: tensv,
+      ngaySinh: ngaysinh,
+      queQuan: quequan,
+    };
+    // console.log(body);
+    return this.http.put<any>(url, body, {
       headers: headers,
     });
   }

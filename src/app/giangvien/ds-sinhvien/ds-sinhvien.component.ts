@@ -42,7 +42,7 @@ export class DsSinhvienComponent implements OnInit {
 
     this.giangvienService.getGiangVienByAccount(accountid).subscribe((res) => {
       this.ketquaService
-        .getAllKetQuaThucTapByGiangVien(res.maGV)
+        .getAllKetQuaThucTapByGiangVien(res.maGV,2)
         .subscribe((data) => {
           console.log(data);
           this.listSinhVien = data;
@@ -72,4 +72,5 @@ export class DsSinhvienComponent implements OnInit {
   //   }
   //   return color;
   // }
+
 }

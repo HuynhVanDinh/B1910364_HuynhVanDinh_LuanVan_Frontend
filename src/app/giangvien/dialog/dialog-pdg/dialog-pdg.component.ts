@@ -68,7 +68,7 @@ export class DialogPdgComponent implements OnInit {
   getMuc(): void {
     this.mucDanhGiaCanBoService.getAll().subscribe(
       (mucList) => {
-        console.log(mucList);
+        console.log("mục",mucList);
         this.mucList = mucList;
         this.processCombinedData();
       },

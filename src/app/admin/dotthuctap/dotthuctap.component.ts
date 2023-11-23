@@ -22,7 +22,7 @@ export class DotthuctapComponent {
   pageSize = 5; // Số mục trên mỗi trang
   pageSizeOptions: number[] = [5, 10, 25, 50]; // Các tùy chọn số mục trên trang
   pageIndex = 0;
-  searchName: string | null = null ;
+  searchName: string | null = null;
   searchThoiGianBatDau: Date | null = null;
   searchThoiGianKetThuc: Date | null = null;
   constructor(
@@ -44,7 +44,6 @@ export class DotthuctapComponent {
   ngOnInit() {
     this.getAll();
   }
-
   getAll() {
     this.dotThucTapService.getAllDotthuctap().subscribe({
       next: (res) => {

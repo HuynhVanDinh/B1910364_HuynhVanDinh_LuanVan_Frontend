@@ -54,7 +54,7 @@ export class DialogSinhvienComponent implements OnInit {
     (this.gender = 'Nam'),
       (this.myForm = new FormGroup({
         quequan: new FormControl(),
-        email: new FormControl(),
+        email: new FormControl('', [Validators.required, Validators.email]),
         lopNameControl: new FormControl(),
         ngaysinh: new FormControl(),
         tenSV: new FormControl(),

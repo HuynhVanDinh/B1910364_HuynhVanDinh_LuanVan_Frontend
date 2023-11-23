@@ -31,7 +31,7 @@ export class CongviecCuatoiComponent implements OnInit {
             .subscribe((data: any) => {
               // console.log(data)
               this.tuanService
-                .getTuanCanBo(data.canBoHuongDan.maCB)
+                .getTuanCanBoSinhvien(data.canBoHuongDan.maCB)
                 .subscribe((dataTuan) => {
                   console.log(dataTuan);
                   this.tuans = dataTuan;

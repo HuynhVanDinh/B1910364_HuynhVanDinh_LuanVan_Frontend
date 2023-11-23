@@ -33,7 +33,7 @@ export class DialogGiangvienComponent implements OnInit, AfterViewChecked {
   danhSachTenKhoa: Khoa[] = [];
   maGV!: number;
 
-  khoaId!: number;
+  khoaId = new FormControl<number | null>(null, Validators.required);
   username!: string;
   email!: string;
   password!: string;

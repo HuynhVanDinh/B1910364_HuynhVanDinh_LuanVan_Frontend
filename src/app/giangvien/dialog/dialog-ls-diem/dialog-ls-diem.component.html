@@ -1,0 +1,133 @@
+<div class="dialog-main">
+  <div class="btn-header" style="display: flex; justify-content: flex-end">
+    <button class="close-button" (click)="closedialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="p-body p-3">
+    <h4 class="text-center">PHIẾU ĐÁNH GIÁ BÁO CÁO KẾT QUẢ THỰC TẬP</h4>
+    <h4 class="text-center">{{ data.sinhvien.dotThucTap.tenDot }}</h4>
+    <h6 class="text-center">(Dùng cho giáo viên chấm báo cáo thực tập)</h6>
+    <div class="container pt-3">
+      <p>
+        Họ và tên cán bộ chấm báo cáo: <b>{{ data.sinhvien.giangVien.tenGV }}</b>
+      </p>
+      <p>
+        Họ tên sinh viên thực tập: <b>{{ data.sinhvien.sinhVien.tenSV }}</b>
+        <span class="pl-5">Mã số SV:</span> {{ data.sinhvien.sinhVien.maSV }}
+      </p>
+<div class="">
+        <!-- <table class="table table-striped border table-inverse">
+          <thead class="thead-inverse">
+            <tr>
+              <th class="text-center">Nội dung đánh giá</th>
+              <th class="text-center">Điểm tối đa</th>
+              <th class="text-center">Chấm điểm</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of tableData">
+              <td scope="row">{{ item.noiDungPDGV }}</td>
+              <td>{{ item.diemMax }}</td>
+              <td>{{ item.mucDG.mucId }}</td>
+              <td>
+                <input
+                  [(ngModel)]="item.diem"
+                  type="number"
+                  min="0"
+                  max="{{ item.diemToiDa }}"
+                  step="0.1"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table> -->
+        <form [formGroup]="myForm">
+          <table class="table table-bordered">
+            <thead class="thead-inverse">
+              <tr>
+                <th class="text-center">Nội dung đánh giá</th>
+                <th class="text-center w-25">Điểm tối đa</th>
+                <th class="text-center w-25">Chấm điểm</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container
+                *ngFor="let bieuMau of listBieuMau | filter2; let i = index"
+              >
+                <tr class="group-row">
+                  <td>{{ i + 1 }}. {{ bieuMau.phieuDiemGiangvien.mucDG.tenMuc }}</td>
+                  <td>
+                    <b>{{
+                      getTotalMaxScoreForSection(bieuMau.phieuDiemGiangvien.mucDG.tenMuc)
+                    }}</b>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr
+                  *ngFor="
+                    let item of listBieuMau
+                      | filerByMuc2 : bieuMau.phieuDiemGiangvien.mucDG.tenMuc;
+                    let j = index
+                  "
+                >
+                  <td style="padding-left: 50px">
+                    {{ i + 1 }}.{{ j + 1 }} {{ item.phieuDiemGiangvien.noiDungPDGV }}
+                  </td>
+                  <td class="text-center">{{ item.phieuDiemGiangvien.diemMax }}</td>
+                  <td>
+                    <mat-form-field class="float-right w-75">
+                      <input
+                        readonly
+                        [value]="item.diem"
+                        matInput
+                        [formControlName]="'diem' + item.phieuDiemGiangvien.maPDGV"
+                        type="number"
+                        step="0.1"
+                        min="0"
+                        max="{{ item.diemMax }}"
+                        required
+                      />
+                      <mat-error
+                        *ngIf="
+                          myForm
+                            .get('diem' + item.phieuDiemGiangvien.maPDGV)!
+                            .hasError('required') &&
+                          myForm.get('diem' + item.phieuDiemGiangvien.maPDGV)!.touched &&
+                          myForm.get('diem' + item.phieuDiemGiangvien.maPDGV)!.invalid
+                        "
+                      >
+                        Vui lòng nhập điểm !!!
+                      </mat-error>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </ng-container>
+              <tr class="group-row">
+                <td class="text-center w-75">Cộng</td>
+                <td class="text-center">
+                  {{ getTotalMaxScoreForAllSections() }}
+                </td>
+                <td>
+                  <input
+                    class="float-right w-75 text-center"
+                    type="text"
+                    [value]="tongDiem"
+                    readonly
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+      <hr />
+
+      <p class="footer">
+        Kết thúc đợt thực tập, kính nhờ quí cơ quan để phiếu này và phiếu đánh
+        giá vào phong bì, dán niêm phong và giao cho sinh viên . GV sẽ căn cứ
+        vào đánh giá này và quyển báo cáo để chấm điểm cho SV
+      </p>
+    </div>
+  </div>
+</div>

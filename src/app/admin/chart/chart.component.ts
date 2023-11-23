@@ -14,6 +14,7 @@ import { SinhvienService } from 'src/app/sinhvien.service';
 export class ChartComponent implements OnInit {
   data: any;
   sl_sinhvien!: number;
+  sl_sinhvien_cdk!: number;
   sl_giangvien!: number;
   sl_donvi!: number;
   sl_baidang!: number;
@@ -34,11 +35,18 @@ export class ChartComponent implements OnInit {
     this.getdonvi();
     this.getbaidang();
     this.getdot();
+    this.getSinhVien_CDK();
   }
   getSinhVien() {
     this.sinhvienService.getAllSinhVien().subscribe((data) => {
       // console.log(data);
       this.sl_sinhvien = data.length;
+    });
+  }
+  getSinhVien_CDK() {
+    this.sinhvienService.getAllSinhVienChuaDangKy().subscribe((data) => {
+      // console.log(data);
+      this.sl_sinhvien_cdk = data.length;
     });
   }
   getgiangvien() {
@@ -182,7 +190,6 @@ export class ChartComponent implements OnInit {
             const index = findIndexByMaDot(dot.maDot);
 
             if (index === -1) {
-
               lengthsArray.push({
                 maDot: dot.maDot,
                 tenDot: dot.tenDot,
@@ -191,7 +198,6 @@ export class ChartComponent implements OnInit {
             } else {
               lengthsArray[index].length = numberOfProperties;
             }
-
 
             lengthsArray.sort((a, b) => a.maDot - b.maDot);
 

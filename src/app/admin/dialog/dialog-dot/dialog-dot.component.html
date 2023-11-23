@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-11 mt-2">
       <h1 class="pl-4">
-        {{ isEdit ? ("suadonvi" | translate) : ("themdonvi" | translate) }}
+        {{ isEdit ? "Sửa đợt thực tập" : "Thêm đợt thực tập" }}
       </h1>
       <!-- <h1 class="p-2">{{ "addbasetype" | translate }}</h1> -->
     </div>
@@ -19,7 +19,7 @@
       <input
         matInput
         formControlName="tenDot"
-        placeholder="Vd: VNPT-IT"
+        placeholder="Vd: Học kỳ 1"
         [(ngModel)]="tenDot"
         required
       />
@@ -29,45 +29,53 @@
       >
     </mat-form-field>
     <mat-form-field class="w-100">
-        <mat-label>Thời gian bắt đầu</mat-label>
-        <!-- <p-calendar [(ngModel)]="date" matInput
+      <mat-label>Thời gian bắt đầu</mat-label>
+      <!-- <p-calendar [(ngModel)]="date" matInput
           formControlName="ngaysinh"
           placeholder="Vd: 16/06/2001"></p-calendar> -->
-        <input
-          type="date"
-          matInput
-          formControlName="thoiGianBatDau"
-          placeholder="Vd: 16/06/2001"
-          [(ngModel)]="thoiGianBatDau"
-          required
-        />
-        <mat-error
-          *ngIf="
-            myForm.get('thoiGianBatDau')!.invalid && myForm.get('thoiGianBatDau')!.touched
-          "
-          >Vui lòng nhập thời gian bắt đầu !!</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field class="w-100">
-        <mat-label>Thời gian kết thúc</mat-label>
-        <!-- <p-calendar [(ngModel)]="date" matInput
+      <input
+        [matDatepicker]="tgbd"
+        matInput
+        formControlName="thoiGianBatDau"
+        placeholder="Vd: 16/06/2001"
+        [(ngModel)]="thoiGianBatDau"
+        required
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="tgbd"></mat-datepicker-toggle>
+      <mat-datepicker #tgbd disabled="false"></mat-datepicker>
+      <mat-error
+        *ngIf="
+          myForm.get('thoiGianBatDau')!.invalid &&
+          myForm.get('thoiGianBatDau')!.touched
+        "
+        >Vui lòng nhập thời gian bắt đầu !!</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Thời gian kết thúc</mat-label>
+      <!-- <p-calendar [(ngModel)]="date" matInput
           formControlName="ngaysinh"
           placeholder="Vd: 16/06/2001"></p-calendar> -->
-        <input
-          type="date"
-          matInput
-          formControlName="thoiGianKetThuc"
-          placeholder="Vd: 16/06/2001"
-          [(ngModel)]="thoiGianKetThuc"
-          required
-        />
-        <mat-error
-          *ngIf="
-            myForm.get('thoiGianKetThuc')!.invalid && myForm.get('thoiGianKetThuc')!.touched
-          "
-          >Vui lòng nhập thời gian kết thúc !!</mat-error
-        >
-      </mat-form-field>
+      <input
+        [matDatepicker]="tgkt"
+        matInput
+        formControlName="thoiGianKetThuc"
+        placeholder="Vd: 16/06/2001"
+        [(ngModel)]="thoiGianKetThuc"
+        required
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="tgkt"></mat-datepicker-toggle>
+      <mat-datepicker #tgkt disabled="false"></mat-datepicker>
+      <mat-error
+        *ngIf="
+          myForm.get('thoiGianKetThuc')!.invalid &&
+          myForm.get('thoiGianKetThuc')!.touched
+        "
+        >Vui lòng nhập thời gian kết thúc !!</mat-error
+      >
+    </mat-form-field>
   </div>
 </form>
 <div class="row m-3">

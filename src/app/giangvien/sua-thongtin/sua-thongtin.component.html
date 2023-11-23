@@ -50,7 +50,7 @@
         </button>
       </div>
       <div class="col-md-8">
-        <div class="thongtin">
+        <!-- <div class="thongtin">
           <mat-form-field class="w-100">
             <mat-label>Mã số giảng viên</mat-label>
             <input readonly matInput value="{{ giangVien.maGV }}" />
@@ -67,21 +67,43 @@
             <mat-label>Thuộc khoa</mat-label>
             <input readonly matInput value="{{ giangVien.khoa.khoaName }}" />
           </mat-form-field>
-          <!-- <mat-form-field class="w-100">
-            <mat-label>Ngày sinh</mat-label>
-            <input type="date" matInput value="{{ sinhVien.ngaySinh }}" />
-          </mat-form-field>
-          <mat-form-field class="w-100">
-            <mat-label>Quê quán</mat-label>
-            <input type="text" matInput value="{{ sinhVien.queQuan }}" />
-          </mat-form-field> -->
           <button
             type="button"
             class="btn btn-outline-primary w-25 float-right"
           >
             Cập nhật
           </button>
-        </div>
+        </div> -->
+        <form [formGroup]="giangVienForm">
+          <div class="thongtin">
+            <mat-form-field class="w-100">
+              <mat-label>Mã số giảng viên</mat-label>
+              <input readonly matInput formControlName="maGV" />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Họ tên giảng viên</mat-label>
+              <input type="text" matInput formControlName="tenGV" />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Email</mat-label>
+              <input type="text" matInput formControlName="email" />
+              <mat-error *ngIf="giangVienForm.get('email')!.hasError('email')"
+                >Invalid email</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Thuộc khoa</mat-label>
+              <input readonly matInput formControlName="khoaName" />
+            </mat-form-field>
+            <button
+              type="button"
+              class="btn btn-outline-primary w-25 float-right"
+              (click)="updateGiangVien()"
+            >
+              Cập nhật
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

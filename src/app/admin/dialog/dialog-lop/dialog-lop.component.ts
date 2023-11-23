@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
@@ -17,13 +17,12 @@ import { Lop } from 'src/app/model/lop.model';
   styleUrls: ['./dialog-lop.component.css'],
 })
 export class DialogLopComponent implements OnInit {
-
   danhSachTenKhoa: Khoa[] = [];
   isLoading: boolean = false;
   id!: number;
   myForm!: FormGroup;
   datas: Lop[] = [];
-  khoaName!: number;
+  khoaName = new FormControl<number | null>(null, Validators.required);
   tenLop!: string;
   isEdit!: boolean;
   isEditMode!: boolean;
@@ -73,7 +72,7 @@ export class DialogLopComponent implements OnInit {
     }
   }
   LopComponent = this.data.LopComponent;
-  themLop(lop: string, khoaid: number): void {
+  themLop(lop: string, khoaid: number | null): void {
     const khoaNameValue = this.myForm.get('khoaName')!.value;
     khoaid = khoaNameValue;
     // console.log(khoaNameValue);
@@ -110,7 +109,7 @@ export class DialogLopComponent implements OnInit {
       }
     );
   }
-  suaLop(id: number, lop: string, khoaid: number): void {
+  suaLop(id: number, lop: string, khoaid: number | null): void {
     const khoaNameValue = this.myForm.get('khoaName')!.value;
     khoaid = khoaNameValue;
     // console.log(khoaNameValue);

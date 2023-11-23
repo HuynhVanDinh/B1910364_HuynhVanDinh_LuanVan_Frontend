@@ -120,6 +120,11 @@ export class LayoutComponent implements OnInit {
           link: '/admin/sinhvien-chuadangky',
           icon: 'warning',
         },
+        {
+          label: 'Thống kê',
+          link: '/admin/thongke',
+          icon: 'bar_chart',
+        },
       ];
     });
   }

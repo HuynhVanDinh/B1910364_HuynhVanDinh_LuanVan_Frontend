@@ -126,6 +126,14 @@ import { SinhvienChuadangkyComponent } from './admin/sinhvien-chuadangky/sinhvie
 import { DialogGuicanhbaoComponent } from './admin/dialog/dialog-guicanhbao/dialog-guicanhbao.component';
 import { DialoaPhancongcoquanComponent } from './admin/dialog/dialoa-phancongcoquan/dialoa-phancongcoquan.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ThongkeComponent } from './admin/thongke/thongke.component';
+import { LsDiemComponent } from './giangvien/ls-diem/ls-diem.component';
+import { DialogLsDiemComponent } from './giangvien/dialog/dialog-ls-diem/dialog-ls-diem.component';
+import { Filter2Pipe } from './filter2.pipe';
+import { FilerByMuc2Pipe } from './filer-by-muc-2.pipe';
+import { GvThongkeComponent } from './giangvien/gv-thongke/gv-thongke.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -200,6 +208,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     SinhvienChuadangkyComponent,
     DialogGuicanhbaoComponent,
     DialoaPhancongcoquanComponent,
+    ThongkeComponent,
+    LsDiemComponent,
+    DialogLsDiemComponent,
+    Filter2Pipe,
+    FilerByMuc2Pipe,
+    GvThongkeComponent,
   ],
   imports: [
     TranslateModule.forRoot({
@@ -256,10 +270,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     GalleriaModule,
     MatSnackBarModule,
     MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ToastNoAnimationModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 1500,
-      closeButton: true,
+      // closeButton: true,
       progressBar: true, // Hiển thị thanh tiến trình
       progressAnimation: 'increasing',
       preventDuplicates: true,

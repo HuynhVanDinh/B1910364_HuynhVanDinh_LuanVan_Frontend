@@ -41,7 +41,7 @@
         /> -->
       <mat-form-field class="w-100">
         <mat-label>Tên giảng viên</mat-label>
-        <mat-select formControlName="giangVien">
+        <mat-select formControlName="giangVien" required>
           <mat-option
             *ngFor="let giangvien of danhSachTenGiangVien"
             [value]="giangvien.maGV"
@@ -51,11 +51,8 @@
         </mat-select>
 
         <mat-error
-          *ngIf="
-            myForm.get('giangVien')!.invalid && myForm.get('giangVien')!.touched
-          "
-        >
-          Vui lòng nhập tên khoa !!
+          *ngIf="giangVien.hasError('required')">
+          Vui lòng nhập tên giảng viên !!
         </mat-error>
       </mat-form-field>
 
@@ -80,7 +77,7 @@
     <button
       class="btn btn-success float-right ml-2"
       *ngIf="!isEditMode"
-      (click)="themLop(id, giangVien)"
+      (click)="themLop(id, myForm.get('giangVien')?.value)"
     >
       {{ "add" | translate }}
     </button>
@@ -88,7 +85,7 @@
     <button
       class="btn btn-success float-right ml-2"
       *ngIf="isEditMode"
-      (click)="suaLop(id, giangVien)"
+      (click)="suaLop(id, myForm.get('giangVien')?.value)"
     >
       {{ "edit" | translate }}
     </button>

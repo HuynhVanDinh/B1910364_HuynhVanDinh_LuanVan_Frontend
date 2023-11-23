@@ -21,7 +21,7 @@ import { SinhvienService } from 'src/app/sinhvien.service';
 })
 export class DangkiCoquanComponent implements OnInit, PipeTransform {
   isLoading: boolean = false;
-  isSinhVienDaNhanHoSo!: any[];
+  isSinhVienDaNhanHoSo!: any;
   isGhiDanh: boolean = false;
   isGhiDanhMap: { [key: number]: boolean } = {};
   pageSize = 5; // Số mục trên mỗi trang
@@ -52,6 +52,7 @@ export class DangkiCoquanComponent implements OnInit, PipeTransform {
       currency: 'VND',
     }).format(value);
   }
+
   getSinhVienDaNhanHoSo() {
     const accountid = localStorage.getItem('accountid');
     this.sinhvienService.getSinhVien(accountid).subscribe((data) => {
@@ -100,7 +101,7 @@ export class DangkiCoquanComponent implements OnInit, PipeTransform {
             );
             this.isGhiDanhMap[baiDangId] = false;
             console.log(this.isGhiDanh);
-          
+
           }
         },
         (error) => {

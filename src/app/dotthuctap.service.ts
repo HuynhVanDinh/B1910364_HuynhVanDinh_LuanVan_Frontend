@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { format, isValid, parseISO } from 'date-fns';
 @Injectable({
   providedIn: 'root',
@@ -28,9 +28,15 @@ export class DotthuctapService {
       thoiGianBatDau: thoiGianBatDau,
       thoiGianKetThuc: thoiGianKetThuc,
     };
-    return this.http.post<any>(url, body, {
-      headers: headers,
-    });
+    return this.http
+      .post<any>(url, body, {
+        headers: headers,
+      })
+      .pipe(
+        catchError((error) => {
+          throw error.error.message; // Trả về thông điệp lỗi từ máy chủ
+        })
+      );;
   }
   editDotthuctap(
     id: number,
@@ -49,9 +55,15 @@ export class DotthuctapService {
       thoiGianBatDau: thoiGianBatDau,
       thoiGianKetThuc: thoiGianKetThuc,
     };
-    return this.http.put<any>(url, body, {
-      headers: headers,
-    });
+    return this.http
+      .put<any>(url, body, {
+        headers: headers,
+      })
+      .pipe(
+        catchError((error) => {
+          throw error.error.message; // Trả về thông điệp lỗi từ máy chủ
+        })
+      );;
   }
   // searchDotthuctap(tenDot: string, authToken: string) {
 

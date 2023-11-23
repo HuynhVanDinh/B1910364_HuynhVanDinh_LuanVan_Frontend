@@ -11,7 +11,10 @@ export class TuanService {
   getAllTuan(): Observable<any> {
     return this.http.get(this.baseUrl);
   }
-  getTuanCanBo(maCB: Number): Observable<any> {
+  getTuanCanBoSinhvien(maCB: Number): Observable<any> {
     return this.http.get(`${this.baseUrl}/canbo/${maCB}`);
+  }
+  getTuanCanBo(maCB: Number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/canbovasinhvien/${maCB}`);
   }
 }

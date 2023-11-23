@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
@@ -26,7 +26,7 @@ export class DialogPhancongGiangvienComponent {
   myForm!: FormGroup;
   datas: Lop[] = [];
   khoaName!: number;
-  giangVien!: number;
+  giangVien = new FormControl<number | null>(null, Validators.required);
   tenLop!: string;
   isEdit!: boolean;
   isEditMode!: boolean;
@@ -79,20 +79,20 @@ export class DialogPhancongGiangvienComponent {
       this.myForm.reset();
       this.myForm.markAsUntouched();
       this.myForm.markAsPristine();
-      this.myForm.get('giangVien')?.setValue("");
+      this.myForm.get('giangVien')?.setValue('');
     }
   }
   LopComponent = this.data.LopComponent;
   themLop(id: number, giangvien: number): void {
-     const giangVienValue = this.myForm.get('giangVien')!.value;
-     giangvien = giangVienValue;
+    const giangVienValue = this.myForm.get('giangVien')!.value;
+    giangvien = giangVienValue;
     // console.log(khoaNameValue);
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched();
       return;
     }
-    this.dialogRef.close('Closed using function');
-
+    this.isLoading = true;
+    // this.dialogRef.close('Closed using function');
     // if (this.selectedFile) {
     //   this.fileUploadService.uploadFile(this.selectedFile).subscribe(
     //     (data) => {
@@ -104,7 +104,7 @@ export class DialogPhancongGiangvienComponent {
       console.error('Access token not found. User is not authenticated.');
       return;
     }
-    this.isLoading = true;
+
     this.lopService.phanCongGiangVien(id, giangvien, authToken).subscribe(
       (data) => {
         console.log(data);
@@ -123,15 +123,15 @@ export class DialogPhancongGiangvienComponent {
     );
   }
   suaLop(id: number, giangvien: number): void {
-    const giangVienValue = this.myForm.get('giangVien')!.value;
-    giangvien = giangVienValue;
-    console.log(giangvien);
+    // console.log(giangvien);
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched();
       return;
     }
-    this.dialogRef.close('Closed using function');
-
+    this.isLoading = true;
+    const giangVienValue = this.myForm.get('giangVien')!.value;
+    giangvien = giangVienValue;
+    // this.dialogRef.close('Closed using function');
     // if (this.selectedFile) {
     //   this.fileUploadService.uploadFile(this.selectedFile).subscribe(
     //     (data) => {
@@ -142,7 +142,7 @@ export class DialogPhancongGiangvienComponent {
       console.error('Access token not found. User is not authenticated.');
       return;
     }
-    this.isLoading = true;
+
     this.lopService.phanCongGiangVien(id, giangvien, authToken).subscribe(
       (data) => {
         console.log(data);

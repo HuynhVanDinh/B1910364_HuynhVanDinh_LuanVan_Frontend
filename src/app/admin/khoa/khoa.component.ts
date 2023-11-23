@@ -195,7 +195,7 @@ export class KhoaComponent {
     this.pdfService.exportKhoaToPdf().subscribe((response) => {
       const blob = new Blob([response], { type: 'application/pdf' });
       const url = window.URL.createObjectURL(blob);
-      // window.open(url); // Mở tệp PDF trong cửa sổ mới hoặc tab.
+
       this.dialog.open(PdfDialogComponent, {
         width: '1000px',
         height: '770px',

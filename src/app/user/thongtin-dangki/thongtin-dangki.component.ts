@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
+import { BaidangService } from 'src/app/baidang.service';
 import { DangkiService } from 'src/app/dangki.service';
 import { FileUploadService } from 'src/app/file-upload.service';
 import { SinhvienService } from 'src/app/sinhvien.service';
@@ -20,6 +21,7 @@ export class ThongtinDangkiComponent implements OnInit {
   selectedFileNameCv = '';
   isLoading: boolean = false;
   sinhVienId!: number;
+  co_quan!: any;
   constructor(
     private fileUploadService: FileUploadService,
     private toastr: ToastrService,
@@ -27,14 +29,21 @@ export class ThongtinDangkiComponent implements OnInit {
     private dangkiService: DangkiService,
     private pdfService: NgxExtendedPdfViewerService,
     private route: ActivatedRoute,
+    private baidangService: BaidangService,
     private router: Router
   ) {
     this.baidangId = this.route.snapshot.queryParamMap.get('baidangId');
   }
   ngOnInit(): void {
+    this.getBaiDang();
     console.log(this.baidangId);
   }
-
+  getBaiDang() {
+    this.baidangService.getBaiDangById(this.baidangId).subscribe((data)=>{
+      console.log(data)
+      this.co_quan = data;
+    })
+  }
   onSubmit() {
     if (this.diemFile && this.cvFile) {
       this.isLoading = true;
@@ -85,7 +94,6 @@ export class ThongtinDangkiComponent implements OnInit {
               }
             );
         });
-
       });
     }
   }

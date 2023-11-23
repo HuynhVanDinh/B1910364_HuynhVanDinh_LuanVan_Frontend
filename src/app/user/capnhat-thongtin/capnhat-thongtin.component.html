@@ -50,7 +50,7 @@
         </button>
       </div>
       <div class="col-md-8">
-        <div class="thongtin">
+        <!-- <div class="thongtin">
           <mat-form-field class="w-100">
             <mat-label>Mã số sinh viên</mat-label>
             <input disabled matInput value="{{ sinhVien.maSV }}" />
@@ -77,6 +77,47 @@
           >
             Cập nhật
           </button>
+        </div> -->
+        <div class="thongtin">
+          <form [formGroup]="sinhVienForm" (ngSubmit)="updateSinhVien()">
+            <mat-form-field class="w-100">
+              <mat-label>Mã số sinh viên</mat-label>
+              <input  matInput formControlName="maSV" />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Họ tên sinh viên</mat-label>
+              <input type="text" matInput formControlName="tenSV" />
+              <mat-error *ngIf="sinhVienForm.get('tenSV')!.hasError('required')"
+                >Vui lòng nhập họ tên sinh viên</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Lớp</mat-label>
+              <input matInput formControlName="tenLop" />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Ngày sinh</mat-label>
+              <input type="date" matInput formControlName="ngaySinh" />
+              <mat-error
+                *ngIf="sinhVienForm.get('ngaySinh')!.hasError('required')"
+                >Vui lòng chọn ngày sinh</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Quê quán</mat-label>
+              <input type="text" matInput formControlName="queQuan" />
+              <mat-error
+                *ngIf="sinhVienForm.get('queQuan')!.hasError('required')"
+                >Vui lòng nhập quê quán</mat-error
+              >
+            </mat-form-field>
+            <button
+              type="submit"
+              class="btn btn-outline-primary w-25 float-right"
+            >
+              Cập nhật
+            </button>
+          </form>
         </div>
       </div>
     </div>

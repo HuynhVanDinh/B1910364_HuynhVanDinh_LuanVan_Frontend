@@ -27,7 +27,7 @@ export class DangkiThuctapComponent implements OnInit {
   initialCoquan: any;
   initialCity: any;
   initialDot: any;
-  thoi_gian_dang_ky!: any[];
+  thoi_gian_dang_ky!: any;
   defaults: any[] = [
     {
       id_tgdk: 1,

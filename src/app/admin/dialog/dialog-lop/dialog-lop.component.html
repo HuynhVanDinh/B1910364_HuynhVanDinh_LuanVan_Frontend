@@ -41,7 +41,7 @@
         /> -->
       <mat-form-field class="w-100">
         <mat-label>Tên khoa</mat-label>
-        <mat-select formControlName="khoaName">
+        <mat-select formControlName="khoaName" required>
           <mat-option
             *ngFor="let khoa of danhSachTenKhoa"
             [value]="khoa.khoaId"
@@ -51,10 +51,7 @@
         </mat-select>
 
         <mat-error
-          *ngIf="
-            myForm.get('khoaName')!.invalid && myForm.get('khoaName')!.touched
-          "
-        >
+            *ngIf="khoaName.hasError('required')">
           Vui lòng nhập tên khoa !!
         </mat-error>
       </mat-form-field>
@@ -81,7 +78,7 @@
     <button
       class="btn btn-success float-right ml-2"
       *ngIf="!isEditMode"
-      (click)="themLop(tenLop, khoaName)"
+      (click)="themLop(tenLop, myForm.get('khoa')?.value)"
     >
       {{ "add" | translate }}
     </button>
@@ -89,7 +86,7 @@
     <button
       class="btn btn-success float-right ml-2"
       *ngIf="isEditMode"
-      (click)="suaLop(id, tenLop, khoaName)"
+      (click)="suaLop(id, tenLop, myForm.get('khoa')?.value)"
     >
       {{ "edit" | translate }}
     </button>

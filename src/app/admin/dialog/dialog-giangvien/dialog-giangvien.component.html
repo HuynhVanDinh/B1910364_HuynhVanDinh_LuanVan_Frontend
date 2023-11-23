@@ -35,7 +35,7 @@
       <div class="col-md-6 mb-2">
         <mat-form-field class="w-100">
           <mat-label>Tên khoa</mat-label>
-          <mat-select formControlName="khoaId">
+          <mat-select formControlName="khoaId" required>
             <mat-option
               *ngFor="let khoa of danhSachTenKhoa"
               [value]="khoa.khoaId"
@@ -44,11 +44,7 @@
             </mat-option>
           </mat-select>
 
-          <mat-error
-            *ngIf="
-              myForm.get('khoaId')!.invalid && myForm.get('khoaId')!.touched
-            "
-          >
+          <mat-error *ngIf="khoaId.hasError('required')">
             Vui lòng nhập tên khoa !!
           </mat-error>
         </mat-form-field>
@@ -82,7 +78,7 @@
         <button
           class="btn btn-success float-right ml-2"
           *ngIf="isEditMode"
-          (click)="suaGiangVien(maGV, tenGV, khoaId)"
+          (click)="suaGiangVien(maGV, tenGV, myForm.get('khoaId')?.value)"
         >
           {{ "edit" | translate }}
         </button>
@@ -121,6 +117,7 @@
         <mat-form-field class="w-100">
           <mat-label>Mật khẩu</mat-label>
           <input
+          type="password"
             #inputElement
             matInput
             formControlName="password"
@@ -148,7 +145,7 @@
             required
           />
           <mat-error
-            *ngIf="myForm.get('email')!.invalid && myForm.get('email')!.touched"
+            *ngIf="myForm.get('email')!.invalid && myForm.get('email')!.touched "
             >Vui lòng nhập email !!</mat-error
           >
         </mat-form-field>
@@ -159,7 +156,7 @@
         <button
           class="btn btn-success float-right ml-2"
           *ngIf="!isEditMode"
-          (click)="themGiangVien(tenGV, khoaId, username, password, email)"
+          (click)="themGiangVien(tenGV, myForm.get('khoaId')?.value, username, password, email)"
         >
           {{ "add" | translate }}
         </button>
@@ -167,7 +164,7 @@
         <button
           class="btn btn-success float-right ml-2"
           *ngIf="isEditMode"
-          (click)="suaGiangVien(maGV, tenGV, khoaId)"
+          (click)="suaGiangVien(maGV, tenGV,myForm.get('khoaId')?.value)"
         >
           {{ "edit" | translate }}
         </button>

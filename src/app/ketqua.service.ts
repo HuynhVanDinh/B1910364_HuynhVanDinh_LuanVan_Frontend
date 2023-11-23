@@ -14,9 +14,12 @@ export class KetquaService {
   getAllKetQuaThucTapBySinhVien(masv: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/masv/${masv}`);
   }
-  getAllKetQuaThucTapByGiangVien(magv: string | null): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/magv/${magv}`);
+  getAllKetQuaThucTapByGiangVien(magv: string | null, trangThai: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/magv/${magv}/${trangThai}`);
   }
+  // getAllKetQuaCanBo(macb: number, trangThai: number): Observable<any[]> {
+  //   return this.http.get<any[]>(`${this.baseUrl}/macb/${macb}/${trangThai}`);
+  // }
   getAllKetQuaThucTapByDot(maDot: number | null): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/dot/${maDot}`);
   }
@@ -24,12 +27,14 @@ export class KetquaService {
     maKqtt: number,
     diem: number,
     maGv: number,
+    maCB: number,
     authToken: string
   ): Observable<any> {
     const url = `${this.baseUrl}/diem/${maGv}`;
     const body = {
       maKqtt: maKqtt,
       diem: diem,
+      canbo: maCB,
     };
     const headers = new HttpHeaders({
       Authorization: `Bearer ${authToken}`,

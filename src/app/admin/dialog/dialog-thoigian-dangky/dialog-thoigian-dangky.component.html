@@ -14,25 +14,18 @@
 </div>
 <form [formGroup]="myForm">
   <div class="m-2 my-2">
-     <mat-form-field class="w-100">
-        <mat-label>Tên khoa</mat-label>
-        <mat-select formControlName="khoaName">
-          <mat-option
-            *ngFor="let khoa of danhSachTenKhoa"
-            [value]="khoa.khoaId"
-          >
-            {{ khoa.khoaName }}
-          </mat-option>
-        </mat-select>
+    <mat-form-field class="w-100">
+      <mat-label>Tên khoa</mat-label>
+      <mat-select formControlName="khoaName" required>
+        <mat-option *ngFor="let khoa of danhSachTenKhoa" [value]="khoa.khoaId">
+          {{ khoa.khoaName }}
+        </mat-option>
+      </mat-select>
 
-        <mat-error
-          *ngIf="
-            myForm.get('khoaName')!.invalid && myForm.get('khoaName')!.touched
-          "
-        >
-          Vui lòng nhập tên khoa !!
-        </mat-error>
-      </mat-form-field>
+      <mat-error *ngIf="khoaName.hasError('required')">
+        Vui lòng nhập tên khoa !!
+      </mat-error>
+    </mat-form-field>
     <mat-form-field class="w-100">
       <mat-label>Ghi chú</mat-label>
       <input
@@ -48,45 +41,60 @@
       >
     </mat-form-field>
     <mat-form-field class="w-100">
-        <mat-label>Thời gian bắt đầu</mat-label>
-        <!-- <p-calendar [(ngModel)]="date" matInput
+      <mat-label>Thời gian bắt đầu</mat-label>
+      <!-- <p-calendar [(ngModel)]="date" matInput
           formControlName="ngaysinh"
           placeholder="Vd: 16/06/2001"></p-calendar> -->
-        <input
-          type="date"
-          matInput
-          formControlName="thoiGianBatDau"
-          placeholder="Vd: 16/06/2001"
-          [(ngModel)]="thoiGianBatDau"
-          required
-        />
-        <mat-error
-          *ngIf="
-            myForm.get('thoiGianBatDau')!.invalid && myForm.get('thoiGianBatDau')!.touched
-          "
-          >Vui lòng nhập thời gian bắt đầu !!</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field class="w-100">
-        <mat-label>Thời gian kết thúc</mat-label>
-        <!-- <p-calendar [(ngModel)]="date" matInput
+      <input
+        [matDatepicker]="tgbd"
+        matInput
+        formControlName="thoiGianBatDau"
+        placeholder="Vd: 16/06/2001"
+        [(ngModel)]="thoiGianBatDau"
+        required
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="tgbd"></mat-datepicker-toggle>
+      <mat-datepicker #tgbd disabled="false"></mat-datepicker>
+      <mat-error
+        *ngIf="
+          myForm.get('thoiGianBatDau')!.invalid &&
+          myForm.get('thoiGianBatDau')!.touched
+        "
+        >Vui lòng nhập thời gian bắt đầu !!</mat-error
+      >
+      <!-- <mat-form-field>
+    <mat-label>Input disabled</mat-label>
+    <input matInput [matDatepicker]="dp3" disabled>
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+  </mat-form-field> -->
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Thời gian kết thúc</mat-label>
+      <!-- <p-calendar [(ngModel)]="date" matInput
           formControlName="ngaysinh"
           placeholder="Vd: 16/06/2001"></p-calendar> -->
-        <input
-          type="date"
-          matInput
-          formControlName="thoiGianKetThuc"
-          placeholder="Vd: 16/06/2001"
-          [(ngModel)]="thoiGianKetThuc"
-          required
-        />
-        <mat-error
-          *ngIf="
-            myForm.get('thoiGianKetThuc')!.invalid && myForm.get('thoiGianKetThuc')!.touched
-          "
-          >Vui lòng nhập thời gian kết thúc !!</mat-error
-        >
-      </mat-form-field>
+      <input
+        matInput
+        [matDatepicker]="tgkt"
+        formControlName="thoiGianKetThuc"
+        placeholder="Vd: 16/06/2001"
+        [(ngModel)]="thoiGianKetThuc"
+        required
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="tgkt"></mat-datepicker-toggle>
+      <mat-datepicker #tgkt disabled="false"></mat-datepicker>
+      <mat-error
+        *ngIf="
+          myForm.get('thoiGianKetThuc')!.invalid &&
+          myForm.get('thoiGianKetThuc')!.touched
+        "
+        >Vui lòng nhập thời gian kết thúc !!</mat-error
+      >
+    </mat-form-field>
   </div>
 </form>
 <div class="row m-3">
@@ -94,7 +102,14 @@
     <button
       class="btn btn-success float-right ml-2"
       *ngIf="!isEditMode"
-      (click)="themThoigian(ghiChu, thoiGianBatDau, thoiGianKetThuc, khoaName)"
+      (click)="
+        themThoigian(
+          ghiChu,
+          thoiGianBatDau,
+          thoiGianKetThuc,
+          myForm.get('khoaName')?.value
+        )
+      "
     >
       {{ "add" | translate }}
     </button>
@@ -102,7 +117,15 @@
     <button
       class="btn btn-success float-right ml-2"
       *ngIf="isEditMode"
-      (click)="suaThoigian(id, ghiChu, thoiGianBatDau, thoiGianKetThuc, khoaName)"
+      (click)="
+        suaThoigian(
+          id,
+          ghiChu,
+          thoiGianBatDau,
+          thoiGianKetThuc,
+          myForm.get('khoaName')?.value
+        )
+      "
     >
       {{ "edit" | translate }}
     </button>

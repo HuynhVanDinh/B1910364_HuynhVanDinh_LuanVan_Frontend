@@ -64,13 +64,38 @@ export class LopComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log(res);
-          // Khởi tạo MatTableDataSource và thiết lập paginator
+
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+          this.dataSource.filterPredicate = (data: any, filter: string) => {
+            const dataStr = this.flattenObject(data).toLowerCase();
+            return dataStr.includes(filter.toLowerCase());
+          };
         },
       });
   }
+
+  flattenObject(obj: any): string {
+    let result = '';
+
+    function recurse(curr: any, prop: string) {
+      if (typeof curr === 'object') {
+        for (const key in curr) {
+          if (curr.hasOwnProperty(key)) {
+            recurse(curr[key], prop + '.' + key);
+          }
+        }
+      } else {
+        result += prop + '=' + curr + ' ';
+      }
+    }
+
+    recurse(obj, '');
+
+    return result;
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

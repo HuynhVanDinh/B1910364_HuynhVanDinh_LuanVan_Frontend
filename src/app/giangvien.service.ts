@@ -70,6 +70,24 @@ export class GiangvienService {
       headers: headers,
     });
   }
+  editTenGiangVien(
+    magv: string | null,
+    tengv: string,
+    khoaId: number | null,
+    authToken: string
+  ): Observable<any> {
+    const url = `${this.baseUrl}/` + khoaId;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
+    const body = {
+      maGV: magv,
+      tenGV: tengv,
+    };
+    return this.http.put<any>(url, body, {
+      headers: headers,
+    });
+  }
   updateAvt(
     magv: string | null,
     hinhAnh: string,
