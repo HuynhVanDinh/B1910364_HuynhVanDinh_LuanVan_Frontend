@@ -10,6 +10,8 @@ import { MatPaginator } from '@angular/material/paginator';
 // import { map } from 'rxjs/operators';
 import { OpenwarningComponent } from 'src/app/openwarning/openwarning.component';
 import { DialogSinhvienComponent } from '../dialog/dialog-sinhvien/dialog-sinhvien.component';
+import { PdfService } from 'src/app/pdf.service';
+import { PdfDialogComponent } from '../dialog/pdf-dialog/pdf-dialog.component';
 
 @Component({
   selector: 'app-sinhvien',
@@ -27,6 +29,7 @@ export class SinhvienComponent implements OnInit {
   pageIndex = 0;
 
   constructor(
+    private pdfService: PdfService,
     private fileUploadService: FileUploadService,
     private excelService: ExcelService,
     private translate: TranslateService,
@@ -162,13 +165,13 @@ export class SinhvienComponent implements OnInit {
         // console.log(authToken);
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
-         this.dataSource.filterPredicate = (data: any, filter: string) => {
-           // Convert the entire object to a string
-           const dataStr = this.flattenObject(data).toLowerCase();
+        this.dataSource.filterPredicate = (data: any, filter: string) => {
+          // Convert the entire object to a string
+          const dataStr = this.flattenObject(data).toLowerCase();
 
-           // Check if the filter value is present in the string
-           return dataStr.includes(filter.toLowerCase());
-         };
+          // Check if the filter value is present in the string
+          return dataStr.includes(filter.toLowerCase());
+        };
       },
       (error) => {
         console.error('Error searching for sinh vien:', error);
@@ -231,4 +234,19 @@ export class SinhvienComponent implements OnInit {
   //     }
   //   );
   // }
+  exportToPdf() {
+    this.pdfService.exportSinhVienToPdf().subscribe((response) => {
+      const blob = new Blob([response], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      // window.open(url); // Mở tệp PDF trong cửa sổ mới hoặc tab.
+      this.dialog.open(PdfDialogComponent, {
+        width: '1000px',
+        height: '770px',
+        enterAnimationDuration: '300ms',
+        exitAnimationDuration: '300ms',
+        data: { url },
+        disableClose: true,
+      });
+    });
+  }
 }

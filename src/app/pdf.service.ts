@@ -21,6 +21,14 @@ export class PdfService {
     // Gửi yêu cầu GET đến API để tạo tệp PDF
     return this.http.get(this.baseUrl + '/donvi', { responseType: 'blob' });
   }
+  exportSinhVienToPdf(): Observable<Blob> {
+    // Gửi yêu cầu GET đến API để tạo tệp PDF
+    return this.http.get(this.baseUrl + '/sinhvien', { responseType: 'blob' });
+  }
+  exportGiangVienToPdf(): Observable<Blob> {
+    // Gửi yêu cầu GET đến API để tạo tệp PDF
+    return this.http.get(this.baseUrl + '/giangvien', { responseType: 'blob' });
+  }
   getKetquaThuctapPdf(keyword?: string): Observable<Blob> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/pdf',
@@ -44,7 +52,10 @@ export class PdfService {
         )
       );
   }
-  getKetquaThuctapByGiangvienPdf(maGv: number,keyword?: string): Observable<Blob> {
+  getKetquaThuctapByGiangvienPdf(
+    maGv: number,
+    keyword?: string
+  ): Observable<Blob> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/pdf',
     });

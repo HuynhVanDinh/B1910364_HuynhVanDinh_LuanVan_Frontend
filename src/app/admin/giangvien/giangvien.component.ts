@@ -9,7 +9,9 @@ import { GiangvienService } from 'src/app/giangvien.service';
 import { ImgClientService } from 'src/app/img-client.service';
 import { GiangVien } from 'src/app/model/giangvien.model';
 import { OpenwarningComponent } from 'src/app/openwarning/openwarning.component';
+import { PdfService } from 'src/app/pdf.service';
 import { DialogGiangvienComponent } from '../dialog/dialog-giangvien/dialog-giangvien.component';
+import { PdfDialogComponent } from '../dialog/pdf-dialog/pdf-dialog.component';
 
 @Component({
   selector: 'app-giangvien',
@@ -26,6 +28,7 @@ export class GiangvienComponent implements OnInit {
   pageIndex = 0;
 
   constructor(
+    private pdfService: PdfService,
     private fileUploadService: FileUploadService,
     private giangVienService: GiangvienService,
     private imgService: ImgClientService,
@@ -179,5 +182,20 @@ export class GiangvienComponent implements OnInit {
         console.log('Lỗi !!!:', error);
       }
     );
+  }
+  exportToPdf() {
+    this.pdfService.exportGiangVienToPdf().subscribe((response) => {
+      const blob = new Blob([response], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      // window.open(url); // Mở tệp PDF trong cửa sổ mới hoặc tab.
+      this.dialog.open(PdfDialogComponent, {
+        width: '1000px',
+        height: '770px',
+        enterAnimationDuration: '300ms',
+        exitAnimationDuration: '300ms',
+        data: { url },
+        disableClose: true,
+      });
+    });
   }
 }
