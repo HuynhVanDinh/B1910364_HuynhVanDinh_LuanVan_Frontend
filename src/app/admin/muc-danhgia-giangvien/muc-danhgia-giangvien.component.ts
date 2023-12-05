@@ -11,6 +11,7 @@ import { OpenwarningComponent } from 'src/app/openwarning/openwarning.component'
 import { PhieudiemCanboService } from 'src/app/phieudiem-canbo.service';
 import { PhieudiemGiangvienService } from 'src/app/phieudiem-giangvien.service';
 import { RefreshService } from 'src/app/refresh-service.service';
+import { DialogDelPdiemGiangvienComponent } from '../dialog/dialog-del-pdiem-giangvien/dialog-del-pdiem-giangvien.component';
 import { DialogPhieudiemGiangvienComponent } from '../dialog/dialog-phieudiem-giangvien/dialog-phieudiem-giangvien.component';
 
 @Component({
@@ -69,15 +70,14 @@ export class MucDanhgiaGiangvienComponent {
   //     this.dataSource.sort = this.sort;
   //   });
   // }
-  openDialog(code: any, image: any): void {
-    this.dialog.open(OpenwarningComponent, {
-      width: '350px',
+  openDialog(code: any): void {
+    this.dialog.open(DialogDelPdiemGiangvienComponent, {
+      width: '450px',
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '300ms',
       data: {
         code: code,
-        image: image,
-        SinhvienComponent: this,
+        PhieudiemComponent: this,
       },
       disableClose: true,
     });

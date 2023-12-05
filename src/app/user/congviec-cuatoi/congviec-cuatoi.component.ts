@@ -12,6 +12,7 @@ import { TuanService } from 'src/app/tuan.service';
 export class CongviecCuatoiComponent implements OnInit {
   datas: any;
   tuans: any[] = [];
+  listKetQua!: any;
   constructor(
     private sinhvienService: SinhvienService,
     private ketquaService: KetquaService,
@@ -20,6 +21,7 @@ export class CongviecCuatoiComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.getTuan();
+    this.getKetQua();
   }
   getTuan() {
     const accountid = localStorage.getItem('accountid');
@@ -45,5 +47,29 @@ export class CongviecCuatoiComponent implements OnInit {
         },
       });
     }
+  }
+  getKetQua() {
+    const accountid = localStorage.getItem('accountid');
+    if (accountid) {
+      this.sinhvienService.getSinhVien(accountid).subscribe({
+        next: (res) => {
+          //  this.datas = res;
+          //  console.log(res);
+          this.ketquaService
+            .getAllKetQuaThucTapBySinhVien(res.maSV)
+            .subscribe((data) => {
+              console.log('lala', data);
+              this.listKetQua = data;
+            });
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
+    }
+  }
+  refresh() {
+    this.getKetQua();
+    this.getTuan();
   }
 }

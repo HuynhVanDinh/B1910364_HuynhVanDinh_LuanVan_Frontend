@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { DotthuctapService } from 'src/app/dotthuctap.service';
@@ -29,17 +30,17 @@ export class DialogDotComponent {
     if (this.data.isEdit) {
       console.log(this.data);
       this.isEditMode = true;
-     this.id = this.data.dot.maDot;
-     this.tenDot = this.data.dot.tenDot;
-     this.thoiGianBatDau = this.data.dot.thoiGianBatDau;
-     this.thoiGianKetThuc = this.data.dot.thoiGianKetThuc;
-
+      this.id = this.data.dot.maDot;
+      this.tenDot = this.data.dot.tenDot;
+      this.thoiGianBatDau = this.data.dot.thoiGianBatDau;
+      this.thoiGianKetThuc = this.data.dot.thoiGianKetThuc;
     } else {
       this.isEditMode = false;
     }
   }
 
   constructor(
+    @Inject(MAT_DATE_LOCALE) private dateLocale: string,
     // private khoaService: KhoaService,
     private toastr: ToastrService,
     private dotThucTapService: DotthuctapService,

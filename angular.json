@@ -70,7 +70,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "host": "internship.edu.vn",
-            "port": 443
+            "port": 4200
           },
           "configurations": {
             "production": {

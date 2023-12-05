@@ -113,6 +113,7 @@ export class SuaThongtinComponent {
             );
         });
     } else {
+      this.toastr.error('Vui lòng chọn ảnh diện');
       console.error('No file selected.');
     }
   }
@@ -133,16 +134,18 @@ export class SuaThongtinComponent {
         this.giangVien.khoa.khoaId,
         authToken
       )
-      .subscribe((data) => {
-        this.isLoading = false;
-        this.toastr.success("cập nhật thành công");
-        console.log('File uploaded successfully:', data);
-        this.getGiangVienDetails(this.maGV!);
-      },
-      (error)=>{
-         this.isLoading = false;
-         this.toastr.error('Lỗi cập nhật');
-         console.error('Lỗi cập nhật', error);
-      });
+      .subscribe(
+        (data) => {
+          this.isLoading = false;
+          this.toastr.success('cập nhật thành công');
+          console.log('File uploaded successfully:', data);
+          this.getGiangVienDetails(this.maGV!);
+        },
+        (error) => {
+          this.isLoading = false;
+          this.toastr.error('Lỗi cập nhật');
+          console.error('Lỗi cập nhật', error);
+        }
+      );
   }
 }

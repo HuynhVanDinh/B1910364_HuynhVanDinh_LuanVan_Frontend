@@ -61,4 +61,13 @@ export class PhieudiemGiangvienService {
       headers: headers,
     });
   }
+  delete(maPD: number, authToken: string): Observable<any> {
+    const url = `${this.baseUrl}/${maPD}`;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
+    return this.http.delete(url, {
+      headers: headers,
+    });
+  }
 }

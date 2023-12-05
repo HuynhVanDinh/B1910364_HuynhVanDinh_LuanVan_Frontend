@@ -66,8 +66,8 @@ export class DialogKhoaComponent implements OnInit {
     const numericValue = inputValue.replace(/[^0-9]/g, '');
 
     // Giới hạn độ dài chuỗi số điện thoại tối đa
-    if (numericValue.length > 10) {
-      this.khoaSdt = numericValue.slice(0, 10);
+    if (numericValue.length > 11) {
+      this.khoaSdt = numericValue.slice(0, 11);
     } else {
       this.khoaSdt = numericValue;
     }

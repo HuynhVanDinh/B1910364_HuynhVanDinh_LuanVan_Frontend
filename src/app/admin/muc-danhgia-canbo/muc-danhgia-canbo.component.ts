@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { OpenwarningComponent } from 'src/app/openwarning/openwarning.component';
 import { PhieudiemCanboService } from 'src/app/phieudiem-canbo.service';
 import { RefreshService } from 'src/app/refresh-service.service';
+import { DialogDelPdiemCanboComponent } from '../dialog/dialog-del-pdiem-canbo/dialog-del-pdiem-canbo.component';
 import { DialogPhieudiemCanboComponent } from '../dialog/dialog-phieudiem-canbo/dialog-phieudiem-canbo.component';
 
 @Component({
@@ -66,15 +67,14 @@ export class MucDanhgiaCanboComponent implements OnInit {
   //     this.dataSource.sort = this.sort;
   //   });
   // }
-  openDialog(code: any, image: any): void {
-    this.dialog.open(OpenwarningComponent, {
-      width: '350px',
+  openDialog(code: any): void {
+    this.dialog.open(DialogDelPdiemCanboComponent, {
+      width: '450px',
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '300ms',
       data: {
         code: code,
-        image: image,
-        SinhvienComponent: this,
+        PhieudiemComponent: this,
       },
       disableClose: true,
     });

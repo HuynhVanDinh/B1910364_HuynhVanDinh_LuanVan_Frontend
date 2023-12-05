@@ -1,33 +1,53 @@
-<div *ngIf="tuans.length != 0; else notTu"></div>
-<ng-template #notTu>
-  <app-galleria></app-galleria>
-</ng-template>
-<div class="list-dangki">
-  <div class="title">
-    <h5>CÔNG VIỆC CỦA TÔI</h5>
-    <hr />
-  </div>
-  <div>
-    <div *ngIf="tuans.length != 0; else notTuan">
-      <mat-tab-group>
-        <mat-tab *ngFor="let tuan of tuans">
-          <ng-template mat-tab-label>
-            {{ tuan.ten_tuan }} <br />
-            ({{ tuan.batdau }}) - ({{ tuan.hethan }})
-            <!-- <mat-icon (click)="openDialogSua(tuan)">edit</mat-icon> -->
-            <!-- Hiển thị tên của tuần làm tiêu đề của tab -->
-          </ng-template>
-          <!-- <h1>{{tuan.id_tuan}}</h1> -->
-          <app-congviec-tuan [tuan]="tuan"></app-congviec-tuan>
-          <!-- <app-congviec-sinhvien [tuan]="tuan"></app-congviec-sinhvien> -->
-          <!-- Nội dung của từng tab -->
-
-          <!-- Thêm nội dung khác tùy ý -->
-        </mat-tab>
-      </mat-tab-group>
+<div *ngIf="listKetQua">
+  <div *ngIf="listKetQua.trangThai == 3; else Complete">
+    <app-galleria></app-galleria>
+    <div class="frame-card">
+      <p class="text-center h2 my-5">Bạn đã hoàn thành thực tập</p>
     </div>
-    <ng-template #notTuan>
-      <p class="text-center h2 my-5">Đợi phân công công việc</p>
-    </ng-template>
   </div>
+  <ng-template #Complete
+    ><div *ngIf="tuans.length != 0; else notTu"></div>
+    <ng-template #notTu>
+      <app-galleria></app-galleria>
+    </ng-template>
+    <div class="list-dangki">
+      <div class="title row">
+        <div class="col-md-10">
+          <h5>CÔNG VIỆC CỦA TÔI</h5>
+        </div>
+        <div class="col-md-2">
+          <button color="primary" mat-raised-button (click)="refresh()">
+            <mat-icon>refresh</mat-icon>
+            Làm mới
+          </button>
+        </div>
+        <hr />
+      </div>
+      <div>
+        <div *ngIf="tuans.length != 0; else notTuan">
+          <mat-tab-group>
+            <mat-tab *ngFor="let tuan of tuans">
+              <ng-template mat-tab-label>
+                {{ tuan.ten_tuan }} <br />
+                ({{ tuan.batdau }}) - ({{ tuan.hethan }})
+                <!-- <mat-icon (click)="openDialogSua(tuan)">edit</mat-icon> -->
+                <!-- Hiển thị tên của tuần làm tiêu đề của tab -->
+              </ng-template>
+              <!-- <h1>{{tuan.id_tuan}}</h1> -->
+              <app-congviec-tuan [tuan]="tuan"></app-congviec-tuan>
+              <!-- <app-congviec-sinhvien [tuan]="tuan"></app-congviec-sinhvien> -->
+              <!-- Nội dung của từng tab -->
+
+              <!-- Thêm nội dung khác tùy ý -->
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+        <ng-template #notTuan>
+          <div class="frame-card">
+            <p class="text-center h2 my-5">Đợi phân công công việc</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </ng-template>
 </div>

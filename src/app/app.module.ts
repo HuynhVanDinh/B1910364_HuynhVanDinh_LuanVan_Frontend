@@ -34,7 +34,11 @@ import {
   MatPaginatorModule,
 } from '@angular/material/paginator';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ToastNoAnimation, ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
+import {
+  ToastNoAnimation,
+  ToastNoAnimationModule,
+  ToastrModule,
+} from 'ngx-toastr';
 import { ChecktokenComponent } from './checktoken/checktoken.component';
 import { LopComponent } from './admin/lop/lop.component';
 import { DialogLopComponent } from './admin/dialog/dialog-lop/dialog-lop.component';
@@ -133,7 +137,14 @@ import { Filter2Pipe } from './filter2.pipe';
 import { FilerByMuc2Pipe } from './filer-by-muc-2.pipe';
 import { GvThongkeComponent } from './giangvien/gv-thongke/gv-thongke.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MatMomentDateModule,
+} from '@angular/material-moment-adapter';
+import { DialogDelPdiemGiangvienComponent } from './admin/dialog/dialog-del-pdiem-giangvien/dialog-del-pdiem-giangvien.component';
+import { DialogDelPdiemCanboComponent } from './admin/dialog/dialog-del-pdiem-canbo/dialog-del-pdiem-canbo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -214,6 +225,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     Filter2Pipe,
     FilerByMuc2Pipe,
     GvThongkeComponent,
+    DialogDelPdiemGiangvienComponent,
+    DialogDelPdiemCanboComponent,
   ],
   imports: [
     TranslateModule.forRoot({
@@ -272,6 +285,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatMomentDateModule,
     ToastNoAnimationModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 1500,
@@ -283,6 +297,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     }),
   ],
   providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
     MultilevelMenuService,
     {
       provide: MatPaginatorIntl,

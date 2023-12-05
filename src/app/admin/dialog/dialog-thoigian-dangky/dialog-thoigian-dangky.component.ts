@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {
   MatDialog,
   MatDialogRef,
@@ -52,6 +53,7 @@ export class DialogThoigianDangkyComponent {
   }
 
   constructor(
+    @Inject(MAT_DATE_LOCALE) private dateLocale: string,
     private khoaService: KhoaService,
     private toastr: ToastrService,
     // private dotThucTapService: DotthuctapService,

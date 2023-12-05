@@ -114,7 +114,7 @@ export class DialogSinhvienComponent implements OnInit {
       this.myForm.markAllAsTouched();
       return;
     }
-    this.dialogRef.close('Closed using function');
+    // this.dialogRef.close('Closed using function');
 
     // const khoaNameValue = this.myForm.get('khoaNameControl')!.value;
     const lopNameValue = this.myForm.get('lopNameControl')!.value;
@@ -156,7 +156,7 @@ export class DialogSinhvienComponent implements OnInit {
                   this.SinhVienComponent.getAll();
                 },
                 (error: any) => {
-                  this.dialogRef.close('Closed using function');
+                  // this.dialogRef.close('Closed using function');
                   this.isLoading = false;
                   this.toastr.error('Lỗi thêm sinh viên');
                   console.error('Lỗi thêm sinh viên:', error);
@@ -183,7 +183,7 @@ export class DialogSinhvienComponent implements OnInit {
       this.myForm.markAllAsTouched();
       return;
     }
-    this.dialogRef.close('Closed using function');
+    // this.dialogRef.close('Closed using function');
     // console.log(masv);
 
     // const khoaNameValue = this.myForm.get('khoaNameControl')!.value;
@@ -211,7 +211,7 @@ export class DialogSinhvienComponent implements OnInit {
           this.SinhVienComponent.getAll();
         },
         (error: any) => {
-          this.dialogRef.close('Closed using function');
+          // this.dialogRef.close('Closed using function');
           this.isLoading = false;
           this.toastr.error('Lỗi sửa sinh viên');
           console.error('Lỗi sửa sinh viên:', error);

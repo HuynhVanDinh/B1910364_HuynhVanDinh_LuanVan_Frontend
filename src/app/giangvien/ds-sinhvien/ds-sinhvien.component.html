@@ -57,7 +57,7 @@
           <!-- {{ element.canBoHuongDan.tenCB }} -->
           <!-- <div *ngIf="element.canBoHuongDan != null"></div> -->
           <button
-            [disabled]="element.canBoHuongDan == null || element.diem != null || element.trangThai == 1 || element.trangThai == 0"
+            [disabled]="element.canBoHuongDan == null  || element.trangThai == 1 || element.trangThai == 0"
             class="btn btn-outline-primary"
             (click)="navigateToAnotherPage(element)"
           >

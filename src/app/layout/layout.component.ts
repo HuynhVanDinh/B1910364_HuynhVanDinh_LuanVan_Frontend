@@ -159,8 +159,8 @@ export class LayoutComponent implements OnInit {
       // console.log('hihihihi');
       const a = this.khoaList.map((khoa) => ({
         label: khoa.khoaName,
-        icon: 'edit_calendar',
         link: `/admin/phieudiemgiangvien/${khoa.khoaId}`,
+        icon: 'edit_calendar',
       }));
       // console.log(a.length);
       return a;

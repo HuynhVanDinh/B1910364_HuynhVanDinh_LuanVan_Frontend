@@ -15,7 +15,11 @@ export class PhieudiemCanboService {
     const url = `${this.baseUrl}/muc/${muc_id}`;
     return this.http.get(url);
   }
-  createPhieu(noidung: string, muc: number, authToken: string): Observable<any> {
+  createPhieu(
+    noidung: string,
+    muc: number,
+    authToken: string
+  ): Observable<any> {
     const url = `${this.baseUrl}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
@@ -29,7 +33,12 @@ export class PhieudiemCanboService {
       headers: headers,
     });
   }
-  editPhieu(id: number, noidung: string, muc: number, authToken: string): Observable<any> {
+  editPhieu(
+    id: number,
+    noidung: string,
+    muc: number,
+    authToken: string
+  ): Observable<any> {
     const url = `${this.baseUrl}/` + id;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
@@ -40,6 +49,15 @@ export class PhieudiemCanboService {
     };
     return this.http.put<any>(url, body, {
       params: { muc_id: muc },
+      headers: headers,
+    });
+  }
+  delete(maPD: number, authToken: string): Observable<any> {
+    const url = `${this.baseUrl}/${maPD}`;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
+    return this.http.delete(url, {
       headers: headers,
     });
   }

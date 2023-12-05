@@ -130,7 +130,7 @@ export class DialogGiangvienComponent implements OnInit, AfterViewChecked {
       this.myForm.markAllAsTouched();
       return;
     }
-    this.dialogRef.close('Closed using function');
+    // this.dialogRef.close('Closed using function');
     this.isLoading = true;
     this.imgService
       .getDefaultImageGVAsFile()
@@ -172,7 +172,7 @@ export class DialogGiangvienComponent implements OnInit, AfterViewChecked {
                   this.GiangvienComponent.getGiangVien();
                 },
                 (error: any) => {
-                  this.dialogRef.close('Closed using function');
+                  // this.dialogRef.close('Closed using function');
                   this.isLoading = false;
                   this.toastr.error('Lỗi thêm giảng viên');
                   console.error('Lỗi thêm giảng viên:', error);

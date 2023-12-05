@@ -125,6 +125,7 @@ export class CapnhatThongtinComponent implements OnInit {
       //   }
       // );
     } else {
+      this.toastr.error('Vui lòng chọn ảnh diện');
       console.error('No file selected.');
       // Show an error message or take appropriate action
     }

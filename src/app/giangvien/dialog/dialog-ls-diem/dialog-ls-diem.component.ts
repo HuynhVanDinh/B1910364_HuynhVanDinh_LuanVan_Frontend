@@ -24,7 +24,7 @@ export class DialogLsDiemComponent implements OnInit {
   diem!: Float32Array;
   tongDiem = 0;
   ngOnInit(): void {
-    this.getBieuMauByKhoa();
+    // this.getBieuMauByKhoa();
     this.getDiemSinhvien();
     //  console.log('data', this.data.sinhvien.sinhVien);
   }
@@ -39,7 +39,7 @@ export class DialogLsDiemComponent implements OnInit {
     this.diemGiangvienService
       .getAllBySinhVien(this.data.sinhvien.sinhVien.maSV)
       .subscribe((dataSV) => {
-        console.log('diem sv', dataSV);
+        console.log('diem sv', dataSV, this.data.sinhvien.sinhVien.maSV);
         this.myForm = this.fb.group({});
         this.listBieuMau = dataSV;
         // Sử dụng một vòng lặp để thêm các FormControl động vào FormGroup

@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DiemGiangvienService } from 'src/app/diem-giangvien.service';
 import { GiangvienService } from 'src/app/giangvien.service';
@@ -30,6 +30,7 @@ export class DiemSinhvienComponent implements OnInit {
   diem!: Float32Array;
   tongDiem = 0;
   constructor(
+    private router: Router,
     private ketquaService: KetquaService,
     private toastr: ToastrService,
     private giangvienService: GiangvienService,
@@ -156,14 +157,21 @@ export class DiemSinhvienComponent implements OnInit {
                     //   parseFloat(this.tongDiem.toString()),
                     // ]);
                     this.ketquaService
-                      .chamDiem(this.elements.maKqtt, this.tongDiem, data.maGV,this.elements.canBoHuongDan.maCB, authToken)
+                      .chamDiem(
+                        this.elements.maKqtt,
+                        this.tongDiem,
+                        data.maGV,
+                        this.elements.canBoHuongDan.maCB,
+                        authToken
+                      )
                       .subscribe(
                         () => {
                           this.isLoading = false;
                           this.toastr.success('Chấm điểm thành công');
-                          this.snackBar.open('Chấm điểm thành công', 'Đóng', {
-                            duration: 3000,
-                          });
+                          // this.snackBar.open('Chấm điểm thành công', 'Đóng', {
+                          //   duration: 3000,
+                          // });
+                          this.router.navigate(['/lecturer/ls-diem']);
                           console.log('Chấm điểm thành công');
                         },
                         (error: any) => {

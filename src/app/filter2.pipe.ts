@@ -14,7 +14,7 @@ export class Filter2Pipe implements PipeTransform {
         result.push(item);
       }
     }
-
+    console.log("kq nè",result);
     return result;
   }
 }

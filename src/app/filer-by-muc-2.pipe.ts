@@ -5,8 +5,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilerByMuc2Pipe implements PipeTransform {
   transform(items: any[], mucTen: string): any[] {
-    return items.filter(
+    console.log("items",items)
+
+    const a = items.filter(
       (item) => item.phieuDiemGiangvien.mucDG.tenMuc === mucTen
     );
+     console.log("ket qua nè",a);
+    return a;
+
   }
 }

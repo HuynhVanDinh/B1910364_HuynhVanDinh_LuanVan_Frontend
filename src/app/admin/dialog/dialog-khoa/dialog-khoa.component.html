@@ -38,11 +38,11 @@
           [(ngModel)]="khoaSdt"
           placeholder="Vd: 0342303842"
           required
-          maxlength="10"
+          maxlength="11"
           (input)="onPhoneNumberInput($event)"
           #input
           />
-          <mat-hint align="end">Số tối đa {{ input.value.length }}/10</mat-hint>
+          <mat-hint align="end">Số tối đa {{ input.value.length }}/11</mat-hint>
         <!-- <mat-icon matSuffix>mode_edit</mat-icon> -->
          <mat-error
           *ngIf="myForm.get('khoaSdt')!.invalid && myForm.get('khoaSdt')!.touched"

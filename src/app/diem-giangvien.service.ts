@@ -13,7 +13,7 @@ export class DiemGiangvienService {
   }
   getAllBySinhVien(maSV: number): Observable<any> {
     const url = `${this.baseUrl}/sinhvien/${maSV}`;
-    return this.http.get(this.baseUrl);
+    return this.http.get(url);
   }
   createDiemGiangVien(
     diem: Float32Array,
@@ -35,6 +35,15 @@ export class DiemGiangvienService {
         maSV: sinhVienId,
         maGV: giangVienId,
       },
+      headers: headers,
+    });
+  }
+  delete(maPD: number, authToken: string): Observable<any> {
+    const url = `${this.baseUrl}/${maPD}`;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
+    return this.http.delete(url, {
       headers: headers,
     });
   }
