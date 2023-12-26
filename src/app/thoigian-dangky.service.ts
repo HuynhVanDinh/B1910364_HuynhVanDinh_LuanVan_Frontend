@@ -45,7 +45,7 @@ export class ThoigianDangkyService {
         catchError((error) => {
           throw error.error.message; // Trả về thông điệp lỗi từ máy chủ
         })
-      );;
+      );
   }
   editThoiGianDangKy(
     id: number,
@@ -74,6 +74,15 @@ export class ThoigianDangkyService {
         catchError((error) => {
           throw error.error.message; // Trả về thông điệp lỗi từ máy chủ
         })
-      );;
+      );
+  }
+  delete(maTgdk: number, authToken: string): Observable<any> {
+    const url = `${this.baseUrl}/${maTgdk}`;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
+    return this.http.delete(url, {
+      headers: headers,
+    });
   }
 }

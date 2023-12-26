@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
 import { OpenwarningComponent } from 'src/app/openwarning/openwarning.component';
 import { ThoigianDangkyService } from 'src/app/thoigian-dangky.service';
+import { DialogDelTgdkComponent } from '../dialog/dialog-del-tgdk/dialog-del-tgdk.component';
 import { DialogThoigianDangkyComponent } from '../dialog/dialog-thoigian-dangky/dialog-thoigian-dangky.component';
 
 @Component({
@@ -92,8 +93,8 @@ export class ThoigianDangkyComponent implements OnInit {
   }
 
   openDialog(code: any): void {
-    this.dialog.open(OpenwarningComponent, {
-      width: '350px',
+    this.dialog.open(DialogDelTgdkComponent, {
+      width: '450px',
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '300ms',
       data: {

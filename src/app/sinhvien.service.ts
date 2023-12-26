@@ -96,6 +96,19 @@ export class SinhvienService {
       headers: headers,
     });
   }
+  createSinhVienFromExcel(file: File, authToken: string): Observable<any> {
+    const formData: FormData = new FormData();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
+     headers.append('Content-Type', 'multipart/form-data');
+     headers.append('Accept', 'application/json');
+    formData.append('file', file, file.name);
+
+    return this.http.post(`${this.baseUrl}/createFromExcel`, formData, {
+      headers: headers,
+    });
+  }
   editSinhVien(
     masv: string | null,
     tensv: string,

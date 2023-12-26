@@ -27,7 +27,7 @@ export class SinhvienComponent implements OnInit {
   pageSize = 5; // Số mục trên mỗi trang
   pageSizeOptions: number[] = [5, 10, 25, 50]; // Các tùy chọn số mục trên trang
   pageIndex = 0;
-
+  files: FileList | null = null;
   constructor(
     private pdfService: PdfService,
     private fileUploadService: FileUploadService,
@@ -177,6 +177,34 @@ export class SinhvienComponent implements OnInit {
         console.error('Error searching for sinh vien:', error);
       }
     );
+  }
+
+  handleFileInput(event: any): void {
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+      // console.log(authToken);
+      console.error('Access token not found. User is not authenticated.');
+      return;
+    }
+    const inputElement = event?.target as HTMLInputElement;
+    this.files = inputElement?.files;
+
+    if (this.files && this.files.length > 0) {
+      const fileToUpload = this.files.item(0);
+
+      if (fileToUpload) {
+        this.sinhvienService
+          .createSinhVienFromExcel(fileToUpload, authToken)
+          .subscribe(
+            (response) => {
+              console.log('SinhVien created successfully.', response);
+            },
+            (error) => {
+              console.error('Error creating SinhVien.', error);
+            }
+          );
+      }
+    }
   }
   search() {
     // this.sinhvienService.searchByName(this.searchName).subscribe((res: any) => {

@@ -56,7 +56,8 @@ export class DialogPhieudiemGiangvienComponent {
     this.isEdit = data.isEdit;
   }
   getAllMuc() {
-    this.mucDanhGiaCanBoService.getAll().subscribe((res) => {
+    // console.log("mục khoa",this.data)
+    this.mucDanhGiaCanBoService.getMucByKhoa(this.data.khoaId).subscribe((res) => {
       console.log(res);
       this.mucs = res;
     });
@@ -86,7 +87,7 @@ export class DialogPhieudiemGiangvienComponent {
       this.myForm.markAllAsTouched();
       return;
     }
-    this.dialogRef.close('Closed using function');
+    // this.dialogRef.close('Closed using function');
     const authToken = localStorage.getItem('authToken');
     if (!authToken) {
       console.error('Access token not found. User is not authenticated.');
@@ -105,7 +106,7 @@ export class DialogPhieudiemGiangvienComponent {
           this.refreshService.triggerRefresh();
         },
         (error: any) => {
-          this.dialogRef.close('Closed using function');
+          // this.dialogRef.close('Closed using function');
           this.isLoading = false;
           this.toastr.error('Lỗi thêm phiếu điểm');
           console.error('Lỗi thêm phiếu điểm:', error);
@@ -122,7 +123,7 @@ export class DialogPhieudiemGiangvienComponent {
       this.myForm.markAllAsTouched();
       return;
     }
-    this.dialogRef.close('Closed using function');
+    // this.dialogRef.close('Closed using function');
     const authToken = localStorage.getItem('authToken');
     if (!authToken) {
       // console.log(authToken);
@@ -144,7 +145,7 @@ export class DialogPhieudiemGiangvienComponent {
           this.refreshService.triggerRefresh();
         },
         (error: any) => {
-          this.dialogRef.close('Closed using function');
+          // this.dialogRef.close('Closed using function');
           this.isLoading = false;
           this.toastr.error('Lỗi sửa phiếu điểm');
           console.error('Lỗi sữa phiếu điểm:', error);

@@ -145,6 +145,7 @@ import {
 } from '@angular/material-moment-adapter';
 import { DialogDelPdiemGiangvienComponent } from './admin/dialog/dialog-del-pdiem-giangvien/dialog-del-pdiem-giangvien.component';
 import { DialogDelPdiemCanboComponent } from './admin/dialog/dialog-del-pdiem-canbo/dialog-del-pdiem-canbo.component';
+import { DialogDelTgdkComponent } from './admin/dialog/dialog-del-tgdk/dialog-del-tgdk.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -227,6 +228,7 @@ import { DialogDelPdiemCanboComponent } from './admin/dialog/dialog-del-pdiem-ca
     GvThongkeComponent,
     DialogDelPdiemGiangvienComponent,
     DialogDelPdiemCanboComponent,
+    DialogDelTgdkComponent,
   ],
   imports: [
     TranslateModule.forRoot({
